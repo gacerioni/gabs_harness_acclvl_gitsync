@@ -1,0 +1,13 @@
+harnessApiVersion: '1.0'
+type: SERVICE
+artifactType: DOCKER
+configVariables:
+- name: tibia_api_mongodb_usr
+  value: gcpkms:IP64XzPSTwaC6gDc6UmCLw
+  valueType: ENCRYPTED_TEXT
+- name: tibia_api_mongodb_pwd
+  value: gcpkms:5r0tOfcrRDSF9rtKrpgXzA
+  valueType: ENCRYPTED_TEXT
+deploymentType: KUBERNETES
+description: This SVC represents a k8s with no persistence (no need) to host our API Backend.
+helmVersion: V2

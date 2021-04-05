@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+gitFileConfig:
+  branch: main
+  connectorName: gabs_github_python_labs_tibia
+  filePath: api/harness_k8s_templates/api
+  useBranch: true
+  useInlineServiceDefinition: false
+storeType: Remote

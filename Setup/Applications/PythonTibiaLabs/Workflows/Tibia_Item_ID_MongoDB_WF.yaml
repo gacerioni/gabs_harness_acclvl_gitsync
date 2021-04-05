@@ -1,0 +1,156 @@
+harnessApiVersion: '1.0'
+type: ROLLING
+concurrencyStrategy: INFRA
+description: This WF will deploy a k8s with no persistence (no need) to host our API Backend.
+envName: prod
+failureStrategies:
+- executionScope: WORKFLOW
+  failureTypes:
+  - APPLICATION_ERROR
+  repairActionCode: ROLLBACK_WORKFLOW
+  retryCount: 0
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupIds:
+  - ZpzNdGbbS4CFtLNaFZ1kFw
+phases:
+- type: KUBERNETES
+  computeProviderName: CS - Gabs - Kubernetes Cluster - GCP
+  daemonSet: false
+  infraDefinitionName: gcp_k8s_gabs_cluster_prod
+  name: Rolling
+  phaseSteps:
+  - type: K8S_PHASE_STEP
+    name: Deploy
+    steps:
+    - type: SHELL_SCRIPT
+      name: Cleaning last mongodb injection job
+      properties:
+        commandPath: null
+        connectionAttributes: null
+        delegateSelectors:
+        - cs-gabs-gcp-k8s-delegate
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          #!/bin/bash
+
+          echo "TIBIA LOADER JOB CLEANER"
+
+          echo "GETTING JOB NAME"
+          job_name=$(kubectl get job -n ${infra.kubernetes.namespace} --output=jsonpath='{.items[*].metadata.name}')
+
+          if [ -z "$job_name" ]
+          then
+                echo "Could not find the MongoDB Service. Ignoring..."
+          else
+                echo "Older MongoDB Injector Job found!"
+                echo "JOB NAME: $job_name"
+                echo "DELETING JOB..."
+                kubectl delete job $job_name -n ${infra.kubernetes.namespace}
+          fi
+        scriptType: BASH
+        sshKeyRef: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    - type: K8S_DEPLOYMENT_ROLLING
+      name: Rollout Deployment
+      properties:
+        stateTimeoutInMinutes: 10
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Verify
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Wrap Up
+    steps:
+    - type: SHELL_SCRIPT
+      name: Expose MongoDB Service Name
+      properties:
+        commandPath: null
+        connectionAttributes: null
+        executeOnDelegate: true
+        host: null
+        outputVars: SVC_NAME
+        publishAsVar: true
+        scriptString: "#!/bin/bash\n\necho \"MONGODB SERVICE EXPOSER\"\n\n\necho \"\
+          GETTING MONGODB SVC NAME\"\nsvc_name=$(kubectl get svc -n ${infra.kubernetes.namespace}\
+          \ -o wide | grep 27017 | awk '{print $1}')\necho \"SVC NAME: $svc_name\"\
+          \n\nexport SVC_NAME=$svc_name "
+        scriptType: BASH
+        secretOutputVars: ''
+        sshKeyRef: null
+        sweepingOutputName: MONGODB_SERVICE
+        sweepingOutputScope: PIPELINE
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    - type: SHELL_SCRIPT
+      name: TESTING EXPOSED VARS
+      properties:
+        commandPath: null
+        connectionAttributes: null
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          #!/bin/bash
+
+          echo "TESTING EXPOSED VARIABLES"
+          echo "TRYING TO GET SERVICE NAME FROM MONGODB"
+
+          echo "SERVICE NAME: ${context.MONGODB_SERVICE.SVC_NAME}"
+        scriptType: BASH
+        sshKeyRef: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: Tibia_Item_ID_MongoDB_Service
+  statefulSet: false
+rollbackPhases:
+- type: KUBERNETES
+  computeProviderName: CS - Gabs - Kubernetes Cluster - GCP
+  daemonSet: false
+  infraDefinitionName: gcp_k8s_gabs_cluster_prod
+  name: Rollback Rolling
+  phaseNameForRollback: Rolling
+  phaseSteps:
+  - type: K8S_PHASE_STEP
+    name: Deploy
+    phaseStepNameForRollback: Deploy
+    statusForRollback: SUCCESS
+    steps:
+    - type: K8S_DEPLOYMENT_ROLLING_ROLLBACK
+      name: Rollback Deployment
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Wrap Up
+    phaseStepNameForRollback: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: Tibia_Item_ID_MongoDB_Service
+  statefulSet: false
+templatized: false
