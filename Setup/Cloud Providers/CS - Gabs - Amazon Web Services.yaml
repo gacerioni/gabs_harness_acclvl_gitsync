@@ -1,0 +1,18 @@
+harnessApiVersion: '1.0'
+type: AWS
+assumeCrossAccountRole: false
+tag: cs-gabs-aws-ec2-delegate
+usageRestrictions:
+  appEnvRestrictions:
+  - appFilter:
+      filterType: ALL
+    envFilter:
+      filterTypes:
+      - PROD
+  - appFilter:
+      filterType: ALL
+    envFilter:
+      filterTypes:
+      - NON_PROD
+useEc2IamCredentials: true
+useIRSA: false

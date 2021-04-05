@@ -1,0 +1,27 @@
+harnessApiVersion: '1.0'
+type: CUSTOM_DEPLOYMENT_TYPE
+fetchInstanceScript: |
+  #
+  # Script is expected to query Infrastructure and dump json
+  # in $INSTANCE_OUTPUT_PATH file path
+  #
+  # Harness is expected to initialize ${INSTANCE_OUTPUT_PATH}
+  # environment variable - a random unique file path on delegate,
+  # so script execution can save the result.
+  #
+  #
+  gcloud app instances list --service="${service_name}" --project="${gcp_project_id}" --format=json > "${INSTANCE_OUTPUT_PATH}"
+hostAttributes:
+  hostname: instance.name
+  service: service
+  startTime: instance.startTime
+  id: instance.id
+  version: version
+hostObjectArrayPath: $
+variables:
+- description: GCP POC test project
+  name: gcp_project_id
+  value: customer-success-244100
+- description: Genesis Framework SampleApp
+  name: service_name
+  value: pownodejsstarter

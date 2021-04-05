@@ -1,0 +1,13 @@
+harnessApiVersion: '1.0'
+type: SHELL_SCRIPT
+outputVars: instanceid
+scriptString: |-
+  #!/bin/bash
+  echo "Creating Variables from harness variables!"
+  #instanceid="${cloudformation.InstanceID}"
+  instanceid="${cloudformation.InstanceId}"
+
+  echo "PRINTING INSTANCEID!!!"
+  echo $instanceid
+scriptType: BASH
+timeoutMillis: 600000
