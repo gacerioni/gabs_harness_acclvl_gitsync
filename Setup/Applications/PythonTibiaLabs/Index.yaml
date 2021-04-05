@@ -1,0 +1,3 @@
+harnessApiVersion: '1.0'
+type: APPLICATION
+description: Will use this one to achieve GitOps State of the Art. CI and CD.
