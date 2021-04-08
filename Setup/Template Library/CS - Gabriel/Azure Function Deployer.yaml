@@ -1,0 +1,16 @@
+harnessApiVersion: '1.0'
+type: CUSTOM_DEPLOYMENT_TYPE
+fetchInstanceScript: |-
+  RESP="[$(az functionapp function show --function-name ${service.name} -n ${FUNC_APP} -g ${RES_GROUP})]"
+
+  echo "${RESP}" | jq '.' > ${INSTANCE_OUTPUT_PATH}
+hostAttributes:
+  hostname: name
+  Language: language
+  ID: id
+  URL: invokeUrlTemplate
+  Location: location
+hostObjectArrayPath: $
+variables:
+- name: RES_GROUP
+- name: FUNC_APP
