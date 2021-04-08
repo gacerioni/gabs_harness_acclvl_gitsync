@@ -1,3 +1,12 @@
 harnessApiVersion: '1.0'
 type: SSH
 commandUnitType: OTHER
+commandUnits:
+- command: "mkdir -p /tmp/${service.name}\n\n#replace with artifact download command\
+    \ for the desired artifact source \n#<artifact download command here output to\
+    \ path > ${artifact.metadata.bucketName}/${artifact.metadata.artifactPath} /tmp/${service.name}"
+  commandUnitType: EXEC
+  deploymentType: SSH
+  name: Exec
+  scriptType: BASH
+  workingDirectory: Download Artifact
