@@ -1,0 +1,5 @@
+harnessApiVersion: '1.0'
+type: ARTIFACTORY
+password: gcpkms:2Jyv4zbOTVOjbOV0LoqQvQ
+url: https://gabsthecreator.jfrog.io/artifactory
+username: gabriel.cerioni@harness.io
