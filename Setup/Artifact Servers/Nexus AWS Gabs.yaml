@@ -1,7 +1,5 @@
 harnessApiVersion: '1.0'
 type: NEXUS
-delegateSelectors:
-- gabs-aws-saeast-ec2-ssh
 password: gcpkms:sckPdjzjSL6L4ELlgbUvGA
 url: http://15.228.7.175:8081
 username: admin
