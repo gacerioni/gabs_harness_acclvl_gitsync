@@ -3,7 +3,7 @@ type: GIT
 branch: main
 keyAuth: true
 sshKeyName: GitHub_Gabs_MBP_PEM
-url: https://github.com/gacerioni/GitSync_Application_Level_Reserved_Repo
+url: git@github.com:gacerioni/GitSync_Application_Level_Reserved_Repo.git
 urlType: REPO
 usageRestrictions:
   appEnvRestrictions:
