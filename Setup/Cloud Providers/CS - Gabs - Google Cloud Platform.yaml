@@ -3,3 +3,4 @@ type: GCP
 serviceAccountKeyFileContent: gcpkms:OxhlmgZ7RuagWeuj3dbHxw
 skipValidation: false
 useDelegate: false
+useDelegateSelectors: false
