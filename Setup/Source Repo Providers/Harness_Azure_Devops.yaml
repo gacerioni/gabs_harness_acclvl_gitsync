@@ -1,8 +1,0 @@
-harnessApiVersion: '1.0'
-type: GIT
-branch: main
-keyAuth: false
-password: gcpkms:V0AOG_vkRguWa-Uz66lQhw
-url: https://gabsthesre@dev.azure.com/gabsthesre/Testing_Harness_Integration/_git/Testing_Harness_Integration
-urlType: REPO
-username: gabsthesre
