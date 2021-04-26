@@ -1,8 +1,8 @@
 harnessApiVersion: '1.0'
 type: GIT
 keyAuth: true
-sshKeyName: gabsthesre_generic_github_ssh
-url: org-83042044@github.com:KenGabriel
+sshKeyName: gacerioni_github_org_kengabs_ssh
+url: git@github.com:KenGabriel
 urlType: ACCOUNT
 usageRestrictions:
   appEnvRestrictions:
