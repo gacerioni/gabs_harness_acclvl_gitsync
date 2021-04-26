@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: CONFIG_FILE
+checksum: dk76iD3aHhHbR2ccSju9ng==
+checksumType: MD5
+encrypted: false
+fileName: test_config_file
+targetFilePath: test_config_file
+targetToAllEnv: true
