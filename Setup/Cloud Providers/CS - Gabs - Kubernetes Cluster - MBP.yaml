@@ -1,7 +1,7 @@
 harnessApiVersion: '1.0'
 type: KUBERNETES_CLUSTER
 delegateSelectors:
-- cluster_1_MBP
+- gabs-personal-pc-k8s
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
