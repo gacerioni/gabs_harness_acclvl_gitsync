@@ -22,7 +22,7 @@ commandUnits:
   scriptType: BASH
 - commandUnitType: COMMAND
   name: Stop
-  templateUri: CS - Gabriel/Tomcat Commands/Stop
+  templateUri: CS - Gabriel - Renamed/Tomcat Commands/Stop
 - artifactVariableName: artifact
   commandUnitType: SCP
   deploymentType: SSH
@@ -52,7 +52,7 @@ commandUnits:
   name: Copy Configs
 - commandUnitType: COMMAND
   name: Start
-  templateUri: CS - Gabriel/Tomcat Commands/Start
+  templateUri: CS - Gabriel - Renamed/Tomcat Commands/Start
 variables:
 - description: Runtime path to install binaries.
   name: RuntimePath
