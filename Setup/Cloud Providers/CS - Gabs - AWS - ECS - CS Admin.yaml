@@ -1,7 +1,7 @@
 harnessApiVersion: '1.0'
 type: AWS
 assumeCrossAccountRole: false
-tag: cse-gabs-ecs-cluster
+tag: gabsecsdelegate
 usageRestrictions:
   appEnvRestrictions:
   - appFilter:
