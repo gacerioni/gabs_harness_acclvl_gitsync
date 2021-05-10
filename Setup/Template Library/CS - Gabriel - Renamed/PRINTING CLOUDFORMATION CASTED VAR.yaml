@@ -2,6 +2,13 @@ harnessApiVersion: '1.0'
 type: SHELL_SCRIPT
 scriptString: |-
   #!/bin/bash
+
+  echo "Printing the exported/hacked Instance ID from Cloudformation"
   echo ${context.info.instanceid}
+
+  echo "Now, trying to fetch the DNS from directly from CF Outputs"
+  echo "${cloudformation.PublicDNS}"
+
+  echo "END OF SCRIPT"
 scriptType: BASH
 timeoutMillis: 600000
