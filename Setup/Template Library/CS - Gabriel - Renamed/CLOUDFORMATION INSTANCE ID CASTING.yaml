@@ -11,6 +11,6 @@ scriptString: |-
   echo $instanceid
 
   echo "PRINTING CF OUTPUT DIRECTLY FROM THE SAME STEP"
-  "${cloudformation.PublicDNS}"
+  echo "${cloudformation.PublicDNS}"
 scriptType: BASH
 timeoutMillis: 600000
