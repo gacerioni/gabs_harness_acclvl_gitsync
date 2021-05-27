@@ -1,5 +1,5 @@
 harnessApiVersion: '1.0'
 type: DOCKER
-password: gcpkms:zknmenWIQueS1nSLy1fTmQ
+password: gcpkms:kbsUqFEGTwiEq9A9JVONYA
 url: https://ghcr.io/
-username: gacerioni
+username: gabriel.cerioni@harness.io
