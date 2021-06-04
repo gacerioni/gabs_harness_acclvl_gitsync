@@ -1,6 +1,6 @@
 harnessApiVersion: '1.0'
 type: GIT
-branch: master
+branch: main
 keyAuth: false
 password: gcpkms:zknmenWIQueS1nSLy1fTmQ
 url: https://github.com/gabrielcerioni/harness_helm_source_nginx.git
