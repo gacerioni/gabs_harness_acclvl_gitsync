@@ -1,0 +1,6 @@
+harnessApiVersion: '1.0'
+type: JENKINS
+authMechanism: Username/Password
+password: gcpkms:OXqEsL7WSMqfv70tA6HeNQ
+url: http://ec2-18-231-150-202.sa-east-1.compute.amazonaws.com:8080
+username: admin
