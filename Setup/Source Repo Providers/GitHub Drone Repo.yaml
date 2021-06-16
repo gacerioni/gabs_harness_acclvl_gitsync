@@ -3,6 +3,6 @@ type: GIT
 branch: master
 keyAuth: false
 password: gcpkms:kbsUqFEGTwiEq9A9JVONYA
-url: https://github.com/drone/charts.git
+url: https://github.com/gabrielcerioni/drone-charts.git
 urlType: REPO
 username: gabrielcerioni
