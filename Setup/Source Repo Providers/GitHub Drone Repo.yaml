@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: GIT
+branch: master
+keyAuth: false
+password: gcpkms:kbsUqFEGTwiEq9A9JVONYA
+url: https://github.com/drone/charts.git
+urlType: REPO
+username: gabrielcerioni
