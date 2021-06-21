@@ -1,0 +1,4 @@
+harnessApiVersion: '1.0'
+type: GCS_HELM_REPO
+bucket: gabs_nginx_helm_repo
+cloudProvider: CS - Gabs - Google Cloud Platform
