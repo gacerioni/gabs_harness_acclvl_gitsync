@@ -1,7 +1,9 @@
 harnessApiVersion: '1.0'
 type: KUBERNETES_CLUSTER
+continuousEfficiencyConfig:
+  continuousEfficiencyEnabled: true
 delegateSelectors:
-- eks-gabs-sa-east-1
+- IRSA_LABS_GABS
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
