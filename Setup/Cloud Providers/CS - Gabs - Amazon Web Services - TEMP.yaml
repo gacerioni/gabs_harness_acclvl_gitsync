@@ -1,7 +1,7 @@
 harnessApiVersion: '1.0'
 type: AWS
 assumeCrossAccountRole: false
-tag: CS_ADMIN_EC2_DELEGATE_US_EAST_1
+tag: CS_ADMIN_EC2_DELEGATE_TEMP
 usageRestrictions:
   appEnvRestrictions:
   - appFilter:
