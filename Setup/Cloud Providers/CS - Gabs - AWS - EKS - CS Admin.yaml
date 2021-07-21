@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: true
 delegateSelectors:
-- IRSA_LABS_GABS
+- eks_k8s_gabs
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
