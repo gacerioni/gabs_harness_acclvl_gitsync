@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: true
 delegateSelectors:
-- eks-sa-east-1-gabs
+- PRD_VAULT_AGENT_K8s
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
