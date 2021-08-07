@@ -1,5 +1,5 @@
 harnessApiVersion: '1.0'
 type: HTTP_HELM_REPO
-password: gcpkms:kbsUqFEGTwiEq9A9JVONYA
+password: gcpkms:gabrielcerioni_github_container_registry_harness
 url: https://gabrielcerioni.github.io/harness-helm-charts/
 username: gabrielcerioni
