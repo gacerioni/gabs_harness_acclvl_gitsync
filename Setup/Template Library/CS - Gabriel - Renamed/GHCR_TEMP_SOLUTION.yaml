@@ -6,8 +6,8 @@ customRepositoryMapping:
 script: |-
   set -e
 
-  UNAME=gabrielcerioni
-  UPASS=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
+  UNAME=${UNAME}
+  UPASS=${UPASS}
   REPO=${REPO}
 
   BasicAuthHeader=$(echo ${UNAME}:${UPASS} | base64)
