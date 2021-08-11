@@ -6,10 +6,11 @@ customRepositoryMapping:
 script: |-
   set -e
 
-  UNAME=${UNAME}
-  UPASS=${UPASS}
+  UNAME=gabrielcerioni
+  UPASS=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
   COUNT=${COUNT}
   BUILDNO=${LASTBUILD}
+  REPO=${REPO}
 
   BasicAuthHeader=$(echo ${UNAME}:${UPASS} | base64)
 
@@ -27,3 +28,5 @@ variables:
   value: '10'
 - name: LASTBUILD
   value: v51
+- name: REPO
+  value: gabrielcerioni/nginxprivate
