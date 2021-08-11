@@ -13,9 +13,9 @@ script: |-
 
   BasicAuthHeader=$(echo ${UNAME}:${UPASS} | base64)
 
-  TOKEN=$(curl -s -H "Content-Type: application/json" -H "Authorization: Basic ${BasicAuthHeader}" \?service=ghcr.io\&scope="repository:${REPO}:pull" | jq -r .token)
+  TOKEN=$(curl -s -H "Content-Type: application/json" -H "Authorization: Basic ${BasicAuthHeader}" https://ghcr.io/token\?service=ghcr.io\&scope="repository:${REPO}:pull" | jq -r .token)
 
-  curl -s -H "Docker-Distribution-API-Version: registry/2.0" -H "Authorization: Bearer ${TOKEN}" \&last="${LASTBUILD}" | jq '.tags | {"items": [ { buildNo: .[]}]}'  > ${ARTIFACT_RESULT_PATH}
+  curl -s -H "Docker-Distribution-API-Version: registry/2.0" -H "Authorization: Bearer ${TOKEN}" https://ghcr.io/v2/${REPO}/tags/list | jq '.tags | {"items": [ { buildNo: .[]}]}'  > ${ARTIFACT_RESULT_PATH}
 sourceType: CUSTOM
 timeout: '60'
 variables:
