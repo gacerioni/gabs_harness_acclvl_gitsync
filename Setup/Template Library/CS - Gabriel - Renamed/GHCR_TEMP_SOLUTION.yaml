@@ -8,8 +8,6 @@ script: |-
 
   UNAME=gabrielcerioni
   UPASS=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
-  COUNT=${COUNT}
-  BUILDNO=${LASTBUILD}
   REPO=${REPO}
 
   BasicAuthHeader=$(echo ${UNAME}:${UPASS} | base64)
@@ -23,6 +21,6 @@ variables:
 - name: UNAME
   value: gabrielcerioni
 - name: UPASS
-  value: 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
+  value: ${secrets.getValue("NEW_PAT_GABS")}
 - name: REPO
   value: gabrielcerioni/nginxprivate
