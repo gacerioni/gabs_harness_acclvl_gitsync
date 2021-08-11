@@ -1,0 +1,29 @@
+harnessApiVersion: '1.0'
+type: ARTIFACT_SOURCE
+customRepositoryMapping:
+  artifactRoot: $.items
+  buildNoPath: buildNo
+script: |-
+  set -e
+
+  UNAME=${UNAME}
+  UPASS=${UPASS}
+  COUNT=${COUNT}
+  BUILDNO=${LASTBUILD}
+
+  BasicAuthHeader=$(echo ${UNAME}:${UPASS} | base64)
+
+  TOKEN=$(curl -s -H "Content-Type: application/json" -H "Authorization: Basic ${BasicAuthHeader}" \?service=ghcr.io\&scope="repository:${REPO}:pull" | jq -r .token)
+
+  curl -s -H "Docker-Distribution-API-Version: registry/2.0" -H "Authorization: Bearer ${TOKEN}" \&last="${LASTBUILD}" | jq '.tags | {"items": [ { buildNo: .[]}]}'  > ${ARTIFACT_RESULT_PATH}
+sourceType: CUSTOM
+timeout: '60'
+variables:
+- name: UNAME
+  value: gabrielcerioni
+- name: UPASS
+  value: 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
+- name: COUNT
+  value: '10'
+- name: LASTBUILD
+  value: v51
