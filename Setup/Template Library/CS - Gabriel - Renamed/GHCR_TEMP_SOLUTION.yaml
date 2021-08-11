@@ -23,10 +23,6 @@ variables:
 - name: UNAME
   value: gabrielcerioni
 - name: UPASS
-  value: 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
-- name: COUNT
-  value: '10'
-- name: LASTBUILD
-  value: v51
+  value: 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
 - name: REPO
   value: gabrielcerioni/nginxprivate
