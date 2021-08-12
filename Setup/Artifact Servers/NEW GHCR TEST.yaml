@@ -1,3 +1,5 @@
 harnessApiVersion: '1.0'
 type: DOCKER
-url: https://ghcr.io/v2/
+password: gcpkms:PAT_FOR_AUGUST_GHCR
+url: https://docker.pkg.github.com/v2/
+username: gabrielcerioni
