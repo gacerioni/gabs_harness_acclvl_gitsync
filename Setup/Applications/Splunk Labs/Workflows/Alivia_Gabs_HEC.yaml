@@ -1,0 +1,69 @@
+harnessApiVersion: '1.0'
+type: BUILD
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    steps:
+    - type: HTTP
+      name: Alivia and Gabs Labs - POST Pod Info to Splunk
+      properties:
+        assertion: ${httpResponseCode}==200
+        body: |-
+          {
+            "event":
+              {
+                  "pod_payload": ${workflow.variables.pod_payload}
+              }
+          }
+        executeWithPreviousSteps: false
+        headers:
+        - key: Authorization
+          value: Splunk 376a3b91-de9b-431c-a996-7de648940f32
+        - key: Content-Type
+          value: application/json
+        method: POST
+        publishAsVar: false
+        responseProcessingExpressions: ''
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        tags: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 10000
+        url: http://ec2-18-228-173-165.sa-east-1.compute.amazonaws.com:8088/services/collector/event
+        useProxy: false
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: false
+userVariables:
+- type: TEXT
+  fixed: true
+  mandatory: true
+  name: pod_payload
+  value: '{"annotations":{"cni.projectcalico.org/podIP":"","cni.projectcalico.org/podIPs":"","kubectl.kubernetes.io/last-applied-configuration":"{\"apiVersion\":\"v1\",\"kind\":\"Pod\",\"metadata\":{\"annotations\":{\"kubernetes.io/change-cause\":\"kubectl
+    apply --kubeconfig=config --filename=manifests.yaml --record=true\"},\"labels\":{\"APRMID\":\"6945\",\"app\":\"github-auto-suspend\"},\"name\":\"github-auto-suspend\",\"namespace\":\"dpt\"},\"spec\":{\"containers\":[{\"env\":[{\"name\":\"GITHUB_BASE_URL\",\"valueFrom\":{\"secretKeyRef\":{\"key\":\"github-base-url\",\"name\":\"github-auto-suspend\"}}},{\"name\":\"PAT\",\"valueFrom\":{\"secretKeyRef\":{\"key\":\"pat\",\"name\":\"github-auto-suspend\"}}},{\"name\":\"LDAP_DN\",\"valueFrom\":{\"secretKeyRef\":{\"key\":\"ldap-dn\",\"name\":\"github-auto-suspend\"}}},{\"name\":\"LDAP_PASS\",\"valueFrom\":{\"secretKeyRef\":{\"key\":\"ldap-pass\",\"name\":\"github-auto-suspend\"}}}],\"image\":\"ntr.nwie.net/dpt/github-auto-suspend:RC-3\",\"imagePullPolicy\":\"Always\",\"name\":\"github-auto-suspend\",\"ports\":[{\"containerPort\":8080}]}],\"restartPolicy\":\"Never\"}}\n","kubernetes.io/change-cause":"kubectl
+    apply --kubeconfig=config --filename=manifests.yaml --record=true","kubernetes.io/limit-ranger":"LimitRanger
+    plugin set: cpu, memory request for container github-auto-suspend; cpu, memory
+    limit for container github-auto-suspend","kubernetes.io/psp":"general-psp"},"baseType":"pod","containers":[{"allowPrivilegeEscalation":true,"environmentFrom":[{"optional":false,"source":"secret","sourceKey":"github-base-url","sourceName":"github-auto-suspend","targetKey":"GITHUB_BASE_URL"},{"optional":false,"source":"secret","sourceKey":"pat","sourceName":"github-auto-suspend","targetKey":"PAT"},{"optional":false,"source":"secret","sourceKey":"ldap-dn","sourceName":"github-auto-suspend","targetKey":"LDAP_DN"},{"optional":false,"source":"secret","sourceKey":"ldap-pass","sourceName":"github-auto-suspend","targetKey":"LDAP_PASS"}],"exitCode":1,"image":"ntr.nwie.net/dpt/github-auto-suspend:RC-3","imagePullPolicy":"Always","initContainer":false,"name":"github-auto-suspend","ports":[{"containerPort":8080,"hostPort":0,"kind":"ClusterIP","protocol":"TCP","sourcePort":0,"type":"/v3/project/schemas/containerPort"}],"resources":{"limits":{"cpu":"1","memory":"256Mi"},"requests":{"cpu":"10m","memory":"128Mi"},"type":"/v3/project/schemas/resourceRequirements"},"restartCount":0,"state":"terminated","stdin":false,"stdinOnce":false,"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File","transitioning":"error","transitioningMessage":"Error","tty":false,"type":"/v3/project/schemas/container","volumeMounts":[{"mountPath":"/var/run/secrets/kubernetes.io/serviceaccount","name":"default-token-48m2j","readOnly":true,"type":"/v3/project/schemas/volumeMount"}]}],"created":"2021-12-13T20:01:15Z","createdTS":1639425675000,"creatorId":null,"dnsPolicy":"ClusterFirst","enableServiceLinks":true,"hostIPC":false,"hostNetwork":false,"hostPID":false,"id":"dpt:github-auto-suspend","labels":{"APRMID":"6945","app":"github-auto-suspend"},"links":{"remove":"https://rancher.nwie.net/v3/project/c-7kpm7:p-8l86q/pods/dpt:github-auto-suspend","self":"https://rancher.nwie.net/v3/project/c-7kpm7:p-8l86q/pods/dpt:github-auto-suspend","update":"https://rancher.nwie.net/v3/project/c-7kpm7:p-8l86q/pods/dpt:github-auto-suspend","yaml":"https://rancher.nwie.net/v3/project/c-7kpm7:p-8l86q/pods/dpt:github-auto-suspend/yaml"},"name":"github-auto-suspend","namespaceId":"dpt","nodeId":"c-7kpm7:m-51e99e14b7c1","preemptionPolicy":"PreemptLowerPriority","projectId":"c-7kpm7:p-8l86q","restartPolicy":"Never","scheduling":{"priority":0,"scheduler":"default-scheduler","tolerate":[{"effect":"NoExecute","key":"node.kubernetes.io/not-ready","operator":"Exists","tolerationSeconds":300,"type":"/v3/project/schemas/toleration"},{"effect":"NoExecute","key":"node.kubernetes.io/unreachable","operator":"Exists","tolerationSeconds":300,"type":"/v3/project/schemas/toleration"}]},"serviceAccountName":"default","state":"unavailable","status":{"conditions":[{"lastProbeTime":null,"lastTransitionTime":"2021-12-13T20:01:15Z","lastTransitionTimeTS":1639425675000,"status":"True","type":"Initialized"},{"lastProbeTime":null,"lastTransitionTime":"2021-12-13T20:01:15Z","lastTransitionTimeTS":1639425675000,"message":"containers
+    with unready status: [github-auto-suspend]","reason":"ContainersNotReady","status":"False","type":"Ready"},{"lastProbeTime":null,"lastTransitionTime":"2021-12-13T20:01:15Z","lastTransitionTimeTS":1639425675000,"message":"containers
+    with unready status: [github-auto-suspend]","reason":"ContainersNotReady","status":"False","type":"ContainersReady"},{"lastProbeTime":null,"lastTransitionTime":"2021-12-13T20:01:15Z","lastTransitionTimeTS":1639425675000,"status":"True","type":"PodScheduled"}],"containerStatuses":[{"containerID":"docker://ec34f9f9c30722c982bac53326a7a3ca6155e8639d0a6b5ed9d77e0187cf6f3f","image":"ntr.nwie.net/dpt/github-auto-suspend:RC-3","imageID":"docker-pullable://ntr.nwie.net/dpt/github-auto-suspend@sha256:8581d4466f77e0349cd8b2b1f72bc1bc55c9b5335ca77a87bbe47b1637fddef3","lastState":{"type":"/v3/project/schemas/containerState"},"name":"github-auto-suspend","ready":false,"restartCount":0,"started":false,"state":{"terminated":{"containerID":"docker://ec34f9f9c30722c982bac53326a7a3ca6155e8639d0a6b5ed9d77e0187cf6f3f","exitCode":1,"finishedAt":"2021-12-13T20:01:18Z","finishedAtTS":1639425678000,"reason":"Error","signal":0,"startedAt":"2021-12-13T20:01:18Z","startedAtTS":1639425678000,"type":"/v3/project/schemas/containerStateTerminated"},"type":"/v3/project/schemas/containerState"},"type":"/v3/project/schemas/containerStatus"}],"nodeIp":"10.165.57.68","phase":"Failed","podIPs":[{"ip":"10.0.11.162","type":"/v3/project/schemas/podIP"}],"podIp":"10.0.11.162","qosClass":"Burstable","startTime":"2021-12-13T20:01:15Z","startTimeTS":1639425675000,"type":"/v3/project/schemas/podStatus"},"terminationGracePeriodSeconds":30,"transitioning":"yes","transitioningMessage":"containers
+    with unready status: [github-auto-suspend]","type":"pod","uuid":"fb400715-e2ac-448d-bf22-608786541e33","volumes":[{"name":"default-token-48m2j","secret":{"defaultMode":420,"secretName":"default-token-48m2j","type":"/v3/project/schemas/secretVolumeSource"},"type":"/v3/project/schemas/volume"}],"workloadId":null}'
