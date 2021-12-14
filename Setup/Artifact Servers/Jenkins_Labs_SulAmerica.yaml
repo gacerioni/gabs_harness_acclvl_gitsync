@@ -1,6 +1,7 @@
 harnessApiVersion: '1.0'
 type: JENKINS
 authMechanism: Username/Password
-password: gcpkms:lrnu1dU-SmG_nNUIu9L3IA
+password: gcpkms:gabs-jenkins-ita-creds
 url: http://18.231.186.211:8080/
+useConnectorUrlForJobExecution: false
 username: gacerioni

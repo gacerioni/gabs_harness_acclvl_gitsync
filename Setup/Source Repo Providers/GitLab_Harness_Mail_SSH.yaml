@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: GIT
+branch: main
+keyAuth: false
+password: gcpkms:Gabs_GitLab_Password
+providerType: GIT
+url: https://gitlab.com/gabriel.cerioni/gabs-fake-gitsync-to-simulate-migration.git
+urlType: REPO
+username: gabriel.cerioni@harness.io

@@ -1,6 +1,7 @@
 harnessApiVersion: '1.0'
 type: GIT
 keyAuth: true
+providerType: GIT
 sshKeyName: gacerioni_github_org_kengabs_ssh
 url: git@github.com:KenGabriel
 urlType: ACCOUNT

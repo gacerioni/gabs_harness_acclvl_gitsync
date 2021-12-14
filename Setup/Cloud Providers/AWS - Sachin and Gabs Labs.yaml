@@ -1,9 +1,23 @@
 harnessApiVersion: '1.0'
 type: AWS
 assumeCrossAccountRole: false
-tag: gabsbelcorprepro
+tag: EC2_CS_ADMIN
 usageRestrictions:
   appEnvRestrictions:
+  - appFilter:
+      entityNames:
+      - PythonTibiaLabs
+      filterType: SELECTED
+    envFilter:
+      filterTypes:
+      - PROD
+  - appFilter:
+      entityNames:
+      - PythonTibiaLabs
+      filterType: SELECTED
+    envFilter:
+      filterTypes:
+      - NON_PROD
   - appFilter:
       filterType: ALL
     envFilter:

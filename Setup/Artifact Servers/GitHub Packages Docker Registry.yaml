@@ -1,5 +1,5 @@
 harnessApiVersion: '1.0'
 type: DOCKER
-password: gcpkms:zknmenWIQueS1nSLy1fTmQ
+password: gcpkms:Gabs GitHub
 url: https://docker.pkg.github.com/gabrielcerioni/github_packages_docker_registry/
 username: gacerioni

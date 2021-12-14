@@ -1,0 +1,23 @@
+harnessApiVersion: '1.0'
+type: GOVERNANCE_CONFIG
+disableAllDeployments: false
+timeRangeBasedFreezeConfigs:
+- type: TIME_RANGE_BASED_FREEZE_CONFIG
+  appSelections:
+  - apps:
+    - Splunk Labs
+    envSelection:
+    - filterType: ALL
+    filterType: CUSTOM
+    serviceSelection:
+    - filterType: ALL
+  applicable: false
+  description: This is just to explore SWAT-5619
+  name: Ken_Lifesaver_Vacation
+  timeRange:
+    durationBased: false
+    from: '1636029600260'
+    timeZone: America/Sao_Paulo
+    to: '1641005940260'
+  userGroups:
+  - Account Administrator

@@ -1,5 +1,5 @@
 harnessApiVersion: '1.0'
-type: ARTIFACTORY
+type: HTTP_HELM_REPO
 password: gcpkms:Pedro JFROG Artifactory Gabs PWD
-url: https://pedroharnesstest.jfrog.io/artifactory
+url: https://pedroharnesstest.jfrog.io/artifactory/fiserv-labs-helm-local/
 username: gabriel-cerioni

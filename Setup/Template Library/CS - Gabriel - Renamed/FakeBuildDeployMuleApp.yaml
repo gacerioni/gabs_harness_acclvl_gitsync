@@ -1,0 +1,39 @@
+harnessApiVersion: '1.0'
+type: SSH
+commandUnitType: OTHER
+commandUnits:
+- command: |2-
+
+    # Execute as root and pass environment variables
+    # su -p -
+
+    # Execute as root via user credentials (with root privileges)
+    # sudo -E su -p -
+
+    # The following variables are absolute paths defined as:
+    # ${HOME}/${appName}/${serviceName}/${serviceTemplateName}/[runtime|backup|staging]
+    rm -rf "$WINGS_RUNTIME_PATH"
+    rm -rf "$WINGS_BACKUP_PATH"
+    rm -rf "$WINGS_STAGING_PATH"
+    mkdir -p "$WINGS_RUNTIME_PATH"
+    mkdir -p "$WINGS_BACKUP_PATH"
+    mkdir -p "$WINGS_STAGING_PATH"
+  commandUnitType: EXEC
+  deploymentType: SSH
+  name: Setup Runtime Paths
+  scriptType: BASH
+- artifactVariableName: artifact
+  commandUnitType: SCP
+  deploymentType: SSH
+  destinationDirectoryPath: $WINGS_RUNTIME_PATH
+  name: Copy Artifact
+  source: ARTIFACTS
+- command: cp *.anyformat mule-proxy-automated-utility.jar
+  commandUnitType: EXEC
+  deploymentType: SSH
+  name: Rename Artifact
+  scriptType: BASH
+  workingDirectory: $WINGS_RUNTIME_PATH
+- commandUnitType: COMMAND
+  name: FAKEgetApiSpecificationFromGitRepo
+  templateUri: CS - Gabriel - Renamed/FAKEgetApiSpecificationFromGitRepo:6

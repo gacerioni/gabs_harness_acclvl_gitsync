@@ -1,6 +1,6 @@
 harnessApiVersion: '1.0'
 type: GCP
-serviceAccountKeyFileContent: gcpkms:OxhlmgZ7RuagWeuj3dbHxw
+serviceAccountKeyFileContent: gcpkms:cs-gabs-service-account
 skipValidation: false
 useDelegate: false
 useDelegateSelectors: false

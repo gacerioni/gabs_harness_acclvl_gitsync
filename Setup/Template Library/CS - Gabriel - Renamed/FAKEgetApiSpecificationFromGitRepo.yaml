@@ -1,0 +1,16 @@
+harnessApiVersion: '1.0'
+type: SSH
+commandUnitType: OTHER
+commandUnits:
+- command: |
+    #!/bin/bash
+
+    set -eu
+
+    echo "putting a test flag at ${WINGS_RUNTIME_PATH}"
+    echo > GABS_FLAG
+  commandUnitType: EXEC
+  deploymentType: SSH
+  name: Git clone using PAT
+  scriptType: BASH
+  workingDirectory: ${WINGS_RUNTIME_PATH}

@@ -1,6 +1,6 @@
 harnessApiVersion: '1.0'
 type: NEXUS
-password: gcpkms:sckPdjzjSL6L4ELlgbUvGA
+password: gcpkms:nexus_gabs_labs
 url: http://15.228.7.175:8081
 username: admin
 version: 3.x

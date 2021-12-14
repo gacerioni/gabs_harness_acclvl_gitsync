@@ -1,5 +1,7 @@
 harnessApiVersion: '1.0'
 type: KUBERNETES_CLUSTER
+continuousEfficiencyConfig:
+  continuousEfficiencyEnabled: false
 delegateSelectors:
 - macbook_kubernetes_docker_desktop
 skipValidation: false

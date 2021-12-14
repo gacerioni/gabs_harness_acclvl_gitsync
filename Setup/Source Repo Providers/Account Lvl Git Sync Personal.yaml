@@ -1,9 +1,8 @@
 harnessApiVersion: '1.0'
 type: GIT
-delegateSelectors:
-- terraform_runner
 keyAuth: false
-password: gcpkms:zknmenWIQueS1nSLy1fTmQ
+password: gcpkms:GHCR_PAT_NEW
+providerType: GIT
 url: https://github.com/gacerioni
 urlType: ACCOUNT
 username: gacerioni

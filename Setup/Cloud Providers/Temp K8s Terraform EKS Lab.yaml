@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: false
 delegateSelectors:
-- GCP_K8s_Customer_Success
+- temp-terraform-eks-lab-sshyjh-0
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:

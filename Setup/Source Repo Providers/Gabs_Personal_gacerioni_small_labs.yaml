@@ -2,7 +2,8 @@ harnessApiVersion: '1.0'
 type: GIT
 branch: main
 keyAuth: false
-password: gcpkms:zknmenWIQueS1nSLy1fTmQ
+password: gcpkms:Gabs GitHub
+providerType: GIT
 url: https://github.com/gacerioni/harness-small-labs
 urlType: REPO
 username: gacerioni

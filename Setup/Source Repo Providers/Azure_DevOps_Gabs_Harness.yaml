@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: GIT
+branch: main
+keyAuth: false
+password: gcpkms:Azure_UI_user_gabriel_dot_cerioni
+providerType: GIT
+url: https://GabsLabsHarness@dev.azure.com/GabsLabsHarness/GitSync-AzureDevOps_Harness/_git/GitSync-AzureDevOps_Harness
+urlType: REPO
+username: gabriel.cerioni

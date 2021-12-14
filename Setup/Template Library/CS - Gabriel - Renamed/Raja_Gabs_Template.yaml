@@ -1,0 +1,18 @@
+harnessApiVersion: '1.0'
+type: SHELL_SCRIPT
+outputVars: PUBLISHVALUE
+scriptString: |-
+  #
+  #set -x
+  #
+  #EXITCODE=$?
+  PUBLISHVALUE=ABC
+
+  #echo -e "End Of Deployment \n\n"
+  #echo -e "\n\n EXITCODE: ${EXITCODE} \n\n"
+  #exit $?
+  #
+
+  #exit 0
+scriptType: BASH
+timeoutMillis: 600000

@@ -1,9 +1,9 @@
 harnessApiVersion: '1.0'
 type: GIT
-branch: master
+branch: main
 keyAuth: false
 password: gcpkms:Gabs GitHub
 providerType: GIT
-url: https://github.com/gabrielcerioni/charts
+url: https://github.com/splunk/splunk-connect-for-kubernetes.git
 urlType: REPO
 username: gacerioni

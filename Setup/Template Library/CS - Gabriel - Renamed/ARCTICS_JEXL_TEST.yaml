@@ -1,0 +1,43 @@
+harnessApiVersion: '1.0'
+type: SHELL_SCRIPT
+outputVars: DeploymentID,AWSAccountID,YamlDefinition,YamlDeployment,AWSAccountRegion,JsonArtifacts,JsonTags,JsonParameters,JsonDeployment,JsonDefinition,YamlParameters,JsonCtxAWS,JsonCtxRegion,DelegateSelectors
+scriptString: "#!/usr/bin/env bash\n#=======================\n# Resolves ArcticWolf\
+  \ artifacts for the current deployment with the\n# available manifest and available\
+  \ deployment contexts\n#\n# This expects the following constraints:\n#   - app.defaults.DeploymentBucket\n\
+  #   - app.defaults.DeploymentBucket_Prefix\n#\n#=======================\nset -Eeuo\
+  \ pipefail\nDIR=\"$(mktemp -d -t deploy-XXXXXXXXXX)\" ; mkdir -p \"${DIR}\" ; cd\
+  \ \"${DIR}\"\n\necho \"[AWS]: Confirming IRSA permissions of the log.\"\naws sts\
+  \ get-caller-identity\n\necho \"[Deployment]: Resolving the deployment ID from environment\
+  \ name\"\nDeploymentID=`echo ${env.name} | rev | cut -d'-' -f1 | rev`\necho \"[Deployment]:\
+  \ ID ${DeploymentID}\"\n\necho \"[Manifest]: Writing from context\"\necho '${context.manifest.Contents}'\
+  \ > manifest.yaml\n\necho \"[Manifest]: Manifest.yaml\"\ncat manifest.yaml\n\nDeployment_S3BucketPath=\"\
+  s3://${app.defaults.DeploymentBucket}/${app.defaults.DeploymentBucket_Prefix}/${DeploymentID}\"\
+  \n\necho \"[AWS/S3]: Reading files from ${Deployment_S3BucketPath}\"\naws s3 cp\
+  \ --quiet \"${Deployment_S3BucketPath}/definition.yaml\" definition.yaml\naws s3\
+  \ cp --quiet \"${Deployment_S3BucketPath}/deployment.yaml\" deployment.yaml\nYamlDefinition=$(<\"\
+  definition.yaml\") \nJsonDefinition=\"$(yq e -j \"definition.yaml\")\"\nYamlDeployment=$(<\"\
+  deployment.yaml\") \nJsonDeployment=\"$(yq e -j \"deployment.yaml\")\"\n\necho \"\
+  [Deployment]: definition.yaml\"\ncat definition.yaml\n\necho \"[Deployment]: deployment.yaml\"\
+  \ncat deployment.yaml\n\necho \"[Deployment]: Determining optional selectors\"\n\
+  DelegateSelectors=`yq e '.deployables.${Deployable}.selectors // \"\"' definition.yaml`\n\
+  \necho \"[Deployment]: Determining AWS Account\"\nctx_aws_path=`yq e '.context.aws'\
+  \ definition.yaml`\nctx_region_path=`yq e '.context.region' definition.yaml`\n\n\
+  aws s3 cp --quiet \"s3://${app.defaults.DeploymentBucket}/${ctx_aws_path}\" .\n\
+  aws s3 cp --quiet \"s3://${app.defaults.DeploymentBucket}/${ctx_region_path}\" .\n\
+  \nJsonCtxAWS=$(<\"account.json\")\nJsonCtxRegion=$(<\"region.json\")\n\nAWSAccountID=`jq\
+  \ -r '.ID' account.json`\nAWSAccountRegion=`jq -r '.Name' region.json`\n\necho \"\
+  [Artifacts]: Resolving artifacts\"\nartifacts_source=`yq e '.artifacts' definition.yaml`\n\
+  JsonArtifacts=`harness-cli artifact resolve --artifacts-source ${artifacts_source}\
+  \ --manifest manifest.yaml`\n\necho \"[Deployables]: Resolving deployable parameters\"\
+  \n\nharness-cli deployment resolve --artifacts-source US --manifest manifest.yaml\
+  \ --context deployment.yaml --target '${Deployable}' --parameters \"parameters.json\"\
+  \ --tags \"tags.json\"\njq . tags.json\njq . parameters.json\nJsonTags=$(<\"tags.json\"\
+  ) \nJsonParameters=$(<\"parameters.json\") \n\n# Convert the cfn parameters to values.yaml\n\
+  jq '(. | map( { (.ParameterKey): .ParameterValue } )) | add' parameters.json | yq\
+  \ e -P - > parameters.yaml\nYamlParameters=$(<\"parameters.yaml\") \n\n##\n## Cleanup\n\
+  ##\ncd /tmp ; rm -rf \"${DIR}\""
+scriptType: BASH
+timeoutMillis: 600000
+variables:
+- description: Deployable name
+  name: Deployable

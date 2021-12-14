@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: false
 delegateSelectors:
-- GCP_K8s_Customer_Success
+- gabs-windows-pc-k8s
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:

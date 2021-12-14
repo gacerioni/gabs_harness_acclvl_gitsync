@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: KUBERNETES_CLUSTER
+authType: SERVICE_ACCOUNT
+caCert: gcpkms:cs-gabs-service-account
+continuousEfficiencyConfig:
+  continuousEfficiencyEnabled: false
+masterUrl: https://dummydummy.com
+serviceAccountToken: gcpkms:gacerioni_aws_cs_admin
+skipValidation: true
+useKubernetesDelegate: false
