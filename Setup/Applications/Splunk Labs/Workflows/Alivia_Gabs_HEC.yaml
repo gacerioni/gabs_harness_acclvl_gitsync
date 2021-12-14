@@ -16,7 +16,7 @@ phases:
     name: Prepare Steps
     steps:
     - type: HTTP
-      name: Alivia and Gabs Labs - POST Pod Info to Splunk
+      name: Alivia and Gabs - POST Pod Info to Splunk
       properties:
         assertion: ${httpResponseCode}==200
         body: |-
