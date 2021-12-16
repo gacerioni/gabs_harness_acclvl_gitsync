@@ -1,0 +1,15 @@
+connector:
+  name: Dockerhub
+  identifier: Dockerhub
+  description:
+  orgIdentifier: Harness_Labs
+  projectIdentifier: GitExperience_Labs
+  type: DockerRegistry
+  spec:
+    dockerRegistryUrl: https://registry.hub.docker.com
+    providerType: DockerHub
+    auth:
+      type: UsernamePassword
+      spec:
+        username: gacerioni
+        passwordRef: account.gacerionidockerhub
