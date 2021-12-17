@@ -21,3 +21,21 @@ timeRangeBasedFreezeConfigs:
     to: '1641005940260'
   userGroups:
   - Account Administrator
+- type: TIME_RANGE_BASED_FREEZE_CONFIG
+  appSelections:
+  - envSelection:
+    - filterType: ALL
+    filterType: ALL
+    serviceSelection:
+    - filterType: ALL
+  applicable: false
+  description: description
+  name: gabs_labs_jonathan
+  timeRange:
+    duration: '3600000'
+    durationBased: true
+    from: '1639742797407'
+    timeZone: America/Toronto
+    to: '1639746397407'
+  userGroups:
+  - Account Administrator
