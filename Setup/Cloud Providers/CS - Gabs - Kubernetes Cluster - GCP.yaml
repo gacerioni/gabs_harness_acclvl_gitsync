@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: true
 delegateSelectors:
-- GCP_K8s_Customer_Success
+- custom-delegate-gabs-gke-sshyjh-0
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
