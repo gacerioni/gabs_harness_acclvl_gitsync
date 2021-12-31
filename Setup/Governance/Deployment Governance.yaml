@@ -28,7 +28,7 @@ timeRangeBasedFreezeConfigs:
     filterType: ALL
     serviceSelection:
     - filterType: ALL
-  applicable: true
+  applicable: false
   description: description
   name: gabs_labs_jonathan
   timeRange:
