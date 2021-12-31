@@ -11,7 +11,7 @@ timeRangeBasedFreezeConfigs:
     filterType: CUSTOM
     serviceSelection:
     - filterType: ALL
-  applicable: true
+  applicable: false
   description: This is just to explore SWAT-5619
   name: Ken_Lifesaver_Vacation
   timeRange:
