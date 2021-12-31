@@ -28,14 +28,14 @@ timeRangeBasedFreezeConfigs:
     filterType: ALL
     serviceSelection:
     - filterType: ALL
-  applicable: false
+  applicable: true
   description: description
   name: gabs_labs_jonathan
   timeRange:
     duration: '3600000'
     durationBased: true
-    from: '1639742797407'
+    from: '1640954212184'
     timeZone: America/Toronto
-    to: '1639746397407'
+    to: '1640957812184'
   userGroups:
   - Account Administrator
