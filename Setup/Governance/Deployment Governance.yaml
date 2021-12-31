@@ -4,38 +4,18 @@ disableAllDeployments: false
 timeRangeBasedFreezeConfigs:
 - type: TIME_RANGE_BASED_FREEZE_CONFIG
   appSelections:
-  - apps:
-    - Splunk Labs
-    envSelection:
-    - filterType: ALL
-    filterType: CUSTOM
-    serviceSelection:
-    - filterType: ALL
-  applicable: false
-  description: This is just to explore SWAT-5619
-  name: Ken_Lifesaver_Vacation
-  timeRange:
-    durationBased: false
-    from: '1636029600260'
-    timeZone: America/Sao_Paulo
-    to: '1641005940260'
-  userGroups:
-  - Account Administrator
-- type: TIME_RANGE_BASED_FREEZE_CONFIG
-  appSelections:
   - envSelection:
     - filterType: ALL
     filterType: ALL
     serviceSelection:
     - filterType: ALL
   applicable: false
-  description: description
-  name: gabs_labs_jonathan
+  description: TEST
+  name: TEST
   timeRange:
-    duration: '3600000'
-    durationBased: true
-    from: '1640954212184'
-    timeZone: America/Toronto
-    to: '1640957812184'
+    durationBased: false
+    from: '1640958061200'
+    timeZone: America/Sao_Paulo
+    to: '1640961661200'
   userGroups:
   - Account Administrator
