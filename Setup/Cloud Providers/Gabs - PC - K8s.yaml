@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: false
 delegateSelectors:
-- bryon-gabs-custom-delegate
+- custom-ubi-delegate-desktop
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
