@@ -1,9 +1,9 @@
 harnessApiVersion: '1.0'
 type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
-  continuousEfficiencyEnabled: true
+  continuousEfficiencyEnabled: false
 delegateSelectors:
-- PRD_VAULT_AGENT_K8s
+- custom-ubi-delegate-eks
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
