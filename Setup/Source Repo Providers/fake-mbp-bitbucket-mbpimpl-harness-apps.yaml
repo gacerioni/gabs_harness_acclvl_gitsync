@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: GIT
+branch: aaa
+keyAuth: false
+password: gcpkms:gacerioni_gmail_bitbucket_app_password
+providerType: GIT
+url: https://bitbucket.org/gabrielcerioni/gitsync-test-aravind.git
+urlType: REPO
+username: gacerioni
