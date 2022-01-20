@@ -1,6 +1,9 @@
 harnessApiVersion: '1.0'
 type: GIT
+authorEmailId: gacerioni@gmail.com
+authorName: Harness
 branch: aaa
+commitMessage: Commit from Harness
 keyAuth: false
 password: gcpkms:gacerioni_gmail_bitbucket_app_password
 providerType: GIT
