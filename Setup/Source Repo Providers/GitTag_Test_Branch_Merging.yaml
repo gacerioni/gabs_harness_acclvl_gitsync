@@ -1,6 +1,6 @@
 harnessApiVersion: '1.0'
 type: GIT
-branch: simple-s3-creator
+branch: kubernetes-provider-lab
 keyAuth: false
 password: gcpkms:Gabs GitHub
 providerType: GIT
