@@ -1,7 +1,0 @@
-harnessApiVersion: '1.0'
-type: ARTIFACTORY
-delegateSelectors:
-- eks-final-sa-east-1
-password: gcpkms:jfrog_artifactory_automationuser
-url: https://harness.jfrog.io/artifactory
-username: automationuser
