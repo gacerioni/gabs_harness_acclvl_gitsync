@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: false
 delegateSelectors:
-- custom-ubi-delegate-eks
+- eks-final-sa-east-1
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
