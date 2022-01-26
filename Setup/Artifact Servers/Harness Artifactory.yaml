@@ -1,5 +1,5 @@
 harnessApiVersion: '1.0'
 type: ARTIFACTORY
-password: gcpkms:Pedro JFROG Artifactory Gabs PWD
-url: https://pedroharnesstest.jfrog.io/artifactory
-username: gabriel-cerioni
+password: gcpkms:jfrog_artifactory_automationuser
+url: https://harness.jfrog.io/artifactory
+username: automationuser
