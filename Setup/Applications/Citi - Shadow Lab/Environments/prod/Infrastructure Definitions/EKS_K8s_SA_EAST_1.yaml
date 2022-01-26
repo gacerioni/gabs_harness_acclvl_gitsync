@@ -5,5 +5,5 @@ deploymentType: KUBERNETES
 infrastructure:
 - type: DIRECT_KUBERNETES
   cloudProviderName: CS - Gabs - AWS - EKS - CS Admin
-  namespace: citidev
+  namespace: citiprod
   releaseName: release-${infra.kubernetes.infraId}
