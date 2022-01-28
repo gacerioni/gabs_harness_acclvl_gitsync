@@ -38,6 +38,15 @@ phases:
   provisionNodes: false
   serviceName: uat-helm-3-6-3-weird
   statefulSet: false
+  templateExpressions:
+  - expression: ${Service}
+    fieldName: serviceId
+    metadata:
+    - name: relatedField
+    - name: artifactType
+      value: DOCKER
+    - name: entityType
+      value: SERVICE
 rollbackPhases:
 - type: KUBERNETES
   computeProviderName: CS - Gabs - AWS - EKS - CS Admin
@@ -61,4 +70,28 @@ rollbackPhases:
   provisionNodes: false
   serviceName: uat-helm-3-6-3-weird
   statefulSet: false
-templatized: false
+  templateExpressions:
+  - expression: ${Service}
+    fieldName: serviceId
+    metadata:
+    - name: relatedField
+    - name: artifactType
+      value: DOCKER
+    - name: entityType
+      value: SERVICE
+templateExpressions:
+- expression: ${Service}
+  fieldName: serviceId
+  metadata:
+  - name: relatedField
+  - name: artifactType
+    value: DOCKER
+  - name: entityType
+    value: SERVICE
+templatized: true
+userVariables:
+- type: ENTITY
+  description: Variable for Service entity in Rollback Rolling
+  fixed: false
+  mandatory: true
+  name: Service
