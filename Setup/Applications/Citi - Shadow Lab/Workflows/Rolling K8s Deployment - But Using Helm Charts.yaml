@@ -36,7 +36,9 @@ phases:
         includeInfraSelectors: true
         outputVars: ''
         publishAsVar: false
-        scriptString: helm version
+        scriptString: |-
+          #helm version
+          echo 1
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
