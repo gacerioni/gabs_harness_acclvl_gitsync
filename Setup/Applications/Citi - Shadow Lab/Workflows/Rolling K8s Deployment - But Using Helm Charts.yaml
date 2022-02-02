@@ -26,28 +26,6 @@ phases:
   - type: K8S_PHASE_STEP
     name: Deploy
     steps:
-    - type: SHELL_SCRIPT
-      name: Temp - print helm version
-      properties:
-        commandPath: null
-        connectionAttributeName: null
-        executeOnDelegate: true
-        host: null
-        includeInfraSelectors: true
-        outputVars: ''
-        publishAsVar: false
-        scriptString: |-
-          #helm version
-          echo 1
-        scriptType: BASH
-        sshKeyRefName: null
-        sweepingOutputName: null
-        sweepingOutputScope: null
-        templateExpressions: null
-        templateUuid: null
-        templateVariables: null
-        templateVersion: null
-        timeoutMillis: 60000
     - type: K8S_DEPLOYMENT_ROLLING
       name: Rollout Deployment
     stepsInParallel: false
