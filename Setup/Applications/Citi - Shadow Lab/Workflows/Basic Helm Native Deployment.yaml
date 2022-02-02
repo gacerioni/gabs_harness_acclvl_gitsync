@@ -35,6 +35,12 @@ phases:
         templateUuid: null
         templateVariables: null
         templateVersion: null
+    - type: HELM_DEPLOY
+      name: Helm Deploy
+      properties:
+        gitFileConfig: null
+        helmReleaseNamePrefix: citi-${env.name}-${infra.helm.shortId}
+        steadyStateTimeout: 10
     stepsInParallel: false
   - type: VERIFY_SERVICE
     name: Verify Service
