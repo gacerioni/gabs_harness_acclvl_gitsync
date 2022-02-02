@@ -27,7 +27,7 @@ phases:
     name: Deploy
     steps:
     - type: SHELL_SCRIPT
-      name: Shell Script
+      name: Temp - print helm version
       properties:
         commandPath: null
         connectionAttributeName: null
@@ -42,7 +42,9 @@ phases:
         sweepingOutputName: null
         sweepingOutputScope: null
         templateExpressions: null
-        templateVariables: ''
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
         timeoutMillis: 60000
     - type: K8S_DEPLOYMENT_ROLLING
       name: Rollout Deployment
