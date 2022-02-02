@@ -4,4 +4,4 @@ artifactFromManifest: true
 artifactType: DOCKER
 deploymentType: KUBERNETES
 description: https://harness.atlassian.net/browse/CDP-20314
-helmVersion: V2
+helmVersion: V3
