@@ -30,7 +30,7 @@ phases:
       name: Rollout Deployment
       properties:
         delegateSelectors:
-        - eks-final-sa-east-1
+        - citi-hacked-config-investigation
         stateTimeoutInMinutes: 10
         templateUuid: null
         templateVariables: null
