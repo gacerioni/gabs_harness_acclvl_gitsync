@@ -16,7 +16,7 @@ phases:
     name: Prepare Steps
     steps:
     - type: SHELL_SCRIPT
-      name: Shell Script
+      name: Print Helm Context
       properties:
         commandPath: null
         connectionAttributeName: null
