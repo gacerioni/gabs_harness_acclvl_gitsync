@@ -30,7 +30,7 @@ phases:
       name: Rollout Deployment
       properties:
         delegateSelectors:
-        - citi-hacked-config-investigation
+        - EC2_CS_ADMIN
         stateTimeoutInMinutes: 10
         templateUuid: null
         templateVariables: null
