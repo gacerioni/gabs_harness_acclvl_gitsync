@@ -1,0 +1,6 @@
+harnessApiVersion: '1.0'
+type: AZURE
+azureEnvironmentType: AZURE
+clientId: 9a24ca72-8df7-4a33-a7c0-ca613531e052
+key: gcpkms:Azure_Gabs_Secret_Client_ID
+tenantId: b229b2bb-5f33-4d22-bce0-730f6474e906
