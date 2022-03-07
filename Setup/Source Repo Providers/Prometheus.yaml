@@ -2,7 +2,7 @@ harnessApiVersion: '1.0'
 type: GIT
 branch: main
 keyAuth: false
-password: gcpkms:Gabs GitHub
+password: gcpkms:GHCR_PAT_NEW
 providerType: GITHUB
 url: https://github.com/prometheus-operator/prometheus-operator
 urlType: REPO
