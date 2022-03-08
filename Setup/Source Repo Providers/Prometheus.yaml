@@ -6,6 +6,6 @@ delegateSelectors:
 keyAuth: false
 password: gcpkms:GHCR_PAT_NEW
 providerType: GITHUB
-url: https://github.com/prometheus-community/helm-charts
+url: https://github.com/gacerioni/prometheus-helm-charts
 urlType: REPO
 username: gacerioni
