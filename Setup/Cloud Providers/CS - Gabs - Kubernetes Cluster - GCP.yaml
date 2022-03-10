@@ -1,9 +1,9 @@
 harnessApiVersion: '1.0'
 type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
-  continuousEfficiencyEnabled: true
+  continuousEfficiencyEnabled: false
 delegateSelectors:
-- custom-delegate-gabs-gke-sshyjh-0
+- citi-custom-helm
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
