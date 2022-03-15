@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: GIT
+keyAuth: false
+password: hashicorpvault://Citi - Shadow Lab - NoDel/173313/harness/quick_pat_gh_deleteme#value
+providerType: GITHUB
+url: https://github.com/gabrielcerioni
+urlType: ACCOUNT
+username: gabrielcerioni
