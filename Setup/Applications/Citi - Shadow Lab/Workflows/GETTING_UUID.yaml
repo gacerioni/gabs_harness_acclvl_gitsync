@@ -28,7 +28,7 @@ phases:
         outputVars: ''
         publishAsVar: false
         scriptString: |-
-          echo "${workflow.pipelineDeploymentUuid}"\
+          echo "${workflow.pipelineDeploymentUuid}"
           echo "${deploymentUrl}"
         scriptType: BASH
         sshKeyRefName: null
