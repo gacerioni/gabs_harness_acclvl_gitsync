@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: false
 delegateSelectors:
-- macbook_kubernetes_docker_desktop
+- citi-k8s-ff-enabled
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
