@@ -31,10 +31,7 @@ phases:
         publishAsVar: false
         scriptString: |-
           #!/bin/bash
-
-          result=0123456789abcdefghijk
-          VARIABLE2="${result:0:-14}"
-          echo $VARIABLE2
+          ${secrets.getValue("ERIC_GABS_TIMEOUT")}
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
