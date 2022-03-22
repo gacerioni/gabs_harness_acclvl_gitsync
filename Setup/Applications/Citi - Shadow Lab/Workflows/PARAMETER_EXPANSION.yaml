@@ -33,7 +33,7 @@ phases:
           #!/bin/bash
 
           result=0123456789abcdefghijk
-          VARIABLE2=${result:0:-14}
+          VARIABLE2="${result:0:-14}"
           echo $VARIABLE2
         scriptType: BASH
         sshKeyRefName: null
