@@ -33,10 +33,10 @@ phases:
           #!/bin/bash
 
           payload=1234
-          VARIABLE0=${payload:-'{}'}
+          VARIABLE0="${payload:-'{}'}"
           echo "$VARIABLE0"
 
-          VARIABLE0=${payloadfake:-'{}'}
+          VARIABLE0="${payloadfake:-'{}'}"
           echo "$VARIABLE0"
         scriptType: BASH
         sshKeyRefName: null
