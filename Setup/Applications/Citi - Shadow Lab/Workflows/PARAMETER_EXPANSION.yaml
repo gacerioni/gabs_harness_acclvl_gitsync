@@ -33,11 +33,11 @@ phases:
           #!/bin/bash
 
           payload=zzzzzzzzzzzzzz
-          VARIABLE1="${payload:-abc}"
+          VARIABLE1="\${payload:-abc}"
           echo "$VARIABLE1"
 
           payload=zzzzzzzzzzzzzz
-          VARIABLE1="${payload2:-abc}"
+          VARIABLE1="\${payload2:-abc}"
           echo "$VARIABLE1"
         scriptType: BASH
         sshKeyRefName: null
