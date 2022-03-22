@@ -32,12 +32,13 @@ phases:
         scriptString: |-
           #!/bin/bash
 
-          payload=1234
-          VARIABLE0="${payload:-\'{}\'}"
-          echo "$VARIABLE0"
+          payload=zzzzzzzzzzzzzz
+          VARIABLE1=${payload:-abc}
+          echo "$VARIABLE1"
 
-          VARIABLE0="${payloadfake:-\'{}\'}"
-          echo "$VARIABLE0"
+          payload=zzzzzzzzzzzzzz
+          VARIABLE1=${payload2:-abc}
+          echo "$VARIABLE1"
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
