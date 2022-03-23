@@ -137,6 +137,13 @@ rollbackPhases:
     - name: entityType
       value: INFRASTRUCTURE_DEFINITION
 templateExpressions:
+- expression: ${Environment}
+  fieldName: envId
+  metadata:
+  - name: relatedField
+    value: ${InfraDefinition_KUBERNETES}
+  - name: entityType
+    value: ENVIRONMENT
 - expression: ${Service}
   fieldName: serviceId
   metadata:
@@ -153,6 +160,11 @@ templateExpressions:
     value: INFRASTRUCTURE_DEFINITION
 templatized: true
 userVariables:
+- type: ENTITY
+  description: Variable for Environment entity
+  fixed: false
+  mandatory: true
+  name: Environment
 - type: ENTITY
   description: Variable for Service entity in Rollback Rolling
   fixed: false
