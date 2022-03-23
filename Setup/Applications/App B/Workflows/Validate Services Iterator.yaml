@@ -18,7 +18,7 @@ notificationRules:
   - Account Administrator
 phases:
 - type: KUBERNETES
-  computeProviderName: Platform Dev US East 1 01
+  computeProviderName: Management DEV US East 1 01
   daemonSet: false
   infraDefinitionName: mgt-dev-us-east-1-01
   name: Rolling
@@ -100,7 +100,7 @@ phases:
       value: INFRASTRUCTURE_DEFINITION
 rollbackPhases:
 - type: KUBERNETES
-  computeProviderName: Platform Dev US East 1 01
+  computeProviderName: Management DEV US East 1 01
   daemonSet: false
   infraDefinitionName: mgt-dev-us-east-1-01
   name: Rollback Rolling
