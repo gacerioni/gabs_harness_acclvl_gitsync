@@ -29,14 +29,23 @@ phases:
     - type: SHELL_SCRIPT
       name: Checkout Scripts
       properties:
+        commandPath: null
+        connectionAttributeName: null
         executeOnDelegate: true
+        host: null
+        includeInfraSelectors: true
+        publishAsVar: false
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
         timeoutMillis: 120000
       templateUri: App/CS - Gabriel - Renamed/Checkout Scripts:latest
       templateVariables:
       - name: scriptBranch
-        value: main
+        value: ${workflow.variables.scriptBranch}
       - name: scriptCommit
-        value: ''
+        value: ${workflow.variables.scriptCommit}
     stepsInParallel: false
   - type: K8S_PHASE_STEP
     name: Verify
