@@ -84,14 +84,6 @@ phases:
   serviceName: GabsMarcoTest
   statefulSet: false
   templateExpressions:
-  - expression: ${Service}
-    fieldName: serviceId
-    metadata:
-    - name: relatedField
-    - name: artifactType
-      value: DOCKER
-    - name: entityType
-      value: SERVICE
   - expression: ${InfraDefinition_KUBERNETES}
     fieldName: infraDefinitionId
     metadata:
@@ -122,14 +114,6 @@ rollbackPhases:
   serviceName: GabsMarcoTest
   statefulSet: false
   templateExpressions:
-  - expression: ${Service}
-    fieldName: serviceId
-    metadata:
-    - name: relatedField
-    - name: artifactType
-      value: DOCKER
-    - name: entityType
-      value: SERVICE
   - expression: ${InfraDefinition_KUBERNETES}
     fieldName: infraDefinitionId
     metadata:
@@ -137,21 +121,6 @@ rollbackPhases:
     - name: entityType
       value: INFRASTRUCTURE_DEFINITION
 templateExpressions:
-- expression: ${Environment}
-  fieldName: envId
-  metadata:
-  - name: relatedField
-    value: ${InfraDefinition_KUBERNETES}
-  - name: entityType
-    value: ENVIRONMENT
-- expression: ${Service}
-  fieldName: serviceId
-  metadata:
-  - name: relatedField
-  - name: artifactType
-    value: DOCKER
-  - name: entityType
-    value: SERVICE
 - expression: ${InfraDefinition_KUBERNETES}
   fieldName: infraDefinitionId
   metadata:
@@ -160,16 +129,6 @@ templateExpressions:
     value: INFRASTRUCTURE_DEFINITION
 templatized: true
 userVariables:
-- type: ENTITY
-  description: Variable for Environment entity
-  fixed: false
-  mandatory: true
-  name: Environment
-- type: ENTITY
-  description: Variable for Service entity in Rollback Rolling
-  fixed: false
-  mandatory: true
-  name: Service
 - type: ENTITY
   description: Variable for Infrastructure Definition entity in Rollback Rolling
   fixed: false
