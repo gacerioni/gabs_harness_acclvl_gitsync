@@ -25,6 +25,18 @@ phases:
   phaseSteps:
   - type: K8S_PHASE_STEP
     name: Deploy
+    steps:
+    - type: SHELL_SCRIPT
+      name: Checkout Scripts
+      properties:
+        executeOnDelegate: true
+        timeoutMillis: 120000
+      templateUri: App/CS - Gabriel - Renamed/Checkout Scripts:latest
+      templateVariables:
+      - name: scriptBranch
+        value: main
+      - name: scriptCommit
+        value: ''
     stepsInParallel: false
   - type: K8S_PHASE_STEP
     name: Verify
