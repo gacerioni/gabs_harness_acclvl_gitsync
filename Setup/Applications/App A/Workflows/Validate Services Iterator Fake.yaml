@@ -46,6 +46,33 @@ phases:
         value: ${workflow.variables.scriptBranch}
       - name: scriptCommit
         value: ${workflow.variables.scriptCommit}
+    - type: SHELL_SCRIPT
+      name: Validate Services Iterator
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        includeInfraSelectors: true
+        outputVars: ''
+        publishAsVar: true
+        scriptString: "#!/bin/bash\n\n#repo_path=\"/opt/harness-delegate/OutSystems-Harness-Scripts\"\
+          \n#pip install $repo_path\n\nfilename=\".envvars\"\nif [ -f $filename ];\
+          \ then\n   rm $filename \n   echo \"$filename is removed\"\nfi\n\necho executing:\n\
+          echo python3  -m harness.validate.validate_services_iterator ${env.name}\
+          \ ${secrets.getValue(\"HarnessAccount\")} ${secrets.getValue(\"harness-cli\"\
+          )} ${workflow.variables.services_to_validate} --debug\n\n# call the python\
+          \ module\npython3  -m harness.validate.validate_services_iterator ${env.name}\
+          \ ${secrets.getValue(\"HarnessAccount\")} ${secrets.getValue(\"harness-cli\"\
+          )} ${workflow.variables.services_to_validate} --debug \n\necho \"Python\
+          \ script executed\"\nexport $(grep -v '^#' $filename | xargs -d '\\n')"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: validate_services
+        sweepingOutputScope: PIPELINE
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
     stepsInParallel: false
   - type: K8S_PHASE_STEP
     name: Verify
