@@ -18,9 +18,9 @@ notificationRules:
   - Account Administrator
 phases:
 - type: KUBERNETES
-  computeProviderName: CS - Gabs - AWS - EKS - CS Admin
+  computeProviderName: Platform Dev US East 1 01
   daemonSet: false
-  infraDefinitionName: EKS
+  infraDefinitionName: mgt-dev-us-east-1-01
   name: Rolling
   phaseSteps:
   - type: K8S_PHASE_STEP
@@ -83,18 +83,11 @@ phases:
   provisionNodes: false
   serviceName: GabsMarcoTest
   statefulSet: false
-  templateExpressions:
-  - expression: ${InfraDefinition_KUBERNETES}
-    fieldName: infraDefinitionId
-    metadata:
-    - name: relatedField
-    - name: entityType
-      value: INFRASTRUCTURE_DEFINITION
 rollbackPhases:
 - type: KUBERNETES
-  computeProviderName: CS - Gabs - AWS - EKS - CS Admin
+  computeProviderName: Platform Dev US East 1 01
   daemonSet: false
-  infraDefinitionName: EKS
+  infraDefinitionName: mgt-dev-us-east-1-01
   name: Rollback Rolling
   phaseNameForRollback: Rolling
   phaseSteps:
@@ -113,27 +106,8 @@ rollbackPhases:
   provisionNodes: false
   serviceName: GabsMarcoTest
   statefulSet: false
-  templateExpressions:
-  - expression: ${InfraDefinition_KUBERNETES}
-    fieldName: infraDefinitionId
-    metadata:
-    - name: relatedField
-    - name: entityType
-      value: INFRASTRUCTURE_DEFINITION
-templateExpressions:
-- expression: ${InfraDefinition_KUBERNETES}
-  fieldName: infraDefinitionId
-  metadata:
-  - name: relatedField
-  - name: entityType
-    value: INFRASTRUCTURE_DEFINITION
 templatized: true
 userVariables:
-- type: ENTITY
-  description: Variable for Infrastructure Definition entity in Rollback Rolling
-  fixed: false
-  mandatory: true
-  name: InfraDefinition_KUBERNETES
 - type: TEXT
   fixed: false
   mandatory: false
