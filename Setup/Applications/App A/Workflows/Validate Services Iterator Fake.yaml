@@ -148,3 +148,25 @@ userVariables:
   fixed: false
   mandatory: true
   name: InfraDefinition_KUBERNETES
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: validate_single_services
+  value: 'false'
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: services_to_validate
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: jobs_to_validate
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: scriptBranch
+  value: main
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: scriptCommit
