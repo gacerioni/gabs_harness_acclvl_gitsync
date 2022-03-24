@@ -30,8 +30,14 @@ phases:
         outputVars: ''
         publishAsVar: false
         scriptString: |-
-          #!/bin/bash
-          ${secrets.getValue("ERIC_GABS_TIMEOUT")}
+          payload=1234
+          VARIABLE0=${payload:='{}'}
+          echo "$VARIABLE0"
+          # this prints 1234
+
+          VARIABLE0=${payloadfake:='{}'}
+          echo "$VARIABLE0"
+          # this prints {}
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
