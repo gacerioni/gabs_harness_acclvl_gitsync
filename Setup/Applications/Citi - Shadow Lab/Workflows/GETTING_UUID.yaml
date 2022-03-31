@@ -32,8 +32,6 @@ phases:
           echo "${deploymentUrl}"
 
           PALMEIRAS="THE VERY BEST!"
-
-          export PALMEIRAS
         scriptType: BASH
         secretOutputVars: ''
         sshKeyRefName: null
