@@ -25,15 +25,18 @@ phases:
         connectionAttributeName: null
         executeOnDelegate: true
         host: null
-        outputVars: ''
-        publishAsVar: false
+        outputVars: PALMEIRAS
+        publishAsVar: true
         scriptString: |-
           echo "${workflow.pipelineDeploymentUuid}"
           echo "${deploymentUrl}"
+
+          PALMEIRAS="THE VERY BEST!"
         scriptType: BASH
+        secretOutputVars: ''
         sshKeyRefName: null
-        sweepingOutputName: null
-        sweepingOutputScope: null
+        sweepingOutputName: HELPER
+        sweepingOutputScope: WORKFLOW
         templateExpressions: null
         templateUuid: null
         templateVariables: null
