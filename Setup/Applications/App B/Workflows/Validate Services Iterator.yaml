@@ -81,7 +81,6 @@ phases:
     name: Wrap Up
     stepsInParallel: false
   provisionNodes: false
-  serviceName: phoenixservicedummy
   statefulSet: false
   templateExpressions:
   - expression: ${Service}
@@ -119,7 +118,6 @@ rollbackPhases:
     phaseStepNameForRollback: Wrap Up
     stepsInParallel: false
   provisionNodes: false
-  serviceName: phoenixservicedummy
   statefulSet: false
   templateExpressions:
   - expression: ${Service}
