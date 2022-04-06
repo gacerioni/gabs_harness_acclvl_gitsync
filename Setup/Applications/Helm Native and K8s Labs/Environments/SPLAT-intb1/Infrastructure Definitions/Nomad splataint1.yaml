@@ -4,6 +4,6 @@ cloudProviderType: KUBERNETES_CLUSTER
 deploymentType: HELM
 infrastructure:
 - type: DIRECT_KUBERNETES
-  cloudProviderName: DUMMY_CLOUD_PROVIDER
+  cloudProviderName: ANAPLAN_CP
   namespace: default
   releaseName: ${infra.kubernetes.infraId}

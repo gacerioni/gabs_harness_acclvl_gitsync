@@ -10,7 +10,7 @@ failureStrategies:
   retryCount: 0
 phases:
 - type: CUSTOM
-  computeProviderName: DUMMY_CLOUD_PROVIDER
+  computeProviderName: ANAPLAN_CP
   daemonSet: false
   infraDefinitionName: Nomad splataint1
   name: Phase 1
@@ -74,7 +74,7 @@ phases:
       value: INFRASTRUCTURE_DEFINITION
 rollbackPhases:
 - type: CUSTOM
-  computeProviderName: DUMMY_CLOUD_PROVIDER
+  computeProviderName: ANAPLAN_CP
   daemonSet: false
   infraDefinitionName: Nomad splataint1
   name: Rollback Phase 1
