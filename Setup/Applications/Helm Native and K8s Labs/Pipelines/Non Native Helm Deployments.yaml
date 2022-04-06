@@ -1,0 +1,22 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+pipelineStages:
+- type: ENV_STATE
+  name: Non Native Helm Template Workflow
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 1
+  workflowName: Non Native Helm Template Workflow
+  workflowVariables:
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: prod
+  - entityType: SERVICE
+    name: Service
+    value: CITI_icg-helm
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_KUBERNETES
+    value: EKS_K8s_SA_EAST_1
+  - name: SiteURL
+    value: ruchi

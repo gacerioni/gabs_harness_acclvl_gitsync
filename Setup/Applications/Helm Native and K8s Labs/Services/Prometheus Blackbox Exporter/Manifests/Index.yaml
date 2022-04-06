@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+gitFileConfig:
+  branch: main
+  connectorName: Account Lvl Git Sync Personal
+  filePath: k8s/blackbox-exporter
+  repoName: prometheus-exporters
+  useBranch: true
+  useInlineServiceDefinition: false
+storeType: Remote

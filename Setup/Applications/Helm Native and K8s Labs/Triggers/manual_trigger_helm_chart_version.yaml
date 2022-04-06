@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: TRIGGER
+continueWithDefaultValues: false
+executionName: Trigger_Artifact_Version
+executionType: Workflow
+manifestSelections:
+- serviceName: GitHub_Pages_Helm_Repo
+  type: WEBHOOK_VARIABLE
+triggerCondition:
+- type: WEBHOOK

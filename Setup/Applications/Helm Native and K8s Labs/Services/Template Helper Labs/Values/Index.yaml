@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+gitFileConfig:
+  branch: main
+  connectorName: Git_GitHub_Account_Level_Connector
+  filePath: values/${env.name}.yaml
+  repoName: gabs_helm_go_templating_helper
+  useBranch: true
+  useInlineServiceDefinition: false
+storeType: Remote

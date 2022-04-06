@@ -1,0 +1,5 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+customSourceConfig:
+  path: simple_nginx/production/values-production.yaml
+storeType: CUSTOM

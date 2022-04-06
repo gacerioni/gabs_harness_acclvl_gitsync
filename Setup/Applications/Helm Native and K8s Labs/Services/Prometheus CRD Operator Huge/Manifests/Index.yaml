@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+gitFileConfig:
+  branch: main
+  connectorName: Account Lvl Git Sync Personal
+  repoName: prometheus-operator-k8s
+  useBranch: true
+  useInlineServiceDefinition: false
+skipVersioningForAllK8sObjects: false
+storeType: Remote

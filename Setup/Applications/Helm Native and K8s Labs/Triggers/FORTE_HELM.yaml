@@ -1,0 +1,22 @@
+harnessApiVersion: '1.0'
+type: TRIGGER
+continueWithDefaultValues: false
+executionName: Non Native Helm Template Workflow
+executionType: Workflow
+manifestSelections:
+- serviceName: CITI_icg-helm
+  type: WEBHOOK_VARIABLE
+triggerCondition:
+- type: WEBHOOK
+workflowVariables:
+- entityType: ENVIRONMENT
+  name: Environment
+  value: prod
+- entityType: SERVICE
+  name: Service
+  value: CITI_icg-helm
+- entityType: INFRASTRUCTURE_DEFINITION
+  name: InfraDefinition_KUBERNETES
+  value: Gabs-PC-Labs
+- name: SiteURL
+  value: ruchi

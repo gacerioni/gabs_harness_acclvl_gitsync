@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: SERVICE
+artifactType: DOCKER
+configVariables:
+- name: CURRENT_SECRET
+  value: gcpkms:override_lab_secret_prd
+  valueType: ENCRYPTED_TEXT
+deploymentType: KUBERNETES
+helmVersion: V2

@@ -1,0 +1,7 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+helmChartConfig:
+  chartName: nginxharness
+  connectorName: Helm Chart Gabs GCS
+skipVersioningForAllK8sObjects: false
+storeType: HelmChartRepo

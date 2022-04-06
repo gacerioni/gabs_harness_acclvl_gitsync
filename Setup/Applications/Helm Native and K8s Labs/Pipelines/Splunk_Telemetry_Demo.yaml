@@ -1,0 +1,20 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+pipelineStages:
+- type: ENV_STATE
+  name: Non Native Helm Template Workflow
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 1
+  workflowName: Non Native Helm Template Workflow
+  workflowVariables:
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: dev
+  - entityType: SERVICE
+    name: Service
+    value: nginx_with_homepage
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_KUBERNETES
+    value: gcp_k8s_gabs_cluster_not_helm_native

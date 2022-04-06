@@ -1,0 +1,30 @@
+name: gabs-aql
+replicas: 1
+
+#image: ${artifact.metadata.image}
+image: ${artifact.buildNo}
+#dockercfg: ${artifact.source.dockerconfig}
+dockercfg: ewogICAgICAgICJhdXRocyI6IHsKICAgICAgICAgICAgICAgICJnYWJzdGhlc3JlLmpmcm9nLmlvIjogewogICAgICAgICAgICAgICAgICAgICAgICAiYXV0aCI6ICJaR1YyWld4dmNHVnlPa2R5WVc1blpYSkFNakF5TVE9PSIKICAgICAgICAgICAgICAgIH0KICAgICAgICB9Cn0K 
+
+createNamespace: true
+namespace: ${infra.kubernetes.namespace}
+
+# Service Type allow you to specify what kind of service you want.
+# Possible values for ServiceType are:
+# ClusterIP | NodePort | LoadBalancer | ExternalName
+serviceType: LoadBalancer
+
+# A Service can map an incoming port to any targetPort.
+# targetPort is where application is listening on inside the container.
+servicePort: 80
+serviceTargetPort: 80
+
+# Specify all environment variables to be added to the container.
+# The following two maps, config and secrets, are put into a ConfigMap
+# and a Secret, respectively.
+# Both are added to the container environment in podSpec as envFrom source.
+env:
+  config:
+    key1: value1
+  secrets:
+    key2: value2

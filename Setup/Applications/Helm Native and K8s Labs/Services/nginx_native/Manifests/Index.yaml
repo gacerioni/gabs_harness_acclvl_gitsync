@@ -1,0 +1,7 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+helmChartConfig:
+  chartName: jenkins
+  chartUrl: ${serviceVariable.repository}
+  chartVersion: ${workflow.variables.version}
+storeType: HelmChartRepo

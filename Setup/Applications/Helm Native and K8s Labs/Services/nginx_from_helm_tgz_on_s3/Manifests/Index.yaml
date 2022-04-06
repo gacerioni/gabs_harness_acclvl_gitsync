@@ -1,0 +1,11 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+customSourceConfig:
+  delegateSelectors:
+  - GCP_K8s_Customer_Success
+  path: simple_nginx/manifests
+  script: |-
+    aws s3 cp s3://gabs-custom-helm-via-script/simple_nginx.tar.gz .
+
+    tar -xvzf simple_nginx.tar.gz
+storeType: CUSTOM

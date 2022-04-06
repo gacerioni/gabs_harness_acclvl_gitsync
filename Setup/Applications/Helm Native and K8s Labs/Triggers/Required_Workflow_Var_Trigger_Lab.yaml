@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: TRIGGER
+continueWithDefaultValues: false
+executionName: Required_Variables_Lab
+executionType: Workflow
+triggerCondition:
+- type: WEBHOOK
+workflowVariables:
+- name: change_req_no
+  value: ${change_req}

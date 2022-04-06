@@ -1,0 +1,264 @@
+harnessApiVersion: '1.0'
+type: SHELL_SCRIPT
+scriptString: |
+  # Manage Notification on deploy status
+
+  set -e
+
+  # have this function to deal with unexplained following way not working
+  # emails=($(echo $WORKFLOW_EMAILS | tr "," "\n"))
+  split_var()
+  {
+    incoming=$1
+    ret_array=()
+
+    while :
+    do
+      echo `expr index "$incoming" ","` > indexSave.txt
+      index=`cat indexSave.txt | xargs`
+      if [[ "$index" != "0" ]]; then
+        ((nindex=index-1))
+        ret_array+=(${incoming:0:$nindex})
+        incoming=${incoming:$index}
+      else
+        ret_array+=($incoming)
+        rm -f indexSave.txt
+        break
+      fi
+    done
+  }
+
+  # get spark token for sending space notification
+  SPARK_BOT_API_TOKEN=${secrets.getValue("spark-jenkins-notification-bot-token")}
+
+  DEPLOY_ID=$(echo -n "${workflow.displayName}" | md5sum | awk '{print $1}')
+  mkdir -p /tmp/${DEPLOY_ID}
+  cd /tmp/${DEPLOY_ID}
+
+  # workflow related
+  if [[ "${NOTIFY_STAGE}" == "workflow_success" || "${NOTIFY_STAGE}" == "workflow_failure" || "${NOTIFY_STAGE}" == "workflow_step_detail" ]]; then
+     configuration_hash="configuration hash: ${workflow.variables.CONFIG_HASH}"
+     artifact_ver="artifact version: $(basename $(dirname ${artifact.artifactPath}))"
+     deploy_failure_doc_url="https://sqbu-github.cisco.com/pages/WebExSquared/docs/deployment/deploy.html#deploy-failures"
+     WORKFLOW_NAME="${workflow.displayName}"
+     WORKFLOW_NAME=${WORKFLOW_NAME/ - /###}
+     echo `expr index "$WORKFLOW_NAME" "###"` > indexSave.txt
+     sep_index=`cat indexSave.txt | xargs`
+
+     if [[ "${sep_index}" != "0" ]]; then
+        ((sep_index=sep_index-1))
+        WORKFLOW_NAME="${WORKFLOW_NAME:0:$sep_index}"
+     fi
+
+     # handle emails
+     if [[ ! -z "${WORKFLOW_EMAILS}" ]]; then
+        # generate email content
+        subject_str="${WORKFLOW_NAME} Deploy Success"
+        if [[ "${NOTIFY_STAGE}" == "workflow_failure" ]]; then
+            subject_str="${WORKFLOW_NAME} Deploy Failure"
+        fi
+
+        if [[ "${NOTIFY_STAGE}" == "workflow_step_detail" ]]; then
+            subject_str="${WORKFLOW_CUSTOM_MSG}"
+        fi
+
+        echo "Subject: ${subject_str}" > email.txt
+        echo "" >> email.txt
+
+        if [[ "${NOTIFY_STAGE}" == "workflow_step_detail" ]]; then
+          echo "${WORKFLOW_CUSTOM_MSG}" >> email.txt
+        else
+          echo "${configuration_hash}" >> email.txt
+          echo "${artifact_ver}" >> email.txt
+          echo "" >> email.txt
+          echo "Please check its deployment URL: ${deploymentUrl}" >>  email.txt
+          if [[ "${NOTIFY_STAGE}" == "workflow_failure" ]]; then
+            echo "For possible failure reasons or how to handle, check Deploy Failure Document URL: ${deploy_failure_doc_url}" >> email.txt
+          fi
+        fi
+        split_var "${WORKFLOW_EMAILS}"
+        for email in "${ret_array[@]}"
+        do
+           curl smtp://outbound.cisco.com --mail-from sce-build-deploy@cisco.com --mail-rcpt ${email} --upload-file  email.txt || echo "Sending emails having issue"
+        done
+     fi
+
+     # handle Webex Teams
+     if [[ ! -z "${WORKFLOW_SPARK_IDS}" ]]; then
+        # handle message itself
+        custom_msg="${WORKFLOW_CUSTOM_MSG}"
+        if [[ -z "${WORKFLOW_CUSTOM_MSG}" ]]; then
+          custom_msg="\n_[SUCCESS](${deploymentUrl})_: Deployed ${SERVICE_APPNAME} in ${environmentVariable.DEPLOY_ENV}"
+          if [[ "${NOTIFY_STAGE}" == "workflow_failure" ]]; then
+            custom_msg="\n**[FAILURE](${deploymentUrl})**: Deploying ${SERVICE_APPNAME} in ${environmentVariable.DEPLOY_ENV}\nCheck [Deploy Failure Document](${deploy_failure_doc_url}) for possible failure reasons."
+          fi
+        else
+          custom_msg="${custom_msg}\nCheck [Deploy Url](${deploymentUrl})"
+        fi
+
+        custom_msg="${custom_msg}\n${configuration_hash}\n${artifact_ver}"
+        if [[ "${NOTIFY_STAGE}" == "workflow_step_detail" ]]; then
+            custom_msg="${WORKFLOW_CUSTOM_MSG} ([Detail](${deploymentUrl}))"
+        fi
+
+        split_var "${WORKFLOW_SPARK_IDS}"
+        for team_space in "${ret_array[@]}"
+        do
+           request_body="{\"roomId\": \"${team_space}\", \"markdown\": \"${custom_msg}\"}"
+           echo $request_body > request_body.json
+           curl -q -X POST -d @request_body.json --header "Content-Type: application/json" --header "Authorization: Bearer ${SPARK_BOT_API_TOKEN}" https://api.ciscospark.com/v1/messages -m 10 || echo "Webex Team notification having issue"
+        done
+     fi
+
+     # handle pager duty
+     if [[ ! -z "${WORKFLOW_PD_KEY}" ]]; then
+       event_type="resolve"
+       incident_key="Deploy_Failure_${WORKFLOW_NAME}"
+       pd_body="{\"service_key\": \"${WORKFLOW_PD_KEY}\", \"incident_key\": \"${incident_key}\", \"event_type\": \"${event_type}\", \"details\": {\"job\": \"${WORKFLOW_NAME}\", \"job_url\": \"${deploymentUrl}\"}}"
+        if [[ "${NOTIFY_STAGE}" == "workflow_failure" ]]; then
+          event_type="trigger"
+          pd_text="Deploy Failure Alert from ${WORKFLOW_NAME}"
+          pd_body="{\"service_key\": \"${WORKFLOW_PD_KEY}\", \"incident_key\": \"${incident_key}\", \"event_type\": \"${event_type}\", \"description\": \"${pd_text} Deploy Failure Document: ${deploy_failure_doc_url}\", \"details\": {\"job\": \"${WORKFLOW_NAME}\", \"job_url\": \"${deploymentUrl}\"}}"
+        fi
+        echo $pd_body > pd_request_body.json
+        curl -q -X POST -d @pd_request_body.json --header "Content-Type: application/json" https://events.pagerduty.com/generic/2010-04-15/create_event.json -m 60 || echo "Sending page duty having issue"
+     fi
+
+  fi
+
+  # pipeline related only including workflow failure case
+  if [[ "${NOTIFY_STAGE}" == "workflow_failure" || "${NOTIFY_STAGE}" == "pipeline_start" || "${NOTIFY_STAGE}" == "pipeline_success" || "${NOTIFY_STAGE}" == "lock_check_start" || "${NOTIFY_STAGE}" == "lock_check_done" || "${NOTIFY_STAGE}" == "pipeline_step_detail" ]]; then
+
+      CLOUD_NAME="production"
+      env_type=${env.environmentType}
+      if [[ "${env_type}" == "NON_PROD" ]]; then
+        env_name=${env.name}
+        if [[ "${env_name}" == *"allnint"* ]]; then
+          CLOUD_NAME="internal"
+        elif [[ "${env_name}" == *"load"* ]]; then
+          CLOUD_NAME="loadtest"
+        else
+          CLOUD_NAME="integration"
+        fi
+      fi
+
+      pipeline_name="${SERVICE_APPNAME}_${CLOUD_NAME}_pipeline"
+
+      case ${NOTIFY_STAGE} in
+             "workflow_failure")
+                     msg_title="${pipeline_name} Deploy Failure"
+                     ;;
+             "pipeline_start")
+                     msg_title="${pipeline_name} Deploy Started by ${deploymentTriggeredBy}"
+                     ;;
+             "pipeline_success")
+                     msg_title="${pipeline_name} Deploy Success"
+                     ;;
+             "lock_check_start")
+                     msg_title="${pipeline_name} Deploy Lock Check Started"
+                     ;;
+             "lock_check_done")
+                     msg_title="${pipeline_name} Deploy Lock Check Done"
+                     ;;
+             "pipeline_step_detail")
+                     msg_title="${PIPELINE_CUSTOM_MSG}"
+                     ;;
+     esac
+
+     # handle emails
+     if [[ ! -z "${PIPELINE_EMAILS}" ]]; then
+        # generate email content
+        subject_str=${msg_title}
+        echo "Subject: ${subject_str}" > email.txt
+        echo "" >> email.txt
+
+        if [[ "${NOTIFY_STAGE}" == "pipeline_start" ]]; then
+          echo "configuration hash: ${workflow.variables.CONFIG_HASH}" >> email.txt
+          echo "artifact version: $(basename $(dirname ${artifact.artifactPath}))" >> email.txt
+          echo "" >> email.txt
+        fi
+
+        echo "Please check its deployment URL: ${deploymentUrl}" >>  email.txt
+        split_var "${PIPELINE_EMAILS}"
+        for email in "${ret_array[@]}"
+        do
+           curl smtp://outbound.cisco.com --mail-from sce-build-deploy@cisco.com --mail-rcpt ${email} --upload-file  email.txt || echo "Sending pipeline emails having issue"
+        done
+     fi
+
+     # handle Webex Teams
+     if [[ ! -z "${PIPELINE_SPARK_IDS}" ]]; then
+        # handle message itself
+        custom_msg="${PIPELINE_CUSTOM_MSG}"
+        if [[ -z "${PIPELINE_CUSTOM_MSG}" ]]; then
+          if [[ "${NOTIFY_STAGE}" == "workflow_failure" || "${NOTIFY_STAGE}" == "pipeline_success" ]]; then
+            custom_msg="\n_[SUCCESS](${deploymentUrl})_: Deployed ${SERVICE_APPNAME} in ${CLOUD_NAME}"
+            if [[ "${NOTIFY_STAGE}" == "workflow_failure" ]]; then
+              custom_msg="\n**[FAILURE](${deploymentUrl})**: Deploying ${SERVICE_APPNAME} in ${CLOUD_NAME}"
+            fi
+          else
+            custom_msg="### ${msg_title} ### \nCheck [Run Link](${deploymentUrl})"
+          fi
+        else
+          custom_msg="${custom_msg}\nCheck [Deploy Url](${deploymentUrl})"
+        fi
+
+        if [[ "${NOTIFY_STAGE}" == "pipeline_start" ]]; then
+          custom_msg="${custom_msg}\n configuration hash: ${workflow.variables.CONFIG_HASH}\n artifact version: $(basename $(dirname ${artifact.artifactPath}))"
+        fi
+
+        if [[ "${NOTIFY_STAGE}" == "pipeline_step_detail" ]]; then
+          custom_msg="${PIPELINE_CUSTOM_MSG}"
+        fi
+
+        split_var "${PIPELINE_SPARK_IDS}"
+        for team_space in "${ret_array[@]}"
+        do
+           request_body="{\"roomId\": \"${team_space}\", \"markdown\": \"${custom_msg}\"}"
+           echo $request_body > request_body.json
+           curl -q -X POST -d @request_body.json --header "Content-Type: application/json" --header "Authorization: Bearer ${SPARK_BOT_API_TOKEN}" https://api.ciscospark.com/v1/messages -m 10 || echo "Webex Team pipeline notification having issue"
+        done
+     fi
+
+     # handle pager duty
+     if [[ ! -z "${PIPELINE_PD_KEY}" ]] && [[ "${NOTIFY_STAGE}" == "workflow_failure" || "${NOTIFY_STAGE}" == "pipeline_success" ]]; then
+       event_type="resolve"
+       incident_key="Deploy_Failure_${pipeline_name}"
+       pd_body="{\"service_key\": \"${PIPELINE_PD_KEY}\", \"incident_key\": \"${incident_key}\", \"event_type\": \"${event_type}\", \"details\": {\"job\": \"${pipeline_name}\", \"job_url\": \"${deploymentUrl}\"}}"
+        if [[ "${NOTIFY_STAGE}" == "workflow_failure" ]]; then
+          event_type="trigger"
+          pd_text="Deploy Failure Alert from ${pipeline_name}"
+          pd_body="{\"service_key\": \"${PIPELINE_PD_KEY}\", \"incident_key\": \"${incident_key}\", \"event_type\": \"${event_type}\", \"description\": \"${pd_text}\", \"details\": {\"job\": \"${pipeline_name}\", \"job_url\": \"${deploymentUrl}\"}}"
+        fi
+        echo $pd_body > pd_request_body.json
+        curl -q -X POST -d @pd_request_body.json --header "Content-Type: application/json" https://events.pagerduty.com/generic/2010-04-15/create_event.json -m 60 || echo "Sending pipeline page duty having issue"
+     fi
+
+  fi
+
+  # Clean up the files
+  cd ~
+  rm -rf /tmp/${DEPLOY_ID}
+scriptType: BASH
+timeoutMillis: 600000
+variables:
+- description: could be "pipeline_start", "pipeline_step_detail", "workflow_success", "workflow_failure", "workflow_step_detail", "pipeline_success", "lock_check_start", "lock_check_done"
+  name: NOTIFY_STAGE
+- description: service or app name, like hello-platform, locus, etc.
+  name: SERVICE_APPNAME
+- description: workflow notification email receipents
+  name: WORKFLOW_EMAILS
+- description: webex space IDs
+  name: WORKFLOW_SPARK_IDS
+- description: workflow pager duty Key
+  name: WORKFLOW_PD_KEY
+- description: pipeline pager duty key
+  name: PIPELINE_PD_KEY
+- description: pipeline notification emails
+  name: PIPELINE_EMAILS
+- description: workflow customized msg
+  name: WORKFLOW_CUSTOM_MSG
+- description: pipeline customized msg
+  name: PIPELINE_CUSTOM_MSG
+- description: pipeline spark IDs
+  name: PIPELINE_SPARK_IDS

@@ -1,0 +1,7 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+enableCollection: true
+helmChartConfig:
+  chartName: nginx-with-version-page
+  connectorName: Gabs Personal GitHub Pages Helm Repo
+storeType: HelmChartRepo

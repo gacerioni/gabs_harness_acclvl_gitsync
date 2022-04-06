@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+helmChartConfig:
+  chartName: '123354'
+  chartVersion: '12345'
+  connectorName: icg-helm-prod
+helmCommandFlag:
+  valueMap:
+    FETCH: --set="env=${env.name}"
+storeType: HelmChartRepo

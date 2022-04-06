@@ -1,0 +1,6 @@
+name: harness-example
+replicas: 1
+
+siteurl: ${workflow.variables.SiteURL}
+
+image: ${artifact.metadata.image}

@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: SERVICE
+artifactType: DOCKER
+configVariables:
+- name: repository
+  value: https://charts.jenkins.io/
+  valueType: TEXT
+deploymentType: HELM
+helmVersion: V3

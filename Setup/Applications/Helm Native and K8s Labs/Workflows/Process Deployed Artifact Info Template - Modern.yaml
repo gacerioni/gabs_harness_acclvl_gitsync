@@ -1,0 +1,165 @@
+harnessApiVersion: '1.0'
+type: BASIC
+concurrencyStrategy: INFRA
+envName: SPLAT-intb1
+failureStrategies:
+- executionScope: WORKFLOW
+  failureTypes:
+  - APPLICATION_ERROR
+  repairActionCode: ROLLBACK_WORKFLOW
+  retryCount: 0
+phases:
+- type: HELM
+  computeProviderName: DUMMY_CLOUD_PROVIDER
+  daemonSet: false
+  infraDefinitionName: Nomad splataint1
+  name: Phase 1
+  phaseSteps:
+  - type: HELM_DEPLOY
+    name: Deploy Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    steps:
+    - type: SHELL_SCRIPT
+      name: Gather Deployed Artifact Info
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - heavy-lifter
+        executeOnDelegate: true
+        host: null
+        includeInfraSelectors: false
+        publishAsVar: false
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        timeoutMillis: 600000
+      templateUri: App/CS - Gabriel - Renamed/Gather Deployed Artifact Info:latest
+      templateVariables:
+      - name: SERVICE_NAME
+        value: ${workflow.variables.SERVICE_APPNAME}
+      - name: ALL_ENVS
+        value: ${workflow.variables.ALL_ENVS}
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: CITI_icg-helm-NATIVE
+  statefulSet: false
+  templateExpressions:
+  - expression: ${Service}
+    fieldName: serviceId
+    metadata:
+    - name: relatedField
+    - name: artifactType
+      value: DOCKER
+    - name: entityType
+      value: SERVICE
+  - expression: ${InfraDefinition_HELM}
+    fieldName: infraDefinitionId
+    metadata:
+    - name: relatedField
+    - name: entityType
+      value: INFRASTRUCTURE_DEFINITION
+rollbackPhases:
+- type: HELM
+  computeProviderName: DUMMY_CLOUD_PROVIDER
+  daemonSet: false
+  infraDefinitionName: Nomad splataint1
+  name: Rollback Phase 1
+  phaseNameForRollback: Phase 1
+  phaseSteps:
+  - type: HELM_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: CITI_icg-helm-NATIVE
+  statefulSet: false
+  templateExpressions:
+  - expression: ${Service}
+    fieldName: serviceId
+    metadata:
+    - name: relatedField
+    - name: artifactType
+      value: DOCKER
+    - name: entityType
+      value: SERVICE
+  - expression: ${InfraDefinition_HELM}
+    fieldName: infraDefinitionId
+    metadata:
+    - name: relatedField
+    - name: entityType
+      value: INFRASTRUCTURE_DEFINITION
+templateExpressions:
+- expression: ${Environment}
+  fieldName: envId
+  metadata:
+  - name: relatedField
+    value: ${InfraDefinition_HELM}
+  - name: entityType
+    value: ENVIRONMENT
+- expression: ${Service}
+  fieldName: serviceId
+  metadata:
+  - name: relatedField
+  - name: artifactType
+    value: DOCKER
+  - name: entityType
+    value: SERVICE
+- expression: ${InfraDefinition_HELM}
+  fieldName: infraDefinitionId
+  metadata:
+  - name: relatedField
+  - name: entityType
+    value: INFRASTRUCTURE_DEFINITION
+templatized: true
+userVariables:
+- type: ENTITY
+  description: Variable for Environment entity
+  fixed: false
+  mandatory: true
+  name: Environment
+- type: ENTITY
+  description: Variable for Service entity
+  fixed: false
+  mandatory: true
+  name: Service
+- type: ENTITY
+  description: Variable for Infrastructure Definition entity
+  fixed: false
+  mandatory: true
+  name: InfraDefinition_HELM
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: SERVICE_APPNAME
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: ALL_ENVS
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: NOTIFY_EMAILS
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: NOTIFY_SPARK
+- type: TEXT
+  fixed: false
+  mandatory: false
+  name: NOTIFY_MSG

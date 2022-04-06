@@ -1,0 +1,4 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+helmValuesYamlFilePaths: another-values.yaml
+storeType: VALUES_YAML_FROM_HELM_REPO

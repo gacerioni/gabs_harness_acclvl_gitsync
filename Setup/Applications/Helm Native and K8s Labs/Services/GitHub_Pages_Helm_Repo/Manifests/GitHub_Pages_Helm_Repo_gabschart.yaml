@@ -1,0 +1,6 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+helmChartConfig:
+  chartName: gabschart
+  connectorName: Gabs Harness GitHub Pages Helm Repo
+storeType: HelmChartRepo

@@ -1,0 +1,54 @@
+harnessApiVersion: '1.0'
+type: SHELL_SCRIPT
+scriptString: |-
+  # Gather deployed artifact version info for requested envs
+
+  set -e
+
+  echo "TEST"
+
+  # Load up the various values.
+  #export AWS_ACCESS_KEY_ID="${app.defaults.AWS_S3_ACCCES_KEY_ID}"
+  #export AWS_SECRET_ACCESS_KEY="${app.defaults.AWS_S3_SECRET_ACCESS_KEY}"
+  #export AWS_REGION="${app.defaults.AWS_S3_REGION}"
+
+  #DEPLOY_ID=$(echo -n "${workflow.displayName}" | md5sum | awk '{print $1}')
+  #TMP_DIR=/tmp/${DEPLOY_ID}
+  #mkdir -p ${TMP_DIR}
+  #cd ${TMP_DIR}
+
+  #envs=$(echo "${ALL_ENVS}" | xargs)
+  #env_array=($(echo $envs | tr "," "\n"))
+
+  # Use the distinct pipeline execution id for file name
+  #pipeline_id=${workflow.pipelineDeploymentUuid}
+  #deploy_info_file=pipeline${pipeline_id}.json
+  #echo '{}' > "${deploy_info_file}"
+
+  #for one_env in "${env_array[@]}"
+  #do
+  #   count_awsfile=$(aws s3 ls s3://harness-bucket-apdx1/splat/${SERVICE_NAME}/${one_env}.latest | wc -l)
+  #   if [[ $count_awsfile -gt 0 ]]; then
+  #     aws s3 cp s3://harness-bucket-apdx1/splat/${SERVICE_NAME}/${one_env}.latest ${one_env}.json --no-progress --sse AES256
+  #   fi
+  #   if [[ -f ${one_env}.json ]]; then
+  #     env_info=$(jq '.version' ${one_env}.json)
+  #     # remove first and last character, which is a double quote
+  #     env_info_len=${#env_info}
+  #     ((env_info_len=env_info_len-2))
+  #     env_info=${env_info:1:$env_info_len}
+  #     jcmd="cat ${deploy_info_file} | jq --arg value \"${env_info}\" '. + {'$one_env': \$value}'"
+  #     echo $(eval $jcmd) > "${deploy_info_file}"
+  #   fi
+  #done
+
+  #cat ${deploy_info_file}
+  #aws s3 cp ${deploy_info_file} s3://harness-bucket-apdx1/splat/${SERVICE_NAME}/ --no-progress --sse AES256
+
+  #cd ~
+  #rm -rf ${TMP_DIR}
+scriptType: BASH
+timeoutMillis: 600000
+variables:
+- name: SERVICE_NAME
+- name: ALL_ENVS

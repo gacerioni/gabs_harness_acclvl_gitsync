@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+gitFileConfig:
+  branch: main
+  connectorName: Account Lvl Git Sync Personal
+  repoName: nginx-k8s-no-template-one-file-per-env
+  useBranch: true
+  useInlineServiceDefinition: false
+storeType: Remote

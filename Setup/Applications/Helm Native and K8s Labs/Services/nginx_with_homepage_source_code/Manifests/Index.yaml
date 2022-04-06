@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+gitFileConfig:
+  branch: main
+  connectorName: Account Lvl Git Sync Personal
+  filePath: charts/nginx_with_version_page/
+  repoName: nginx_helm_with_version_page
+  useBranch: true
+  useInlineServiceDefinition: false
+storeType: HelmSourceRepo

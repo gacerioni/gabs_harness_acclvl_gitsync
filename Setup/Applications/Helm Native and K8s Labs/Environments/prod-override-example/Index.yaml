@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: ENVIRONMENT
+configMapYamlByServiceTemplateName: {}
+environmentType: PROD
+variableOverrides:
+- name: CURRENT_SECRET
+  serviceName: Override Lab - Example with Secrets
+  value: gcpkms:override_lab_secret_dev
+  valueType: ENCRYPTED_TEXT

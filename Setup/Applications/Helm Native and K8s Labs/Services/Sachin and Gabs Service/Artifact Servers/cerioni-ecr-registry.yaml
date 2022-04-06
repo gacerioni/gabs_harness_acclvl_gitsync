@@ -1,0 +1,5 @@
+harnessApiVersion: '1.0'
+type: ECR
+imageName: cerioni-ecr-registry
+region: sa-east-1
+serverName: AWS - Sachin and Gabs Labs

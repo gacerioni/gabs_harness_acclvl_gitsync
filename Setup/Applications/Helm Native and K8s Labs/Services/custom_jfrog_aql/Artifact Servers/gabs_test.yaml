@@ -1,0 +1,19 @@
+harnessApiVersion: '1.0'
+type: CUSTOM
+delegateTags:
+- GCP_K8s_Customer_Success
+scripts:
+- customRepositoryMapping:
+    artifactAttributes:
+    - mappedAttribute: imageproperties
+      relativePath: properties
+    artifactRoot: $.results
+    buildNoPath: path
+  scriptString: |-
+    curl -X POST \
+      https://gabsthesre.jfrog.io/artifactory/api/search/aql \
+      -H 'Authorization: Basic ZGV2ZWxvcGVyOkdyYW5nZXJAMjAyMQ==' \
+      -H 'Content-Type: text/plain' \
+      -H 'cache-control: no-cache' \
+      -d 'items.find({"repo":{"$match" : "gabs-labs"}}).include("@docker.repoName", "@docker.manifest")' | jq '.' > ${ARTIFACT_RESULT_PATH}
+  timeout: '60'

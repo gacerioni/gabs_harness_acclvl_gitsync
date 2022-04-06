@@ -1,0 +1,12 @@
+harnessApiVersion: '1.0'
+type: SERVICE
+artifactType: DOCKER
+configVariables:
+- name: DSN
+  value: thingiverse-user:26369b23cf58e3f0@tcp(proxysql-svc-proxysql-thingiverse.proxysql.svc.cluster.local:6033)/thingiverse_development
+  valueType: TEXT
+- name: CONN_COUNT
+  value: '20'
+  valueType: TEXT
+deploymentType: KUBERNETES
+helmVersion: V3

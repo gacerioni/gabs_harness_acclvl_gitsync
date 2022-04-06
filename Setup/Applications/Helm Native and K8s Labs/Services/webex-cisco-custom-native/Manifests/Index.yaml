@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+customSourceConfig:
+  delegateSelectors:
+  - eks-final-sa-east-1
+  path: nginx_helm_with_version_page/charts/nginx_with_version_page
+  script: |-
+    git clone -b helm-native-labs https://github.com/gacerioni/nginx_helm_with_version_page.git
+    #git clone https://github.com/gacerioni/nginx_helm_with_version_page.git
+storeType: CUSTOM

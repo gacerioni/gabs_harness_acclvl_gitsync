@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST_VALUES_ENV_SERVICE_OVERRIDE
+gitFileConfig:
+  branch: users/gabs/deploy-to-k8
+  connectorName: Azure_DevOps_Gabs_Harness
+  filePath: services/wallet/deploy/k8s/helm-chart/dev.yaml
+  useBranch: true
+  useInlineServiceDefinition: false
+storeType: Remote
