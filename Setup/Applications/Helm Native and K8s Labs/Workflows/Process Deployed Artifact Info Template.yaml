@@ -44,7 +44,7 @@ phases:
         sweepingOutputScope: null
         templateExpressions: null
         timeoutMillis: 600000
-      templateUri: App/Cisco (WebEx)/Gather Deployed Artifact Info:latest
+      templateUri: App/CS - Gabriel - Renamed/Gather Deployed Artifact Info:latest
       templateVariables:
       - name: SERVICE_NAME
         value: ${workflow.variables.SERVICE_APPNAME}
@@ -98,7 +98,7 @@ rollbackPhases:
         sweepingOutputScope: null
         templateExpressions: null
         timeoutMillis: 600000
-      templateUri: App/Cisco (WebEx)/Send Notification Job:latest
+      templateUri: App/CS - Gabriel - Renamed/Send Notification Job:latest
       templateVariables:
       - name: NOTIFY_STAGE
         value: workflow_step_detail
