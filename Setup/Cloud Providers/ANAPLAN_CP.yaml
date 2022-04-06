@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: false
 delegateSelectors:
-- eks-final-sa-east-1
+- eks-anaplan-nonroot
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
