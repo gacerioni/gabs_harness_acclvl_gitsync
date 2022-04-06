@@ -56,8 +56,7 @@ phases:
     - type: K8S_DEPLOYMENT_ROLLING
       name: Rollout Deployment
       properties:
-        delegateSelectors:
-        - eks-final-sa-east-1
+        delegateSelectors: null
         stateTimeoutInMinutes: 10
         templateUuid: null
         templateVariables: null
