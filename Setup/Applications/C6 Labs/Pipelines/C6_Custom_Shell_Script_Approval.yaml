@@ -41,3 +41,13 @@ pipelineStages:
     type: DO_NOT_SKIP
   stageName: STAGE 2
   workflowName: Non Native Helm Template Workflow
+  workflowVariables:
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: dev
+  - entityType: SERVICE
+    name: Service
+    value: C6_Helm_Fake
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_KUBERNETES
+    value: mbp_k8s
