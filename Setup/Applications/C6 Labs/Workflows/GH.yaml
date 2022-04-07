@@ -39,8 +39,8 @@ phases:
 
           FINALURL=${PROTO}://${USER}:${PWD}@${INDEX_PATH}
 
-          curl -X GET  ${FINALURL} > index.yaml
-          yq -o=json '.' index.yaml
+          curl -X GET  ${FINALURL} > /tmp/index.yaml
+          yq -o=json '.'  /tmp/index.yaml
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
