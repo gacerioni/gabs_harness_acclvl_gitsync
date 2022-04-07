@@ -6,6 +6,7 @@ pipelineStages:
   name: Approval 0
   parallel: false
   properties:
+    workflowVariables: null
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
@@ -33,3 +34,10 @@ pipelineStages:
   skipCondition:
     type: DO_NOT_SKIP
   stageName: STAGE 1
+- type: ENV_STATE
+  name: Non Native Helm Template Workflow
+  parallel: false
+  skipCondition:
+    type: ALWAYS_SKIP
+  stageName: STAGE 2
+  workflowName: Non Native Helm Template Workflow
