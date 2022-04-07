@@ -1,0 +1,5 @@
+harnessApiVersion: '1.0'
+type: HTTP_HELM_REPO
+password: gcpkms:gabrielcerioni_1_day_PAT
+url: https://gabrielcerioni.github.io/nginx_helm_with_version_page
+username: gabrielcerioni
