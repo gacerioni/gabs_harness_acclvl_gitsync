@@ -6,6 +6,7 @@ pipelineStages:
   name: Approval 0
   parallel: false
   properties:
+    workflowVariables: null
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
@@ -38,6 +39,15 @@ pipelineStages:
 - type: ENV_STATE
   name: Non Native Helm Template Workflow
   parallel: false
+  runtimeInputs:
+    runtimeInputVariables:
+    - Environment
+    - Service
+    - InfraDefinition_KUBERNETES
+    timeout: 86400000
+    timeoutAction: END_EXECUTION
+    userGroupNames:
+    - Account Administrator
   skipCondition:
     type: DO_NOT_SKIP
   stageName: STAGE 2
@@ -45,10 +55,10 @@ pipelineStages:
   workflowVariables:
   - entityType: ENVIRONMENT
     name: Environment
-    value: dev
+    value: ${env}
   - entityType: SERVICE
     name: Service
-    value: C6_Helm_Fake
+    value: ${svc}
   - entityType: INFRASTRUCTURE_DEFINITION
     name: InfraDefinition_KUBERNETES
-    value: mbp_k8s
+    value: ${infra}
