@@ -17,6 +17,11 @@ pipelineStages:
           SNOW_PASS=${secrets.getValue("harness_user")}
           URL_SNOW="https://c6bank.service-now.com"
 
+          echo "${CHANGE_NUMBER}"
+          echo "${CMDB_CI_NAME}"
+          echo "${SNOW_USER}"
+          echo "${SNOW_PASS}"
+          echo "${URL_SNOW}"
 
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
