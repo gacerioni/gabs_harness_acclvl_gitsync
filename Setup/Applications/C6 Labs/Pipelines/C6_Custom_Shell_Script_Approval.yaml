@@ -8,7 +8,10 @@ pipelineStages:
   properties:
     approvalStateParams:
       shellScriptApprovalParams:
-        scriptString: export HARNESS_APPROVAL_STATUS="APPROVED"
+        scriptString: |-
+          cd /root/harness-service-now/
+
+          export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
         delegateSelectors:
         - ec2-final-sa-east-1
