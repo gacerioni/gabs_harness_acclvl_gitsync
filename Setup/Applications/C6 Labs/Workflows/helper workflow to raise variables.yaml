@@ -54,6 +54,54 @@ phases:
     stepsInParallel: false
   - type: K8S_PHASE_STEP
     name: Verify
+    steps:
+    - type: SHELL_SCRIPT
+      name: Shell Script
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - ec2-final-sa-east-1
+        executeOnDelegate: true
+        host: null
+        includeInfraSelectors: false
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          cd /root/harness-service-now/
+
+          CHANGE_NUMBER=${context.HELPER.CHG_NUMBER}
+          CMDB_CI_NAME=${context.HELPER.SVC_NAME}
+          SNOW_USER=svc_harness_CD
+          SNOW_PASS=${secrets.getValue("harness_user")}
+          URL_SNOW="https://c6bank.service-now.com"
+
+          echo "########"
+          echo "${CHANGE_NUMBER}"
+          echo "${CMDB_CI_NAME}"
+          echo "${SNOW_USER}"
+          echo "${SNOW_PASS}"
+          echo "${URL_SNOW}"
+          echo "########"
+
+          CHG_RESULT="curl -s "$URL_SNOW" --request GET --header "Accept:application/json" --user "$SNOW_USER":"$SNOW_PASS""
+          echo "########DANGER########"
+          echo "PRINTING PWD DIRECTLY"
+          echo ${secrets.getValue("harness_user")}
+          echo "PRINTING RAW PWD:"
+          echo $SNOW_PASS
+          echo "PRINTING THE CURL COMMAND:"
+          echo $CHG_RESULT
+          echo "#######################"
+
+          export HARNESS_APPROVAL_STATUS="APPROVED"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
     stepsInParallel: false
   - type: K8S_PHASE_STEP
     name: Wrap Up
