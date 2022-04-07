@@ -25,6 +25,28 @@ phases:
   phaseSteps:
   - type: K8S_PHASE_STEP
     name: Deploy
+    steps:
+    - type: SHELL_SCRIPT
+      name: shell script - raise service name in the pipeline context
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        includeInfraSelectors: false
+        outputVars: ''
+        publishAsVar: true
+        scriptString: |-
+          #!/bin/bash
+
+          SVC_NAME="${service.name}"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: HELPER
+        sweepingOutputScope: PIPELINE
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
     stepsInParallel: false
   - type: K8S_PHASE_STEP
     name: Verify
