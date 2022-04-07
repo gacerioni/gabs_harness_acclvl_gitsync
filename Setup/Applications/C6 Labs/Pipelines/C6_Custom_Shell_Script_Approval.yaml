@@ -5,15 +5,6 @@ pipelineStages:
 - type: ENV_STATE
   name: Non Native Helm Template Workflow
   parallel: false
-  runtimeInputs:
-    runtimeInputVariables:
-    - Environment
-    - Service
-    - InfraDefinition_KUBERNETES
-    timeout: 86400000
-    timeoutAction: END_EXECUTION
-    userGroupNames:
-    - Account Administrator
   skipCondition:
     type: DO_NOT_SKIP
   stageName: STAGE 2
@@ -21,13 +12,13 @@ pipelineStages:
   workflowVariables:
   - entityType: ENVIRONMENT
     name: Environment
-    value: ${env}
+    value: dev
   - entityType: SERVICE
     name: Service
-    value: ${svc}
+    value: C6_Helm_Fake
   - entityType: INFRASTRUCTURE_DEFINITION
     name: InfraDefinition_KUBERNETES
-    value: ${infra}
+    value: mbp_k8s
 - type: APPROVAL
   name: Approval 1
   parallel: false
