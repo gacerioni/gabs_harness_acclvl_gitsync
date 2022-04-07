@@ -34,7 +34,7 @@ phases:
         executeOnDelegate: true
         host: null
         includeInfraSelectors: false
-        outputVars: ''
+        outputVars: SVC_NAME,CHG_NUMBER
         publishAsVar: true
         scriptString: |-
           #!/bin/bash
@@ -42,6 +42,7 @@ phases:
           SVC_NAME="${service.name}"
           CHG_NUMBER="${workflow.variables.CHG}"
         scriptType: BASH
+        secretOutputVars: ''
         sshKeyRefName: null
         sweepingOutputName: HELPER
         sweepingOutputScope: PIPELINE
