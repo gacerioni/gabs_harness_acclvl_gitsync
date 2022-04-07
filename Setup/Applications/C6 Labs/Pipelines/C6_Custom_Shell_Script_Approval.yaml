@@ -42,6 +42,8 @@ pipelineStages:
           echo "${URL_SNOW}"
           echo "########"
 
+          CHG_RESULT="curl -s "$URL_SNOW" --request GET --header "Accept:application/json" --user "$SNOW_USER":"$SNOW_PASS""
+
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
         delegateSelectors:
