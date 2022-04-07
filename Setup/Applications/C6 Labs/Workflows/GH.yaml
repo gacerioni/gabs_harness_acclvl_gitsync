@@ -23,6 +23,8 @@ phases:
       properties:
         commandPath: null
         connectionAttributeName: null
+        delegateSelectors:
+        - ec2-final-sa-east-1
         executeOnDelegate: true
         host: null
         outputVars: ''
@@ -37,13 +39,16 @@ phases:
 
           FINALURL=${PROTO}://${USER}:${PWD}@${INDEX_PATH}
 
-          echo "${FINALURL}"
+          curl -X GET  ${FINALURL} > index.yaml
+          yq -o=json '.' index.yaml
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
         sweepingOutputScope: null
         templateExpressions: null
-        templateVariables: ''
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
         timeoutMillis: 60000
     stepsInParallel: false
   - type: WRAP_UP
