@@ -4,4 +4,4 @@ artifactFromManifest: true
 artifactType: DOCKER
 deploymentType: KUBERNETES
 description: https://harnesssupport.zendesk.com/agent/tickets/29446
-helmVersion: V2
+helmVersion: V3
