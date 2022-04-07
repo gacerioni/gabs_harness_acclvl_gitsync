@@ -37,8 +37,7 @@ phases:
     - type: K8S_DEPLOYMENT_ROLLING
       name: Rollout Deployment
       properties:
-        delegateSelectors:
-        - eks-anaplan-nonroot
+        delegateSelectors: null
         stateTimeoutInMinutes: 10
         templateUuid: null
         templateVariables: null
