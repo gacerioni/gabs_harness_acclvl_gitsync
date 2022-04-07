@@ -9,7 +9,7 @@ pipelineStages:
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
-          cd /root/harness-service-now/
+          cd /root/harness-service-nowa/
 
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
