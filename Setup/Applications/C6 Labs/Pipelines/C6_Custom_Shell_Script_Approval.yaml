@@ -44,7 +44,7 @@ pipelineStages:
 
           CHG_RESULT="curl -s "$URL_SNOW" --request GET --header "Accept:application/json" --user "$SNOW_USER":"$SNOW_PASS""
           echo "########DANGER########"
-          echo "PRINTING PWD DIRECTLY - WE SUPPRESS:"
+          echo "PRINTING PWD DIRECTLY"
           echo ${secrets.getValue("harness_user")}
           echo "PRINTING RAW PWD:"
           echo $SNOW_PASS
