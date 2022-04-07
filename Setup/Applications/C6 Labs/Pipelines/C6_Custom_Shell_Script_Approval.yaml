@@ -44,6 +44,10 @@ pipelineStages:
 
           CHG_RESULT="curl -s "$URL_SNOW" --request GET --header "Accept:application/json" --user "$SNOW_USER":"$SNOW_PASS""
           echo "########DANGER########"
+
+          echo "PRINTING RAW PWD:"
+          echo $SNOW_PASS
+          echo "PRINTING THE CURL COMMAND:"
           echo $CHG_RESULT
           echo "#######################"
 
