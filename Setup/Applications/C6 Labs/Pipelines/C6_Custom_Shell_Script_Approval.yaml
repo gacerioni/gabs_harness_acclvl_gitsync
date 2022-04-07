@@ -27,7 +27,6 @@ pipelineStages:
   name: Approval 1
   parallel: false
   properties:
-    workflowVariables: null
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
@@ -51,9 +50,9 @@ pipelineStages:
         retryInterval: 30000
         delegateSelectors:
         - ec2-final-sa-east-1
-    stageName: STAGE 3
+    stageName: Custom Approval
     timeoutMillis: 86400000
     approvalStateType: SHELL_SCRIPT
   skipCondition:
     type: DO_NOT_SKIP
-  stageName: STAGE 3
+  stageName: Custom Approval
