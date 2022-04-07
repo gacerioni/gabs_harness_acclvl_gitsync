@@ -8,7 +8,7 @@ pipelineStages:
   skipCondition:
     type: DO_NOT_SKIP
   stageName: STAGE 2
-  workflowName: Non Native Helm Template Workflow
+  workflowName: helper workflow to raise variables
   workflowVariables:
   - entityType: ENVIRONMENT
     name: Environment
