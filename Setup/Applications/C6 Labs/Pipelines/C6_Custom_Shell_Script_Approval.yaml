@@ -2,42 +2,6 @@ harnessApiVersion: '1.0'
 type: PIPELINE
 description: https://harnesssupport.zendesk.com/agent/tickets/29543
 pipelineStages:
-- type: APPROVAL
-  name: Approval 0
-  parallel: false
-  properties:
-    workflowVariables: null
-    approvalStateParams:
-      shellScriptApprovalParams:
-        scriptString: |-
-          cd /root/harness-service-now/
-
-
-          CHANGE_NUMBER=${CHG_NUMBER}
-          #CMDB_CI_NAME=${service.name}
-          CMDB_CI_NAME=${svc}
-          SNOW_USER=svc_harness_CD
-          SNOW_PASS=${secrets.getValue("harness_user")}
-          URL_SNOW="https://c6bank.service-now.com"
-
-          echo "########"
-          echo "${CHANGE_NUMBER}"
-          echo "${CMDB_CI_NAME}"
-          echo "########"
-          echo "${SNOW_USER}"
-          echo "${SNOW_PASS}"
-          echo "${URL_SNOW}"
-
-          export HARNESS_APPROVAL_STATUS="APPROVED"
-        retryInterval: 30000
-        delegateSelectors:
-        - ec2-final-sa-east-1
-    stageName: STAGE 1
-    timeoutMillis: 86400000
-    approvalStateType: SHELL_SCRIPT
-  skipCondition:
-    type: DO_NOT_SKIP
-  stageName: STAGE 1
 - type: ENV_STATE
   name: Non Native Helm Template Workflow
   parallel: false
@@ -65,9 +29,10 @@ pipelineStages:
     name: InfraDefinition_KUBERNETES
     value: ${infra}
 - type: APPROVAL
-  name: Approval 2
+  name: Approval 1
   parallel: false
   properties:
+    workflowVariables: null
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
