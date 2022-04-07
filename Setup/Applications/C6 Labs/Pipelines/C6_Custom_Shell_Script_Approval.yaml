@@ -13,6 +13,9 @@ pipelineStages:
 
           CHANGE_NUMBER=${CHG_NUMBER}
           CMDB_CI_NAME=${service.name}
+          SNOW_USER=svc_harness_CD
+          SNOW_PASS=${secrets.getValue("harness_user")}
+          URL_SNOW="https://c6bank.service-now.com"
 
 
           export HARNESS_APPROVAL_STATUS="APPROVED"
