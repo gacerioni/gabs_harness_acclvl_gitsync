@@ -130,3 +130,7 @@ userVariables:
   fixed: false
   mandatory: true
   name: InfraDefinition_KUBERNETES
+- type: TEXT
+  fixed: false
+  mandatory: true
+  name: change
