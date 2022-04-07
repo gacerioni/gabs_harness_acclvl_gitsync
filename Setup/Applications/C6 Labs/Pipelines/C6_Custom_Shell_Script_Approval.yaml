@@ -26,26 +26,26 @@ pipelineStages:
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
-          cd /root/harness-service-now/
+          export HARNESS_APPROVAL_STATUS="APPROVED"
+
+          #cd /root/harness-service-now/
 
 
           #CHANGE_NUMBER=${CHG_NUMBER}
-          CHANGE_NUMBER=${workflow.variables.change}
-          CMDB_CI_NAME=${service.name}
+          #CHANGE_NUMBER=${workflow.variables.change}
+          #CMDB_CI_NAME=${service.name}
           #CMDB_CI_NAME=${svc}
-          SNOW_USER=svc_harness_CD
-          SNOW_PASS=${secrets.getValue("harness_user")}
-          URL_SNOW="https://c6bank.service-now.com"
+          #SNOW_USER=svc_harness_CD
+          #SNOW_PASS=${secrets.getValue("harness_user")}
+          #URL_SNOW="https://c6bank.service-now.com"
 
-          echo "########"
-          echo "${CHANGE_NUMBER}"
-          echo "${CMDB_CI_NAME}"
-          echo "########"
-          echo "${SNOW_USER}"
-          echo "${SNOW_PASS}"
-          echo "${URL_SNOW}"
-
-          export HARNESS_APPROVAL_STATUS="APPROVED"
+          #echo "########"
+          #echo "${CHANGE_NUMBER}"
+          #echo "${CMDB_CI_NAME}"
+          #echo "########"
+          #echo "${SNOW_USER}"
+          #echo "${SNOW_PASS}"
+          #echo "${URL_SNOW}"
         retryInterval: 30000
         delegateSelectors:
         - ec2-final-sa-east-1
