@@ -8,15 +8,7 @@ pipelineStages:
   properties:
     approvalStateParams:
       shellScriptApprovalParams:
-        scriptString: |-
-          cd /root/harness-service-now/
-          CHANGE_NUMBER=${CHG_NUMBER}
-          CMDB_CI_NAME=${service.name}
-          SNOW_USER=svc_harness_CD
-          SNOW_PASS=${secrets.getValue("harness_user")}
-          URL_SNOW="https://c6bank.service-now.com"
-
-          export HARNESS_APPROVAL_STATUS="APPROVED"
+        scriptString: export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
         delegateSelectors:
         - ec2-final-sa-east-1
