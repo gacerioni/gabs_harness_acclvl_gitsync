@@ -3,7 +3,7 @@ type: PIPELINE
 description: https://harnesssupport.zendesk.com/agent/tickets/29543
 pipelineStages:
 - type: ENV_STATE
-  name: Non Native Helm Template Workflow
+  name: helper wf to raise variables
   parallel: false
   skipCondition:
     type: DO_NOT_SKIP
