@@ -5,5 +5,5 @@ deploymentType: KUBERNETES
 infrastructure:
 - type: DIRECT_KUBERNETES
   cloudProviderName: Gabs - PC - K8s
-  namespace: helm-charter
+  namespace: vivun
   releaseName: release-${infra.kubernetes.infraId}
