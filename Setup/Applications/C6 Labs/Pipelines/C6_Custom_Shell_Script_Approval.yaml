@@ -1,3 +1,28 @@
 harnessApiVersion: '1.0'
 type: PIPELINE
 description: https://harnesssupport.zendesk.com/agent/tickets/29543
+pipelineStages:
+- type: APPROVAL
+  name: Approval 0
+  parallel: false
+  properties:
+    approvalStateParams:
+      shellScriptApprovalParams:
+        scriptString: |-
+          cd /root/harness-service-now/
+          CHANGE_NUMBER=${CHG_NUMBER}
+          CMDB_CI_NAME=${service.name}
+          SNOW_USER=svc_harness_CD
+          SNOW_PASS=${secrets.getValue("harness_user")}
+          URL_SNOW="https://c6bank.service-now.com"
+
+          export HARNESS_APPROVAL_STATUS="APPROVED"
+        retryInterval: 30000
+        delegateSelectors:
+        - ec2-final-sa-east-1
+    stageName: STAGE 1
+    timeoutMillis: 86400000
+    approvalStateType: SHELL_SCRIPT
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 1
