@@ -6,14 +6,15 @@ pipelineStages:
   name: Approval 0
   parallel: false
   properties:
-    workflowVariables: null
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
           cd /root/harness-service-now/
 
+          echo "########"
           CHANGE_NUMBER=${CHG_NUMBER}
           CMDB_CI_NAME=${service.name}
+          echo "########"
           SNOW_USER=svc_harness_CD
           SNOW_PASS=${secrets.getValue("harness_user")}
           URL_SNOW="https://c6bank.service-now.com"
