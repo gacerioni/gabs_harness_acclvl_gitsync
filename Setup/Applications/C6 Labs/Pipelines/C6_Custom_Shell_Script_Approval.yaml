@@ -11,6 +11,8 @@ pipelineStages:
         scriptString: |-
           cd /root/harness-service-now/
 
+          CHANGE_NUMBER=${CHG_NUMBER}
+
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
         delegateSelectors:
