@@ -12,6 +12,8 @@ pipelineStages:
           cd /root/harness-service-now/
 
           CHANGE_NUMBER=${CHG_NUMBER}
+          CMDB_CI_NAME=${service.name}
+
 
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
