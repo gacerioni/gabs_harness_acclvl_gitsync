@@ -31,8 +31,8 @@ pipelineStages:
 
           #CHANGE_NUMBER=${CHG_NUMBER}
           CHANGE_NUMBER=${workflow.variables.change}
-          #CMDB_CI_NAME=${service.name}
-          CMDB_CI_NAME=${svc}
+          CMDB_CI_NAME=${service.name}
+          #CMDB_CI_NAME=${svc}
           SNOW_USER=svc_harness_CD
           SNOW_PASS=${secrets.getValue("harness_user")}
           URL_SNOW="https://c6bank.service-now.com"
