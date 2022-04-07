@@ -23,14 +23,14 @@ pipelineStages:
   name: Approval 1
   parallel: false
   properties:
-    workflowVariables: null
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
           cd /root/harness-service-now/
 
 
-          CHANGE_NUMBER=${CHG_NUMBER}
+          #CHANGE_NUMBER=${CHG_NUMBER}
+          CHANGE_NUMBER=${workflow.variables.change}
           #CMDB_CI_NAME=${service.name}
           CMDB_CI_NAME=${svc}
           SNOW_USER=svc_harness_CD
