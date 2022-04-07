@@ -7,9 +7,11 @@ pipelineStages:
   parallel: false
   skipCondition:
     type: DO_NOT_SKIP
-  stageName: STAGE 2
+  stageName: Carregar Variaveis Necessarias
   workflowName: helper workflow to raise variables
   workflowVariables:
+  - name: change
+    value: '12345'
   - entityType: ENVIRONMENT
     name: Environment
     value: dev
@@ -19,10 +21,13 @@ pipelineStages:
   - entityType: INFRASTRUCTURE_DEFINITION
     name: InfraDefinition_KUBERNETES
     value: mbp_k8s
+  - name: svc_name
+    value: ${service.name}
 - type: APPROVAL
   name: Approval 1
   parallel: false
   properties:
+    workflowVariables: null
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
