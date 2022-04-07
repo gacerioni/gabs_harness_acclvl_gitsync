@@ -153,8 +153,3 @@ userVariables:
   fixed: false
   mandatory: true
   name: change
-- type: TEXT
-  fixed: true
-  mandatory: true
-  name: svc_name
-  value: ${service.name}
