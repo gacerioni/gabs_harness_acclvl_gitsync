@@ -26,8 +26,8 @@ metadata:
   annotations:
     harness.io/skip-versioning: true
 data:
-  .dockercfgjson: {{.Values.dockercfg}}
-type: kubernetes.io/dockercfgjson
+  .dockercfg: {{.Values.dockercfg}}
+type: kubernetes.io/dockercfg
 ---
 {{- end}}
 
