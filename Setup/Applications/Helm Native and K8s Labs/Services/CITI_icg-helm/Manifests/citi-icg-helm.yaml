@@ -3,5 +3,5 @@ type: APPLICATION_MANIFEST
 enableCollection: true
 helmChartConfig:
   chartName: nginx-with-version-page
-  connectorName: icg-helm-prod
+  connectorName: icg-helm-dev
 storeType: HelmChartRepo
