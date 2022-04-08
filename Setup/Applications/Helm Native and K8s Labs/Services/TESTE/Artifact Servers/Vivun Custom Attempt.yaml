@@ -4,6 +4,9 @@ delegateTags:
 - ec2-final-sa-east-1
 scripts:
 - customRepositoryMapping:
+    artifactAttributes:
+    - mappedAttribute: url
+      relativePath: urls[0]
     artifactRoot: $.entries.nginx-with-version-page
     buildNoPath: version
   scriptString: |-
