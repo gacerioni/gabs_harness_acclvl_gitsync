@@ -1,0 +1,23 @@
+harnessApiVersion: '1.0'
+type: CUSTOM
+delegateTags:
+- ec2-final-sa-east-1
+scripts:
+- customRepositoryMapping:
+    artifactRoot: $.entries.nginx-with-version-page
+    buildNoPath: version
+  scriptString: |-
+    #!/bin/bash
+
+    INDEX_PATH="raw.githubusercontent.com/GabsLabs/private_nginx_helm_with_version_page/gh-pages/index.yaml"
+    PROTO="https"
+    USER=gabrielcerioni
+    PWD=${secrets.getValue("gabrielcerioni_1_day_PAT")}
+
+    FINALURL=${PROTO}://${USER}:${PWD}@${INDEX_PATH}
+
+    curl -X GET  ${FINALURL} > /tmp/index.yaml
+
+
+    cat /tmp/index.yaml | yq -o=json '.' > ${ARTIFACT_RESULT_PATH}
+  timeout: '60'
