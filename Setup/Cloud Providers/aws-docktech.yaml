@@ -1,0 +1,7 @@
+harnessApiVersion: '1.0'
+type: AWS
+accessKey: AKIA5KL7XUCJJ6U4F3WZ
+assumeCrossAccountRole: false
+secretKey: gcpkms:harness-cloud-provider-iam-key
+useEc2IamCredentials: false
+useIRSA: false
