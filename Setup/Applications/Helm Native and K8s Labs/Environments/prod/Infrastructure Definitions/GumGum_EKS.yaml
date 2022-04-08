@@ -4,6 +4,6 @@ cloudProviderType: KUBERNETES_CLUSTER
 deploymentType: KUBERNETES
 infrastructure:
 - type: DIRECT_KUBERNETES
-  cloudProviderName: GUMGUM TEMP AWS EKS NO IRSA
+  cloudProviderName: CS - Gabs - AWS - EKS - CS Admin
   namespace: gumgum
   releaseName: release-${infra.kubernetes.infraId}
