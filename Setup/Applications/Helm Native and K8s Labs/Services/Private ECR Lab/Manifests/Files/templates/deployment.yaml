@@ -47,7 +47,7 @@ spec:
     spec:
       {{- if .Values.dockercfg}}
       imagePullSecrets:
-      - name: gabcred
+      - name: {{.Values.name}}-dockercfg
       {{- end}}
       containers:
       - name: {{.Values.name}}
