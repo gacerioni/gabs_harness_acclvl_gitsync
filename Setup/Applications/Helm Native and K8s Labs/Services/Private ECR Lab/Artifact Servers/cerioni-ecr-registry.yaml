@@ -2,4 +2,4 @@ harnessApiVersion: '1.0'
 type: ECR
 imageName: cerioni-ecr-registry
 region: sa-east-1
-serverName: CS - Gabs - Amazon Web Services
+serverName: aws-docktech
