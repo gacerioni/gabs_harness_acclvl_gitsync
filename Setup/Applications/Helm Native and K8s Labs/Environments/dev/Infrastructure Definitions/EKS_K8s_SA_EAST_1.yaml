@@ -5,5 +5,5 @@ deploymentType: KUBERNETES
 infrastructure:
 - type: DIRECT_KUBERNETES
   cloudProviderName: CS - Gabs - AWS - EKS - CS Admin
-  namespace: regions-${env.name}
+  namespace: conductor-${env.name}
   releaseName: release-${infra.kubernetes.infraId}
