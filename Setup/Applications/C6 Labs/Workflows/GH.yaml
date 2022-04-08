@@ -39,10 +39,10 @@ phases:
 
           FINALURL=${PROTO}://${USER}:${PWD}@${INDEX_PATH}
 
-          curl -X GET  ${FINALURL} > /tmp/index.yaml
+          curl -X GET  ${FINALURL}
 
-
-          cat /tmp/index.yaml | yq -o=json '.'
+          #curl -X GET  ${FINALURL} > /tmp/index.yaml
+          #cat /tmp/index.yaml | yq -o=json '.'
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
