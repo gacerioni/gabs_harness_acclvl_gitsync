@@ -22,7 +22,7 @@ phases:
       name: Artifact Collection
       properties:
         artifactStreamName: Vivun Custom Attempt
-        buildNo: ''
+        buildNo: ${artifact.buildNo}
         entityType: SERVICE
         regex: false
         serviceName: TESTE
