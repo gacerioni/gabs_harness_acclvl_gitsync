@@ -22,10 +22,10 @@ phases:
       name: Artifact Collection
       properties:
         artifactStreamName: Vivun Custom Attempt
-        buildNo: ${artifact.buildNo}
+        buildNo: ''
         entityType: SERVICE
         regex: false
-        serviceName: TESTE
+        serviceName: Vivun Private GH Pages Custom
         sourceType: ARTIFACT
         templateUuid: null
         templateVariables: null
