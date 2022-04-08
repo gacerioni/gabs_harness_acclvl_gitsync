@@ -20,6 +20,17 @@ phases:
     steps:
     - type: ARTIFACT_COLLECTION
       name: Artifact Collection
+      properties:
+        artifactStreamName: Vivun Custom Attempt
+        buildNo: ''
+        entityType: SERVICE
+        regex: false
+        serviceName: TESTE
+        sourceType: ARTIFACT
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 300000
     stepsInParallel: false
   - type: WRAP_UP
     name: Wrap Up
