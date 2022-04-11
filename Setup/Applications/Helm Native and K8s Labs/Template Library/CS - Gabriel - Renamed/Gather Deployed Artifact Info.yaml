@@ -5,7 +5,7 @@ scriptString: |-
 
   set -e
 
-  echo "TEST"
+  echo "I am using logj4 2.10.0 and this is just a fake message."
 
   # Load up the various values.
   #export AWS_ACCESS_KEY_ID="${app.defaults.AWS_S3_ACCCES_KEY_ID}"
