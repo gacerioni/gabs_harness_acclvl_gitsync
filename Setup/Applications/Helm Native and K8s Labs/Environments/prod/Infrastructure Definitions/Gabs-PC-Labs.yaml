@@ -5,5 +5,5 @@ deploymentType: KUBERNETES
 infrastructure:
 - type: DIRECT_KUBERNETES
   cloudProviderName: Gabs - PC - K8s
-  namespace: forte-ns
+  namespace: canary
   releaseName: release-forte
