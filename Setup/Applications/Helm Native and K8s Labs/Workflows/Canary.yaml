@@ -52,9 +52,9 @@ phases:
   serviceName: nginx_with_homepage
   statefulSet: false
 - type: KUBERNETES
-  computeProviderName: CS - Gabs - AWS - EKS - CS Admin
+  computeProviderName: Gabs - PC - K8s
   daemonSet: false
-  infraDefinitionName: EKS_K8s_SA_EAST_1
+  infraDefinitionName: Gabs-PC-Labs
   name: Primary
   phaseSteps:
   - type: K8S_PHASE_STEP
@@ -93,9 +93,9 @@ rollbackPhases:
   serviceName: nginx_with_homepage
   statefulSet: false
 - type: KUBERNETES
-  computeProviderName: CS - Gabs - AWS - EKS - CS Admin
+  computeProviderName: Gabs - PC - K8s
   daemonSet: false
-  infraDefinitionName: EKS_K8s_SA_EAST_1
+  infraDefinitionName: Gabs-PC-Labs
   name: Rollback Primary
   phaseNameForRollback: Primary
   phaseSteps:
