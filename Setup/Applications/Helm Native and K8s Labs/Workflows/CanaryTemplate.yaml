@@ -16,4 +16,16 @@ notificationRules:
   userGroupAsExpression: false
   userGroupNames:
   - Account Administrator
+preDeploymentSteps:
+- type: SHELL_SCRIPT
+  name: Gather Deployed Artifact Info
+  properties:
+    executeOnDelegate: true
+    timeoutMillis: 600000
+  templateUri: App/CS - Gabriel - Renamed/Gather Deployed Artifact Info:latest
+  templateVariables:
+  - name: SERVICE_NAME
+    value: ''
+  - name: ALL_ENVS
+    value: ''
 templatized: false
