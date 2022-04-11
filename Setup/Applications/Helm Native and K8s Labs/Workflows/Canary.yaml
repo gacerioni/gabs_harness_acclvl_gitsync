@@ -18,9 +18,9 @@ notificationRules:
   - Account Administrator
 phases:
 - type: KUBERNETES
-  computeProviderName: CS - Gabs - AWS - EKS - CS Admin
+  computeProviderName: Gabs - PC - K8s
   daemonSet: false
-  infraDefinitionName: EKS_K8s_SA_EAST_1
+  infraDefinitionName: Gabs-PC-Labs
   name: Canary Deployment
   phaseSteps:
   - type: K8S_PHASE_STEP
@@ -74,9 +74,9 @@ phases:
   statefulSet: false
 rollbackPhases:
 - type: KUBERNETES
-  computeProviderName: CS - Gabs - AWS - EKS - CS Admin
+  computeProviderName: Gabs - PC - K8s
   daemonSet: false
-  infraDefinitionName: EKS_K8s_SA_EAST_1
+  infraDefinitionName: Gabs-PC-Labs
   name: Rollback Canary Deployment
   phaseNameForRollback: Canary Deployment
   phaseSteps:
