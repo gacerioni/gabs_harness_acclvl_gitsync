@@ -47,7 +47,7 @@ spec:
     spec:
       {{- if .Values.dockercfg}}
       imagePullSecrets:
-      - name: {{.Values.name}}-dockercfg
+      - name: regcred
       {{- end}}
       containers:
       - name: {{.Values.name}}
