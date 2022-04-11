@@ -80,6 +80,18 @@ phases:
   provisionNodes: false
   serviceName: Private ECR Lab
   statefulSet: false
+preDeploymentSteps:
+- type: SHELL_SCRIPT
+  name: Gather Deployed Artifact Info
+  properties:
+    executeOnDelegate: true
+    timeoutMillis: 600000
+  templateUri: App/CS - Gabriel - Renamed/Gather Deployed Artifact Info:latest
+  templateVariables:
+  - name: SERVICE_NAME
+    value: ''
+  - name: ALL_ENVS
+    value: ''
 rollbackPhases:
 - type: KUBERNETES
   computeProviderName: Gabs - PC - K8s
