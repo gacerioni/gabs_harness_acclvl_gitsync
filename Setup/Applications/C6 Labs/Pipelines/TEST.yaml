@@ -1,2 +1,20 @@
 harnessApiVersion: '1.0'
 type: PIPELINE
+pipelineStages:
+- type: APPROVAL
+  name: Approval 0
+  parallel: false
+  properties:
+    approvalStateParams:
+      shellScriptApprovalParams:
+        scriptString: |-
+          echo $secrets.getValue("administartor_local_winrm_labs")
+
+          export HARNESS_APPROVAL_STATUS="APPROVED"
+        retryInterval: 30000
+    stageName: STAGE 1
+    timeoutMillis: 86400000
+    approvalStateType: SHELL_SCRIPT
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 1
