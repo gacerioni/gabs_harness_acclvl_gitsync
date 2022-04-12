@@ -8,7 +8,7 @@ pipelineStages:
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
-          echo $secrets.getValue("administartor_local_winrm_labs")
+          echo "$secrets.getValue("administartor_local_winrm_labs")"
 
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
