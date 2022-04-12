@@ -56,8 +56,7 @@ pipelineStages:
 
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
-        delegateSelectors:
-        - ec2-final-sa-east-1
+        delegateSelectors: null
     stageName: Custom Approval
     timeoutMillis: 86400000
     approvalStateType: SHELL_SCRIPT
