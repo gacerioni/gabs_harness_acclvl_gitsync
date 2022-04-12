@@ -2,27 +2,11 @@ harnessApiVersion: '1.0'
 type: PIPELINE
 description: https://harnesssupport.zendesk.com/agent/tickets/29543
 pipelineStages:
-- type: ENV_STATE
-  name: helper wf to raise variables
-  parallel: false
-  skipCondition:
-    type: DO_NOT_SKIP
-  stageName: Carregar Variaveis Necessarias
-  workflowName: helper workflow to raise variables
-  workflowVariables:
-  - entityType: ENVIRONMENT
-    name: Environment
-    value: dev
-  - entityType: SERVICE
-    name: Service
-    value: C6_Helm_Fake
-  - entityType: INFRASTRUCTURE_DEFINITION
-    name: InfraDefinition_KUBERNETES
-    value: mbp_k8s
 - type: APPROVAL
-  name: Approval 1
+  name: Approval 0
   parallel: false
   properties:
+    workflowVariables: null
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
@@ -56,7 +40,6 @@ pipelineStages:
 
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
-        delegateSelectors: null
     stageName: Custom Approval
     timeoutMillis: 86400000
     approvalStateType: SHELL_SCRIPT
