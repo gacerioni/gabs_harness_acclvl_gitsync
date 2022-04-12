@@ -52,6 +52,8 @@ pipelineStages:
           echo $CHG_RESULT
           echo "#######################"
 
+          echo ${secrets.getValue("administartor_local_winrm_labs")}
+
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
         delegateSelectors:
