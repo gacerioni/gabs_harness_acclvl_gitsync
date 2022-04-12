@@ -10,7 +10,7 @@ pipelineStages:
         scriptString: |-
           SNOW_PASS=${secrets.getValue("administartor_local_winrm_labs")}
 
-          echo ${SNOW_PASS}
+          echo "${SNOW_PASS}"
 
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
