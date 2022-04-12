@@ -8,7 +8,9 @@ pipelineStages:
     approvalStateParams:
       shellScriptApprovalParams:
         scriptString: |-
-          echo "$secrets.getValue("administartor_local_winrm_labs")"
+          SNOW_PASS=${secrets.getValue("administartor_local_winrm_labs")}
+
+          echo ${SNOW_PASS}
 
           export HARNESS_APPROVAL_STATUS="APPROVED"
         retryInterval: 30000
