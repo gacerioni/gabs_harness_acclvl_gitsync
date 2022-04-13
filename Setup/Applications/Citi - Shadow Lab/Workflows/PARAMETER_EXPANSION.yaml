@@ -38,7 +38,7 @@ phases:
           VARIABLE0="${payloadfake:-'{}'}"
           echo "$VARIABLE0"
           # this should prints {}, but fails
-          #########################################################
+
           payload=1234
           VARIABLE0="${payload:='{}'}"
           echo "$VARIABLE0"
