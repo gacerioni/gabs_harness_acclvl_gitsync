@@ -30,23 +30,17 @@ phases:
         outputVars: ''
         publishAsVar: false
         scriptString: |-
-          payload=1234
-          VARIABLE0="${payload:-'{}'}"
-          echo "$VARIABLE0"
-          # this should print 1234, but fails
+          #!/bin/bash
 
-          VARIABLE0="${payloadfake:-'{}'}"
+          VARIABLE0=${payload:-{}}
           echo "$VARIABLE0"
-          # this should prints {}, but fails
 
-          payload=1234
-          VARIABLE0="${payload:='{}'}"
-          echo "$VARIABLE0"
-          # this prints 1234
+          VARIABLE1=${payload:-'abc'}
+          echo "$VARIABLE1"
 
-          VARIABLE0="${payloadfake:='{}'}"
-          echo "$VARIABLE0"
-          # this prints {}
+          result=0123456789abcdefghijk
+          VARIABLE2=${result:0:-14}
+          echo $VARIABLE2
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
