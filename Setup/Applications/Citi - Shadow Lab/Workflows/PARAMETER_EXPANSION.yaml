@@ -23,8 +23,7 @@ phases:
       properties:
         commandPath: null
         connectionAttributeName: null
-        delegateSelectors:
-        - ec2-final-sa-east-1
+        delegateSelectors: null
         executeOnDelegate: true
         host: null
         outputVars: ''
