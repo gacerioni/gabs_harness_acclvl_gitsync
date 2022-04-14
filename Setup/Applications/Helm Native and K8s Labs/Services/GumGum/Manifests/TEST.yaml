@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+enableCollection: false
+helmChartConfig:
+  basePath: charts/
+  chartName: test-chart
+  connectorName: GumGum_IRSA
+storeType: HelmChartRepo
