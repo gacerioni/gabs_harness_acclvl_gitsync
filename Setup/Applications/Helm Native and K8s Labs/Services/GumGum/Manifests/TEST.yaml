@@ -1,6 +1,6 @@
 harnessApiVersion: '1.0'
 type: APPLICATION_MANIFEST
-enableCollection: false
+enableCollection: true
 helmChartConfig:
   basePath: charts/
   chartName: test-chart
