@@ -1,5 +1,5 @@
 harnessApiVersion: '1.0'
 type: AMAZON_S3_HELM_REPO
 bucket: gabshelmcharts
-cloudProvider: CS - Gabs - AWS - IRSA - EKS
+cloudProvider: GUMGUM AWS IRSA
 region: sa-east-1
