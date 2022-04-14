@@ -4,5 +4,5 @@ enableCollection: true
 helmChartConfig:
   basePath: charts/
   chartName: test-chart
-  connectorName: GumGum_IRSA
+  connectorName: GumGum IRSA
 storeType: HelmChartRepo
