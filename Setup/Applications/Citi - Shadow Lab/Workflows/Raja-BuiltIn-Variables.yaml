@@ -62,7 +62,8 @@ phases:
         commandName: dbdeploy
         commandType: OTHER
         connectionAttributeName: null
-        delegateSelectors: null
+        delegateSelectors:
+        - ' ec2-final-delegate'
         executeOnDelegate: true
         host: null
         outputVars: ''
