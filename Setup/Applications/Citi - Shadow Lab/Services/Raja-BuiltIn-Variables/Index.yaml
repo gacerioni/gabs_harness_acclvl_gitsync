@@ -1,0 +1,5 @@
+harnessApiVersion: '1.0'
+type: SERVICE
+artifactType: OTHER
+deploymentType: CUSTOM
+deploymentTypeTemplateUri: CS - Gabriel - Renamed/ORACLEDB
