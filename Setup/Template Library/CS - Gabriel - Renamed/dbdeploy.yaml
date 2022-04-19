@@ -19,7 +19,7 @@ commandUnits:
   commandUnitType: SETUP_ENV
   deploymentType: SSH
   name: Setup Env
-  scriptType: POWERSHELL
+  scriptType: BASH
 - command: |-
     export CITI=${instance.hostName}
 
