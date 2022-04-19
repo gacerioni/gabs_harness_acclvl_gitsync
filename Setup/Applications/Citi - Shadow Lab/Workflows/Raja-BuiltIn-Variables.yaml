@@ -95,24 +95,6 @@ phases:
         templateExpressions: null
         timeoutMillis: 600000
       templateUri: CS - Gabriel - Renamed/dbdeploy_shell_script:latest
-    - type: COMMAND
-      name: dbdeploy
-      properties:
-        commandName: dbdeploy
-        commandType: OTHER
-        connectionAttributeName: null
-        delegateSelectors:
-        - ' ec2-final-delegate'
-        executeOnDelegate: true
-        host: null
-        outputVars: ''
-        publishAsVar: false
-        sshKeyRefName: null
-        sweepingOutputName: null
-        sweepingOutputScope: null
-        templateExpressions: null
-        timeoutMillis: 60000
-      templateUri: CS - Gabriel - Renamed/dbdeploy:latest
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
