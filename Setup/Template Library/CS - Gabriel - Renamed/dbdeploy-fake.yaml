@@ -7,3 +7,4 @@ commandUnits:
   deploymentType: SSH
   name: Exec
   scriptType: BASH
+  workingDirectory: /tmp/gabs
