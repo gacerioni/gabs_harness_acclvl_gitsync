@@ -35,6 +35,27 @@ phases:
         templateUuid: null
         templateVariables: null
         templateVersion: null
+    - type: SHELL_SCRIPT
+      name: PRINT BUILT-IN VARIABLES
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        connectionType: SSH
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |
+          set -x
+          echo ${artifact.artifactPath}
+          echo ${instance.hostName}
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
