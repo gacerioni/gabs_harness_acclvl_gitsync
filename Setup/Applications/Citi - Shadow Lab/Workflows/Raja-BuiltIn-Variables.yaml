@@ -79,6 +79,12 @@ phases:
         templateVariables: null
         templateVersion: null
         timeoutMillis: 60000
+    - type: SHELL_SCRIPT
+      name: dbdeploy_shell_script
+      properties:
+        executeOnDelegate: true
+        timeoutMillis: 600000
+      templateUri: CS - Gabriel - Renamed/dbdeploy_shell_script:latest
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
