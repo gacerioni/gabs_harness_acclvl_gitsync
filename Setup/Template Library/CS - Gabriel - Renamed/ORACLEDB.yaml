@@ -14,9 +14,11 @@ fetchInstanceScript: |-
   #{"data": [{"dbhost": "${dbhost}"}]}
   #_EOF_
 
-  aws ec2 describe-instances --region sa-east-1 --query 'Reservations[*]' --filters Name=tag:Name,Values="Ancestry - 28331" Name=instance-state-name,Values=running --output json | jq '.[]' > "${INSTANCE_OUTPUT_PATH}"
+  #aws ec2 describe-instances --region sa-east-1 --query 'Reservations[*]' --filters Name=tag:Name,Values="Ancestry - 28331" Name=instance-state-name,Values=running --output json | jq '.[]' > "${INSTANCE_OUTPUT_PATH}"
+
+  cat >${INSTANCE_OUTPUT_PATH} <<_EOF_
+  {"Instances": [{"PublicDnsName" : "ec2-18-230-155-32.sa-east-1.compute.amazonaws.com"},{"PublicDnsName" : "ec2-15-228-191-98.sa-east-1.compute.amazonaws.com"}]}
+  _EOF_
 hostAttributes:
   hostname: PublicDnsName
-  ip: PublicIpAddress
-  az: Placement.AvailabilityZone
 hostObjectArrayPath: Instances
