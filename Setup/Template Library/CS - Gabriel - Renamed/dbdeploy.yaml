@@ -20,3 +20,9 @@ commandUnits:
   deploymentType: SSH
   name: Setup Env
   scriptType: POWERSHELL
+- artifactVariableName: artifact
+  commandUnitType: SCP
+  deploymentType: SSH
+  destinationDirectoryPath: $WINGS_RUNTIME_PATH
+  name: Copy
+  source: ARTIFACTS
