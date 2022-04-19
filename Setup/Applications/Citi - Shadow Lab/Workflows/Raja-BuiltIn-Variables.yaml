@@ -95,6 +95,11 @@ phases:
         templateExpressions: null
         timeoutMillis: 600000
       templateUri: CS - Gabriel - Renamed/dbdeploy_shell_script:latest
+    - type: COMMAND
+      name: dbdeploy-fake
+      properties:
+        commandType: OTHER
+      templateUri: CS - Gabriel - Renamed/dbdeploy-fake:latest
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
