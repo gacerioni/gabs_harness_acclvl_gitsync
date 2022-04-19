@@ -1,0 +1,20 @@
+harnessApiVersion: '1.0'
+type: CUSTOM_DEPLOYMENT_TYPE
+fetchInstanceScript: |-
+  #
+  # Script is expected to query Infrastructure and dump json
+  # in $INSTANCE_OUTPUT_PATH file path
+  #
+  # Harness is expected to initialize ${INSTANCE_OUTPUT_PATH}
+  # environment variable - a random unique file path on delegate,
+  # so script execution can save the result.
+  #
+  #
+  cat >${INSTANCE_OUTPUT_PATH} <<_EOF_
+  {"data": [{"dbhost": "${dbhost}"}]}
+  _EOF_
+hostAttributes:
+  hostname: dbhost
+hostObjectArrayPath: data
+variables:
+- name: dbhost
