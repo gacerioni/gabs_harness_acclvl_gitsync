@@ -69,7 +69,7 @@ phases:
         publishAsVar: false
         scriptString: |
           set -x
-          echo ${instance.hostName}
+          echo ${instance.host.properties.hostname}
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
