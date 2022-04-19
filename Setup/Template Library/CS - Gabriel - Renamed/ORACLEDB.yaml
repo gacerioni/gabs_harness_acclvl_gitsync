@@ -10,11 +10,13 @@ fetchInstanceScript: |-
   # so script execution can save the result.
   #
   #
-  cat >${INSTANCE_OUTPUT_PATH} <<_EOF_
-  {"data": [{"dbhost": "${dbhost}"}]}
-  _EOF_
+  #cat >${INSTANCE_OUTPUT_PATH} <<_EOF_
+  #{"data": [{"dbhost": "${dbhost}"}]}
+  #_EOF_
+
+  aws ec2 describe-instances --region sa-east-1 --query 'Reservations[*]' --filters Name=tag:Name,Values="Ancestry - 28331" Name=instance-state-name,Values=running --output json | jq '.[]' > "${INSTANCE_OUTPUT_PATH}"
 hostAttributes:
-  hostname: dbhost
-hostObjectArrayPath: data
-variables:
-- name: dbhost
+  hostname: PublicDnsName
+  ip: PublicIpAddress
+  az: Placement.AvailabilityZone
+hostObjectArrayPath: Instances
