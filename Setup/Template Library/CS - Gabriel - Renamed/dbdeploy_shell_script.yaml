@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: SHELL_SCRIPT
+scriptString: |-
+  export CITI=${instance.hostName}
+
+  echo $CITI
+scriptType: BASH
+timeoutMillis: 600000
