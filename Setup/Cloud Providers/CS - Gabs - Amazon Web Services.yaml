@@ -1,7 +1,8 @@
 harnessApiVersion: '1.0'
 type: AWS
 assumeCrossAccountRole: false
-tag: ec2-final-sa-east-1
+defaultRegion: sa-east-1
+tag: ' ec2-final-delegate'
 usageRestrictions:
   appEnvRestrictions:
   - appFilter:
