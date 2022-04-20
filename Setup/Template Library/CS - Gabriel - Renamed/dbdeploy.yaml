@@ -10,6 +10,3 @@ commandUnits:
   deploymentType: SSH
   name: Deploy
   scriptType: BASH
-variables:
-- name: myHost
-  value: ${instance.hostName}
