@@ -100,27 +100,6 @@ phases:
       templateVariables:
       - name: myHost
         value: ${instance.hostName}
-    - type: COMMAND
-      name: dbdeploy_1
-      properties:
-        commandName: dbdeploy
-        commandType: OTHER
-        connectionAttributeName: null
-        delegateSelectors:
-        - ' ec2-final-delegate'
-        executeOnDelegate: true
-        host: null
-        outputVars: ''
-        publishAsVar: false
-        sshKeyRefName: null
-        sweepingOutputName: null
-        sweepingOutputScope: null
-        templateExpressions: null
-        timeoutMillis: 60000
-      templateUri: CS - Gabriel - Renamed/dbdeploy:latest
-      templateVariables:
-      - name: myHost
-        value: ${instance.hostName}
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
