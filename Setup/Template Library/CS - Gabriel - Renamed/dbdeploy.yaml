@@ -2,12 +2,10 @@ harnessApiVersion: '1.0'
 type: SSH
 commandUnitType: OTHER
 commandUnits:
-- command: |-
-    export CITI=${myHost}
+- command: |
+    export CITI=${instance.hostName}
 
     echo ${CITI}
-
-    echo "${instance.hostName}"
   commandUnitType: EXEC
   deploymentType: SSH
   name: Deploy
