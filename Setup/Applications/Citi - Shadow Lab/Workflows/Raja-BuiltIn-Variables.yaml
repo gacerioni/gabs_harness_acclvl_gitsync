@@ -84,11 +84,11 @@ phases:
       properties:
         commandName: dbdeploy
         commandType: OTHER
-        connectionAttributeName: null
-        delegateSelectors:
-        - ' ec2-final-delegate'
-        executeOnDelegate: true
-        host: null
+        connectionAttributeName: Ancestry Lab
+        connectionType: WINRM
+        delegateSelectors: null
+        executeOnDelegate: false
+        host: ${instance.hostName}
         outputVars: ''
         publishAsVar: false
         sshKeyRefName: null
