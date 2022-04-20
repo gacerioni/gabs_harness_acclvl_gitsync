@@ -26,26 +26,7 @@ phases:
         host: null
         outputVars: ''
         publishAsVar: false
-        scriptString: |-
-          set -e
-
-          function containsStr {
-            local str="$1"
-            shift 1
-            local -a arr=("$@")
-            for elem in "${arr[@]}" ; do
-              if [[ "$elem" == "$str" ]]; then
-                return 0
-              fi
-            done
-            return 1
-          }
-
-          UP_canaryVerificationRegions="BLABLABLA"
-
-          echo "${UP_canaryVerificationRegions}"
-          echo 1
-          echo 2
+        scriptString: echo "${stringData.uniqueString}"
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
