@@ -82,7 +82,19 @@ phases:
     - type: COMMAND
       name: dbdeploy
       properties:
+        commandName: dbdeploy
         commandType: OTHER
+        connectionAttributeName: null
+        connectionType: SSH
+        executeOnDelegate: false
+        host: ${instance.hostName}
+        outputVars: ''
+        publishAsVar: false
+        sshKeyRefName: gabs_keypair_sa_east_1
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        timeoutMillis: 60000
       templateUri: CS - Gabriel - Renamed/dbdeploy:latest
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
