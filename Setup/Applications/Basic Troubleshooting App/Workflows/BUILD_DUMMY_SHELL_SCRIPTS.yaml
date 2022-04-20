@@ -45,6 +45,7 @@ phases:
 
           echo "${UP_canaryVerificationRegions}"
           echo 1
+          echo 2
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
