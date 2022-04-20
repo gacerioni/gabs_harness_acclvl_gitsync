@@ -12,5 +12,5 @@ commandUnits:
   name: Deploy
   scriptType: BASH
 variables:
-- name: CITI
 - name: myHost
+  value: ${instance.hostName}
