@@ -100,6 +100,14 @@ phases:
       templateVariables:
       - name: myHost
         value: ${instance.hostName}
+    - type: COMMAND
+      name: dbdeploy_1
+      properties:
+        commandType: OTHER
+      templateUri: CS - Gabriel - Renamed/dbdeploy:latest
+      templateVariables:
+      - name: myHost
+        value: ${instance.hostName}
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
