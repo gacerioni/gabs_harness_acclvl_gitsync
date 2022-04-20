@@ -88,7 +88,7 @@ phases:
         connectionType: SSH
         delegateSelectors: null
         executeOnDelegate: false
-        host: ${instance.hostName}
+        host: ec2-15-228-167-45.sa-east-1.compute.amazonaws.com
         outputVars: ''
         publishAsVar: false
         sshKeyRefName: gabs_keypair_sa_east_1
