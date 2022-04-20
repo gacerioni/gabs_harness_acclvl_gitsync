@@ -1,0 +1,16 @@
+harnessApiVersion: '1.0'
+type: CLOUD_FORMATION
+gitFileConfig:
+  branch: main
+  connectorId: 12EmhttbTZiOGcZfiFuz9w
+  filePath: Basic_EC2_CloudFormation.yml
+  useBranch: true
+  useInlineServiceDefinition: false
+sourceType: GIT
+variables:
+- name: InstanceType
+  valueType: TEXT
+- name: KeyName
+  valueType: TEXT
+- name: SSHLocation
+  valueType: TEXT

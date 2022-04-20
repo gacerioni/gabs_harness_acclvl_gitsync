@@ -1,0 +1,21 @@
+name: anishandgabs
+
+createNamespace: true
+namespace: ${infra.kubernetes.namespace}
+
+# Specify all environment variables to be added to the container.
+# The following two maps, config and secrets, are put into a ConfigMap
+# and a Secret, respectively.
+# Both are added to the container environment in podSpec as envFrom source.
+env:
+  config:
+    key1: value1
+    key3: value3
+  secrets:
+    key2: value2
+
+consumers:
+  queue1: mqname1
+  queue2: mqname2
+  queue3: mqname3
+  queue4: mqname4

@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{.Values.name}}-config
+data:
+  anishfile: |
+{{.Values.file_content | indent 4 | replace "," " \n    "}}
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.name}}-deployment
+spec:
+  replicas: {{int .Values.replicas}}
+  selector:
+    matchLabels:
+      app: {{.Values.name}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.name}}
+    spec:
+      containers:
+      - name: {{.Values.name}}
+        image: {{.Values.image}}
+        volumeMounts:
+          - name: config-vol
+            mountPath: /etc/anish/config
+      volumes:
+      - name: config-vol
+        configMap:
+          name: {{.Values.name}}-config
+          items:
+          - key: anishfile
+            path: anish_config.txt

@@ -1,0 +1,25 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+pipelineStages:
+- type: ENV_STATE
+  name: SKIP_PIPELINE_TEST_17825
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 1
+  workflowName: SKIP_PIPELINE_TEST_17825
+- type: APPROVAL
+  name: Approval 1
+  parallel: false
+  properties:
+    userGroups:
+    - APPROVERS
+    variables: null
+    stageName: STAGE 2
+    timeoutMillis: 86400000
+    approvalStateType: USER_GROUP
+    sweepingOutputName: ''
+  skipCondition:
+    expression: ${context.helpervar.CURRENT_ENV} == "NON_PRODZZZ"
+    type: CONDITIONAL_SKIP
+  stageName: STAGE 2

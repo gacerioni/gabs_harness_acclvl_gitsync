@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: ARTIFACTORY
+artifactPattern: '*/*.tar.gz'
+metadataOnly: true
+repositoryName: example-repo-local
+repositoryType: any
+serverName: Harness Artifactory
+useDockerFormat: false

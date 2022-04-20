@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: SERVICE
+artifactType: DOCKER
+configVariables:
+- name: my_secret_from_secret_manager
+  value: gcpkms:my_secret_text
+  valueType: ENCRYPTED_TEXT
+deploymentType: KUBERNETES
+description: https://harnesssupport.zendesk.com/agent/tickets/14742
+helmVersion: V2

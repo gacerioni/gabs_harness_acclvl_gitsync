@@ -1,0 +1,274 @@
+harnessApiVersion: '1.0'
+type: BASIC
+concurrencyStrategy: INFRA
+description: Azure Function Workflow GABS
+envName: prod
+failureStrategies:
+- executionScope: WORKFLOW
+  failureTypes:
+  - APPLICATION_ERROR
+  repairActionCode: ROLLBACK_WORKFLOW
+  retryCount: 0
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- type: CUSTOM
+  computeProviderName: DUMMY_CLOUD_PROVIDER
+  daemonSet: false
+  infraDefinitionName: TANDEM_AZURE_FUNCTIONS_LIMIT
+  name: Phase 1
+  phaseSteps:
+  - type: CUSTOM_DEPLOYMENT_PHASE_STEP
+    name: Deploy
+    steps:
+    - type: CUSTOM_DEPLOYMENT_FETCH_INSTANCES
+      name: Fetch Instances
+      properties:
+        stateTimeoutInMinutes: 1
+    - type: SHELL_SCRIPT
+      name: Azure Powershell Script
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: "#deploy AZ function\n#Linux Version\n#PWSH\n#author: Daniel\
+          \ Sidman\n#Requirements\n#AZ CLI\n#AZ\n#Storage account created\n#Function\
+          \ created\n#TO DO:\n #add more defensive coding, check for function and\
+          \ storage account.\n\n#***START OF SCRIPT****\n\n#enable to supress noise\n\
+          #$ErrorActionPreference = \"-WarningAction:SilentlyContinue\"\n\n#test param\
+          \ variables here to make sure they are not null.\n\nwrite-host \"config\
+          \ folder is: ${workflow.variables.gitConfigFolder}\"\n\nwrite-host \"function\
+          \ application short name is: ${workflow.variables.applicationShortName}\"\
+          \n\nwrite-host \"Jfrog Artifactory folder is: ${workflow.variables.artifactoryFolder}\"\
+          \n\nwrite-host \"Region is: ${serviceVariable.region}\"\n\nwrite-host \"\
+          Vertical or environment is: ${serviceVariable.vertical}\"\n\n\nsleep 2\n\
+          \n#****NEXT SECTION SETS UP THE ENVIROMENT ON THE DELEGATE****\n\n#get the\
+          \ artifact\n$artifactoryFolder = \"${workflow.variables.artifactoryFolder}\"\
+          \n$datscibuildpwd = \"${serviceVariable.arifactorydatabuildpassword}\"\n\
+          curl -udatascibuild:\"$datscibuildpwd\" -O  \"https://artifactory.tandemdiabetes.com/local-azurefunctionpackages/$artifactoryFolder/${artifact.fileName}\"\
+          \  \n\nwrite-host \"please ignore download metrics, they show as errors\
+          \ but are not errors\"\n\nwrite-host \"***make sure you see it, the downloaded\
+          \ artifact is:\"\ndir \"${artifact.fileName}\"\n\n\n\n#Change artifact perms\n\
+          chmod -R 777 /tmp/\ncd /tmp/\n\nsleep 2\n\n#git clone from bitbucket\nwrite-host\
+          \ \"getting the bitbucket repo\"\n$bitbucketsvcacctpwd = \"${serviceVariable.bitbucketpsprdjserviceacctpassword}\"\
+          \nRemove-Item powershelldsutils -Recurse -Force -Confirm:$false -ErrorAction\
+          \ SilentlyContinue\ngit clone https://PsPrdJirDeploAutSvc:\"$bitbucketsvcacctpwd\"\
+          @bitbucket.tandemdiabetes.com/scm/dev/powershelldsutils.git\n\n#test for\
+          \ folders\ncd /tmp/\n$filestuff = (dir power*)\nwrite-host \"you should\
+          \ see git repo folder powershelldsutils in this: $filestuff\"\n\nsleep 2\n\
+          \n\n\n#setup modules\n#Install-Module AzureRM -AllowClobber\n#Install-Module\
+          \ -Name Az -AllowClobber\nImport-Module Az\n\n#****connect to Azure*****\n\
+          #create variables\n#will change per vertical, so defined in harness env\
+          \ settings\n$clientID = \"${serviceVariable.clientID}\"\n#will change per\
+          \ vertical, so defined in harness env settings\n$key = \"${serviceVariable.clientSecretArmBase}\"\
+          \nwrite-host \"We got encrypted key it is: $key\"\n#will change per vertical,\
+          \ so defined in harness env settings\n$tenantID = \"${serviceVariable.tenantID}\"\
+          \nwrite-host \"tenantID is $tenantID\"\n\n$SecurePassword = $key | ConvertTo-SecureString\
+          \ -AsPlainText -Force\n\n$cred = new-object -typename System.Management.Automation.PSCredential\
+          \ -argumentlist $clientID, $SecurePassword\n\nwrite-host \"Connecting to\
+          \ Azure....\"\n#For windows Add-AzureRmAccount -Credential $cred -TenantId\
+          \ $tenantID -ServicePrincipal\nConnect-AzAccount -ServicePrincipal -Credential\
+          \ $cred -Tenant $tenantId\n\n#****END OF ENVIRONMENT SETUP****\n\n#****START\
+          \ OF FUNCTIONS****\n\n#copy operation\nfunction copyConfig{\n    param(\n\
+          \        $zipArchiveFullPath,\n        $subscription,\n        $resourceGroup,\n\
+          \        $appName,\n        $appSettingsFileName\n    )\n    \n    \n  \
+          \  $wc2 = \"/tmp/powershelldsutils/${workflow.variables.gitConfigFolder}/$AppSettingsFileName\"\
+          \n\n    write-host \"app settings config file to be copied is: $wc2\"\n\n\
+          \    Copy-Item \"$wc2\" \"\\tmp\\$AppSettingsFileName\" -Force -Confirm:$false\
+          \ -Verbose -ErrorAction Ignore\n\n    #test for important app settings config\
+          \ file\n\n    $testAppSettingsLoc = \"\\tmp\\$AppSettingsFileName\"\n  \
+          \  \n    $t2 = Test-Path $testAppSettingsLoc\n\n        if ($t2) {\n   \
+          \             write-host \"app settings file is on the system\"\n      \
+          \           }\n         Else {\n                  write-host \"****app settings\
+          \ file is missing something is very wrong****\"\n              }\n     \
+          \       }\n\n\n#sets up logging\nfunction log{\n    param(\n        $text\n\
+          \    )\n\n    write-host $text -ForegroundColor Yellow -BackgroundColor\
+          \ DarkGreen\n}\n\n#****deploys to azure*****\nfunction deploy{\n    param(\n\
+          \        $zipArchiveFullPath,\n        $subscription,\n        $resourceGroup,\n\
+          \        $appName\n    )\n    write-host \"deploying function>>resource\
+          \ group is: $($resourceGroup)\"\n    log \"deploying '$($appName)' to Resource\
+          \ Group '$($resourceGroup)' in Subscription '$($subscription)' from zip\
+          \ '$($zipArchiveFullPath)' ...\"\n    write-host \" az functionapp deployment\
+          \ source config-zip -g \"$($resourceGroup)\" -n \"$($appName)\" --src \"\
+          $($zipArchiveFullPath)\" --slot \"$($global:slotSourceGreen)\" --subscription\
+          \ \"$($subscription)\" --timeout 3600\"\n    az functionapp deployment source\
+          \ config-zip -g \"$($resourceGroup)\" -n \"$($appName)\" --src \"$($zipArchiveFullPath)\"\
+          \ --slot \"$($global:slotSourceGreen)\" --subscription \"$($subscription)\"\
+          \ --timeout 3600\n}\n\n#****sets application settings for function configuration****\n\
+          function setConfig{\n    param(\n        $subscription,\n        $resourceGroup,\n\
+          \        $appName,\n        $configPath\n    )\n    log \"updating application\
+          \ config...\"\n\n    write-host \" az functionapp config appsettings set\
+          \ --name \"$($appName)\" --resource-group \"$($resourceGroup)\" --slot \"\
+          $($global:slotSourceGreen)\" --subscription  \"$($subscription)\" --settings\
+          \ @$configPath\"\n\n    az functionapp config appsettings set --name \"\
+          $($appName)\" --resource-group \"$($resourceGroup)\" --subscription \"$($subscription)\"\
+          \ --slot \"$($global:slotSourceGreen)\"  --settings @$configPath\n\n   \
+          \ write-host \"getting new app settings and they are:\"\n\n    sleep 5\n\
+          \n    write-host \"az functionapp config appsettings list --name \"$($appName)\"\
+          \ --resource-group \"$($resourceGroup)\" --slot \"$($global:slotSourceGreen)\"\
+          \  --subscription \"$($subscription)\"\"\n\n    az functionapp config appsettings\
+          \ list --name \"$($appName)\" --resource-group \"$($resourceGroup)\" --slot\
+          \ \"$($global:slotSourceGreen)\"  --subscription \"$($subscription)\"\n\n\
+          \    sleep 3\n}\n\n#****swaps slots****\nfunction slotChange {\n    param(\n\
+          \        $zipArchiveFullPath,\n        $subscription,\n        $resourceGroup,\n\
+          \        $appName\n    )\n\n    log \"Swapping slots ...this might take\
+          \ a while please kindly wait\"\n    write-host \"swapping slots, resource\
+          \ group is: $($resourceGroup)\"\n    az webapp deployment slot swap -g \"\
+          $($resourceGroup)\" -n \"$($appName)\" --slot \"$($global:slotSourceGreen)\"\
+          \ --target-slot \"$($global:targetSlotAim)\"  --subscription \"$($subscription)\"\
+          \n\n    #change to below line if windows\n\n    #Switch-AzureRmWebAppSlot\
+          \ -ResourceGroupName \"$($resourceGroup)\" -Name \"$($appName)\" -SourceSlotName\
+          \ \"$($global:slotSourceGreen)\" -DestinationSlotName Production -Verbose\n\
+          \n    log \"We swapped slots ...\"\n\n}\n\n#****main function****\nfunction\
+          \ deployInstance {\n    param(\n        $zipPath,\n        $subscription,\n\
+          \        $resourceGroup,\n        $appName,\n        $configPath\n    )\n\
+          \n    deploy $zipPath $subscription $resourceGroup $appName\n\n    if(![string]::IsNullOrEmpty($configPath)){\n\
+          \        setConfig $subscription $resourceGroup $appName $configPath}\n\n\
+          \    slotchange $zipPath $subscription $resourceGroup $appName\n    \n \
+          \   }\n\n    \n#****END OF FUNCTIONS****\n\n\n#****START ASSIGN AND DERIVE\
+          \ VARIABLES****\n\n\n#Equals a variable for artifact name taken from harness\
+          \ service\nwrite-host \"artifact name is: ${artifact.fileName}\"\n$zipPath\
+          \ = \"${artifact.fileName}\"\n\n#will change per vertical so defined as\
+          \ override in harness env settings\n$Subscription = \"${serviceVariable.Subscription}\"\
+          \n\n\n#defined in env as service via over-ride.\n\n$resourceGroup = \"${serviceVariable.resourceGroup}\"\
+          \n\n#find config file name\n#defined in env for a service over-ride\n\n\
+          $region = \"${serviceVariable.region}\"\n$vertical = \"${serviceVariable.vertical}\"\
+          \n$functionVersion = \"${workflow.variables.functionVersion}\"\n\n#defined\
+          \ in workflow\n$applicationShortName = \"${workflow.variables.applicationShortName}\"\
+          \n\n$appSettings = $vertical + \".\" + $region + \".\" + $applicationShortName\
+          \ + \"-\" + $vertical + \"-\" + $region + \"-\" + $functionVersion + \"\
+          .\" + \"settings.json\"\n\n$applicationFullName = $applicationShortName\
+          \ + \"-\" + $vertical + \"-\" + $region + \"-\" + $functionVersion \n\n\
+          write-host \"application settings filename is: $appSettings make sure this\
+          \ is right\"\n\nsleep 2\n\n#find the name of the slots\n#if we get more\
+          \ one off's or anonmolies change to case statement.\n$issignalruploader\
+          \ = \"${workflow.variables.issignalruploader}\"\n#when we swap slots this\
+          \ the destination\n$global:targetSlotAim = \"production\"\n$slotTargetColor\
+          \ = \"green\"\n$global:slotSourceGreen = \"not set\"\n\nif ($issignalruploader\
+          \ -eq \"no\") {\n                \n    $global:slotSourceGreen = $vertical\
+          \ + $slotTargetColor\n                \n    write-host \"The source slot\
+          \ or green slot is: $global:slotSourceGreen\"\n                 }\nElse\
+          \ {\n    $global:slotSourceGreen  = $vertical + $slotTargetColor + $functionVersion\n\
+          \               \n   write-host \"This is a signal R use case, so source\
+          \ slot or the green slot is: $global:slotSourceGreen\"\n              }\n\
+          \         \nWrite-host \"Target slot for final placement is: $global:targetSlotAim\"\
+          \  \nWrite-host \"The $global:targetSlotAim slot will get values from this\
+          \ slot: $global:slotSourceGreen\"  \n\n\n#****END OF ASSIGN AND DERIVE VARIABLES****\n\
+          \n\n#****Start the workflow process and call functions*****\ncopyConfig\
+          \ $zipPath $Subscription $resourceGroup $applicationFullName $appSettings\n\
+          \ndeployInstance $zipPath $Subscription $resourceGroup $applicationFullName\
+          \ $appSettings\n\nwrite-host \"****all done, finished!!*****\"\n\n#test\
+          \ slot change\n#slotChange $zipPath $Subscription $resourceGroup $applicationName\
+          \ $appSettings\n\nwrite-host \"the workflow for: ${workflow.displayName}\
+          \ is finished\""
+        scriptType: POWERSHELL
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: CUSTOM_DEPLOYMENT_PHASE_STEP
+    name: Verify Service
+    stepsInParallel: false
+  - type: CUSTOM_DEPLOYMENT_PHASE_STEP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: Override Azure Lab
+  statefulSet: false
+  templateExpressions:
+  - expression: ${Service}
+    fieldName: serviceId
+    metadata:
+    - name: relatedField
+    - name: artifactType
+      value: ZIP
+    - name: entityType
+      value: SERVICE
+  - expression: ${InfraDefinition_CUSTOM}
+    fieldName: infraDefinitionId
+    metadata:
+    - name: relatedField
+    - name: entityType
+      value: INFRASTRUCTURE_DEFINITION
+rollbackPhases:
+- type: CUSTOM
+  computeProviderName: DUMMY_CLOUD_PROVIDER
+  daemonSet: false
+  infraDefinitionName: TANDEM_AZURE_FUNCTIONS_LIMIT
+  name: Rollback Phase 1
+  phaseNameForRollback: Phase 1
+  phaseSteps:
+  - type: CUSTOM_DEPLOYMENT_PHASE_STEP
+    name: Rollback Service
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: Override Azure Lab
+  statefulSet: false
+  templateExpressions:
+  - expression: ${Service}
+    fieldName: serviceId
+    metadata:
+    - name: relatedField
+    - name: artifactType
+      value: ZIP
+    - name: entityType
+      value: SERVICE
+  - expression: ${InfraDefinition_CUSTOM}
+    fieldName: infraDefinitionId
+    metadata:
+    - name: relatedField
+    - name: entityType
+      value: INFRASTRUCTURE_DEFINITION
+templateExpressions:
+- expression: ${Environment}
+  fieldName: envId
+  metadata:
+  - name: relatedField
+    value: ${InfraDefinition_CUSTOM}
+  - name: entityType
+    value: ENVIRONMENT
+- expression: ${Service}
+  fieldName: serviceId
+  metadata:
+  - name: relatedField
+  - name: artifactType
+    value: ZIP
+  - name: entityType
+    value: SERVICE
+- expression: ${InfraDefinition_CUSTOM}
+  fieldName: infraDefinitionId
+  metadata:
+  - name: relatedField
+  - name: entityType
+    value: INFRASTRUCTURE_DEFINITION
+templatized: true
+userVariables:
+- type: ENTITY
+  description: Variable for Environment entity
+  fixed: false
+  mandatory: true
+  name: Environment
+- type: ENTITY
+  description: Variable for Service entity
+  fixed: false
+  mandatory: true
+  name: Service
+- type: ENTITY
+  description: Variable for Infrastructure Definition entity
+  fixed: false
+  mandatory: true
+  name: InfraDefinition_CUSTOM

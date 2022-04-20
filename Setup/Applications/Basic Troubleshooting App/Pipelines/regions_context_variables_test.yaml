@@ -1,0 +1,23 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+pipelineStages:
+- type: ENV_STATE
+  name: Regions_Date_Creator
+  parallel: false
+  runtimeInputs:
+    runtimeInputVariables:
+    - Start_DateTime_Override
+    - End_DateTime_Override
+    timeout: 86400000
+    timeoutAction: END_EXECUTION
+    userGroupNames:
+    - Account Administrator
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 1
+  workflowName: Regions_Date_Creator
+  workflowVariables:
+  - name: Start_DateTime_Override
+    value: ${NEXT_MONDAY}
+  - name: End_DateTime_Override
+    value: ${NEXT_FRIDAY}

@@ -1,0 +1,10 @@
+harnessApiVersion: '1.0'
+type: SERVICE
+artifactType: DOCKER
+configVariables:
+- name: workflow_path_on_artifactory
+  value: ${workflow.variable.artifactoryFolder}
+  valueType: TEXT
+deploymentType: KUBERNETES
+description: https://harnesssupport.zendesk.com/agent/tickets/15039
+helmVersion: V2

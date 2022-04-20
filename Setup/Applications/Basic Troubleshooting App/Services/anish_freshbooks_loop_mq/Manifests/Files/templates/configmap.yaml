@@ -1,0 +1,15 @@
+{{- if .Values.env.config}}
+{{- $prefix := .Values.name}}
+{{- $envconfig := .Values.env.config}}
+{{- range $index, $myname := .Values.consumers}}
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $prefix }}-{{ $index }}
+data:
+{{ $envconfig | toYaml | indent 2}}
+
+---
+{{- end}}
+{{- end}}

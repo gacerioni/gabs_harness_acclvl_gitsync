@@ -1,0 +1,12 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+pipelineStages:
+- type: ENV_STATE
+  name: AlphaCredit_Test_Build_Workflow
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Build Stage - Collect Artifacts
+  workflowName: AlphaCredit_Test_Build_Workflow
+  workflowVariables:
+  - name: TagNumber

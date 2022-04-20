@@ -1,0 +1,97 @@
+harnessApiVersion: '1.0'
+type: BUILD
+description: https://harnesssupport.zendesk.com/agent/tickets/15558
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    steps:
+    - type: SHELL_SCRIPT
+      name: Collect Instances Metadata
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        outputVars: INSTANCES_LIST
+        publishAsVar: true
+        scriptString: |-
+          #!/bin/bash
+
+          instance_list='[{"instanceName": "instance-1","networkIP": "1.1.1.1"},{"instanceName": "instance-2","networkIP": "2.2.2.2"}, {"instanceName": "instance-3","networkIP": "3.3.3.3"}]'
+
+
+          export INSTANCES_LIST=$instance_list
+
+
+          env
+        scriptType: BASH
+        secretOutputVars: ''
+        sshKeyRefName: null
+        sweepingOutputName: COLLECTOR_VARS
+        sweepingOutputScope: PIPELINE
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    - type: SHELL_SCRIPT
+      name: Instance Parser Engine
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          #!/bin/bash
+
+          # Printing the bash version:
+          bash --version
+
+          echo "Starting the useful part..."
+
+          raw_list=$(echo ${context.COLLECTOR_VARS.INSTANCES_LIST})
+
+          parsed_list=$(echo ${raw_list} | sed 's/\[//g' | sed 's/\]//g' | sed 's/ //g' | sed 's/},{/ /g' | sed 's/,/|/g' | sed 's/{//g' | sed 's/}//g')
+
+          for n in $(echo $parsed_list)
+          do
+              echo "Working on $n entry..."
+
+              instance_name=$(echo $n | sed -n 's/.*\(instance-[0-9]\).*/\1/p')
+              echo "Instance Name: $instance_name"
+
+              instance_ip=$(echo $n | sed -n 's/.*networkIP:\(.*\)$/\1/p')
+              echo "Instance IP: $instance_ip"
+          done
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: false

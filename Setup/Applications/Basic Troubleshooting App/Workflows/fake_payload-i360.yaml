@@ -1,0 +1,138 @@
+harnessApiVersion: '1.0'
+type: BUILD
+description: https://harnesssupport.zendesk.com/agent/tickets/14722
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    steps:
+    - type: SHELL_SCRIPT
+      name: Shell Script Inside the WFlow
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - jq
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: "#!/bin/bash\n\n#export AWS_ACCESS_KEY_ID=${context.stsInfo.STS_AccessKeyId}\n\
+          #export AWS_SECRET_ACCESS_KEY=${context.stsInfo.STS_SecretAccessKey}\n#export\
+          \ AWS_SESSION_TOKEN=${context.stsInfo.STS_SessionToken}\n\nacceptHeader='Accept:\
+          \ application/json'\n#URL='${scalingPolicyUrl}/v1/ScalingPolicy/org/0/app/${appStackName}'\n\
+          \n#response=$(curl -H \"$acceptHeader\" \"$URL\")\nresponse='[{\"appStackName\"\
+          :\"default-api\",\"commandType\":\"TargetTrackingScaling\",\"configurationFragment\"\
+          :{\"policyName\":\"default-api:TargetTrackingScaling:alb-request-count:up\"\
+          ,\"serviceNamespace\":\"ecs\",\"resourceId\":\"${resourceId}\",\"scalableDimension\"\
+          :\"ecs:service:DesiredCount\",\"policyType\":\"TargetTrackingScaling\",\"\
+          targetTrackingScalingPolicyConfiguration\":{\"targetValue\":100.0,\"predefinedMetricSpecification\"\
+          :{\"predefinedMetricType\":\"ALBRequestCountPerTarget\",\"resourceLabel\"\
+          :\"${resourceLabel}\"},\"scaleOutCooldown\":60,\"scaleInCooldown\":60,\"\
+          disableScaleIn\":false}}},{\"appStackName\":\"default-api\",\"commandType\"\
+          :\"ScheduledAction\",\"configurationFragment\":{\"serviceNamespace\":\"\
+          ecs\",\"schedule\":\"cron(0 2 * * MON-FRI *)\",\"scheduledActionName\":\"\
+          default-api:ScheduledAction:scheduled-weekday:down\",\"resourceId\":\"${resourceId}\"\
+          ,\"scalableDimension\":\"ecs:service:DesiredCount\",\"scalableTargetAction\"\
+          :{\"minCapacity\":0}}},{\"appStackName\":\"default-api\",\"commandType\"\
+          :\"ScheduledAction\",\"configurationFragment\":{\"serviceNamespace\":\"\
+          ecs\",\"schedule\":\"cron(0 11 * * MON-FRI *)\",\"scheduledActionName\"\
+          :\"default-api:ScheduledAction:scheduled-weekday:up\",\"resourceId\":\"\
+          ${resourceId}\",\"scalableDimension\":\"ecs:service:DesiredCount\",\"scalableTargetAction\"\
+          :{\"minCapacity\":2}}}]'\necho \"${response}\" \necho\n\necho \"#############\
+          \ GABS BLOCK START #############\"\necho \"${response}\" | jq -c '.[]' |\
+          \ while read row; do\n    \n    echo \"##### printing a row #####\"\n  \
+          \  echo \"$row\"\n    echo \"##########################\"\n\n    commandType=$(echo\
+          \ \"$row\"  | jq '.commandType')\n    echo \"commandType: ${commandType}\"\
+          \n    echo\n\n    echo \"#### NOW THE BLOCK THAT IS NOT WORKING ON HIS SIDE\
+          \ ####\"\n    echo\n    echo \"${row}\"  | jq -c  '.configurationFragment\
+          \ | @json'\n    configFragment=$(echo \"${row}\"  | jq -c '.configurationFragment\
+          \ | @json')\n    echo \"configFragment: ${configFragment}\"\n    echo\n\
+          \    echo \"#######################################################\"\n\n\
+          \n    if [ \"$commandType\" == \"\\\"ScheduledAction\\\"\" ]\n    then\n\
+          \        echo \"/root/bin/aws application-autoscaling put-scheduled-action\
+          \ --cli-input-json ${configFragment}\"\n        #/root/bin/aws application-autoscaling\
+          \ put-scheduled-action --cli-input-json ${configFragment} \n    else\n \
+          \       echo \"/root/bin/aws application-autoscaling put-scaling-policy\
+          \ --cli-input-json ${configFragment}\"\n        #/root/bin/aws application-autoscaling\
+          \ put-scaling-policy --cli-input-json ${configFragment}\n    fi\n\t\t\n\
+          \    echo \n\ndone\necho\necho \"############# GABS BLOCK END #############\""
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    - type: SHELL_SCRIPT
+      name: i360_ShellScript_Template
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - jq
+        executeOnDelegate: true
+        host: null
+        publishAsVar: false
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        timeoutMillis: 600000
+      templateUri: CS - Gabriel - Renamed/i360_ShellScript_Template:latest
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    steps:
+    - type: SHELL_SCRIPT
+      name: i360_ShellScript_Template
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - jq
+        executeOnDelegate: true
+        host: null
+        publishAsVar: false
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        timeoutMillis: 600000
+      templateUri: CS - Gabriel - Renamed/i360_ShellScript_Template:latest
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    steps:
+    - type: SHELL_SCRIPT
+      name: i360_ShellScript_Template
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - jq
+        executeOnDelegate: true
+        host: null
+        publishAsVar: false
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        timeoutMillis: 600000
+      templateUri: CS - Gabriel - Renamed/i360_ShellScript_Template:latest
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: false

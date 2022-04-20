@@ -1,0 +1,16 @@
+harnessApiVersion: '1.0'
+type: TRIGGER
+artifactSelections:
+- artifactStreamName: artifact
+  regex: false
+  serviceName: ckd-web-gabs
+  type: LAST_COLLECTED
+continueWithDefaultValues: false
+executionName: ckd-web-gabs-pipeline
+executionType: Pipeline
+triggerCondition:
+- type: NEW_ARTIFACT
+  artifactFilter: .*\.zip
+  artifactStreamName: artifact
+  regex: true
+  serviceName: ckd-web-gabs

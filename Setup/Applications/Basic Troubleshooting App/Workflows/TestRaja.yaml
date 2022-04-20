@@ -1,0 +1,145 @@
+harnessApiVersion: '1.0'
+type: BUILD
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: ALL_STEPS
+    steps:
+    - type: SHELL_SCRIPT
+      name: Export Context Variables
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        outputVars: CITI_TARGETURL,CITI_APP_ROLLBACK_FLAG
+        publishAsVar: true
+        scriptString: |-
+          export CITI_TARGETURL=${instance.hostName}
+          export CITI_APP_ROLLBACK_FLAG='TRUE'
+        scriptType: BASH
+        secretOutputVars: ''
+        sshKeyRefName: null
+        sweepingOutputName: CITI_PUBLISH_VARIABLE
+        sweepingOutputScope: PIPELINE
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: SPECIFIC_STEPS
+      steps:
+      - Print Context Variables
+    steps:
+    - type: SHELL_SCRIPT
+      name: Print Context Variables
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          echo "${context.CITI_PUBLISH_VARIABLE.CITI_TARGETURL}"
+          echo "${context.CITI_PUBLISH_VARIABLE.CITI_APP_ROLLBACK_FLAG}"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    - type: SHELL_SCRIPT
+      name: Test Vijay
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - GCP_K8s_Customer_Success
+        executeOnDelegate: true
+        host: null
+        outputVars: CITI_ARTIFACT_NAME,environment,enableCIGov
+        publishAsVar: true
+        scriptString: |-
+          #!/bin/sh
+          set -x
+
+          # Quality Gate Check
+
+          CITI_BUILDID="jenkins-171384.rtl.ogn.c.rossdb.ngfg.master.int-556"
+
+          if [ -z "$CITI_BUILDID" ]; then
+             echo "ERROR: CITI_BUILDID property value not defined"
+             exit 1
+          fi
+
+          CITI_ARTIFACT_NAME=$CITI_BUILDID
+          if [ -z "$CITI_ARTIFACT_NAME" ]; then
+             CITI_ARTIFACT_NAME=NA
+             echo "WARNING: Package ID Not Defined. Using default value '$CITI_ARTIFACT_NAME'"
+          else
+             #CITI_ARTIFACT_NAME=`echo $CITI_BUILDID | awk -F'-' '{print $2}'| sed s/}/\ /g`
+             replacement="snapshot."
+             CITI_ARTIFACT_NAME=${CITI_BUILDID/jenkins-/$replacement}
+             echo "$CITI_ARTIFACT_NAME"
+          fi
+
+
+
+          CITI_APP_NAME=
+          CITI_MICROSERVICE_NAME=$CITI_APP_NAME
+
+          if [ -z "$CITI_MICROSERVICE_NAME" ]; then
+             environment="production"
+             echo $environment
+          else
+             environment="production-$CITI_MICROSERVICE_NAME"
+             echo $environment
+          fi
+
+          #ENABLEGOV_QG=TRUE
+          echo "Calling QG Testing Service before start of the deployment"
+
+          if [ "$ENABLEGOV_QG" == "TRUE" ]; then
+          enableCIGov="YES"
+          else
+           enableCIGov=""
+          fi
+        scriptType: BASH
+        secretOutputVars: ''
+        sshKeyRefName: null
+        sweepingOutputName: httpinputs
+        sweepingOutputScope: WORKFLOW
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: false

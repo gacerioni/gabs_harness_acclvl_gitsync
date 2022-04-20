@@ -1,0 +1,24 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+description: https://harnesssupport.zendesk.com/agent/tickets/16671
+pipelineStages:
+- type: ENV_STATE
+  name: Override_Workflow_Variable_A
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: VAR IS BANANA
+  workflowName: Override_Workflow_Variable_A
+  workflowVariables:
+  - name: variable_to_be_disputed
+    value: banana
+- type: ENV_STATE
+  name: Override_Workflow_Variable_B
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: VAR IS ORANGE
+  workflowName: Override_Workflow_Variable_B
+  workflowVariables:
+  - name: variable_to_be_disputed
+    value: orange

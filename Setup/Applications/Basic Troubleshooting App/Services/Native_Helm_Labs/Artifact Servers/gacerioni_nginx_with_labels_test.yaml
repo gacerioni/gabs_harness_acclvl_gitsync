@@ -1,0 +1,4 @@
+harnessApiVersion: '1.0'
+type: DOCKER
+imageName: gacerioni/nginx_with_labels_test
+serverName: Docker Hub Gabs Private

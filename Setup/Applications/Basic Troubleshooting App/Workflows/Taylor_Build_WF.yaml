@@ -1,0 +1,82 @@
+harnessApiVersion: '1.0'
+type: BUILD
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    steps:
+    - type: SHELL_SCRIPT
+      name: Shell Script
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - cs-gabs-gcp-k8s-delegate
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          #!/bin/bash
+
+          winrmStatus=1
+          connRetries=3
+          connTimeout=3
+
+          # you can remove this one, just so I can test locally
+          privateDnsName="ec2-19-231-136-26.sa-east-1.compute.amazonaws.com"
+
+          echo "Waiting for WinRM on ${privateDnsName}..."
+
+
+          loopHelper=1
+
+          while [[ $loopHelper -le $((connRetries)) ]];
+          do
+
+            winrmStatus=`curl -s -k --connect-timeout ${connTimeout} --header "Content-Type: application/soap+xml;charset=UTF-8" --header "WSMANIDENTIFY: unauthenticated" https://${privateDnsName}:5986/wsman --data '&lt;s:Envelope xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:wsmid="http://schemas.dmtf.org/wbem/wsman/identity/1/wsmanidentity.xsd"&gt;&lt;s:Header/&gt;&lt;s:Body&gt;&lt;wsmid:Identify/&gt;&lt;/s:Body&gt;&lt;/s:Envelope&gt;';echo $?`
+            sleep 2;
+
+            #echo ${winrmStatus}
+
+            if [ ${winrmStatus} = 0 ]; then
+              echo "WinRM is ready! I'll sleep just for testing purposes!"
+              sleep 10
+              exit 0
+            else
+              echo "WinRM is not ready yet! Retrying... ${loopHelper}/${connRetries}"
+              loopHelper=$((loopHelper+1))
+            fi
+          done
+
+          echo "WinRM is not ready, and we reached the max retries... aborting"
+          exit 1
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: false

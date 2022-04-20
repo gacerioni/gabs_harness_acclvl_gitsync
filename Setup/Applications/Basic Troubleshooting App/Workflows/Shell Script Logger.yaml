@@ -1,0 +1,63 @@
+harnessApiVersion: '1.0'
+type: BUILD
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    steps:
+    - type: SHELL_SCRIPT
+      name: Shell Script
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - CS_ADMIN_EC2_DELEGATE
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          function __msg_error() {
+              [[ "${ERROR}" == "1" ]] && echo -e "[ERROR]: $*"
+          }
+
+          function __msg_debug() {
+              [[ "${DEBUG}" == "1" ]] && echo -e "[DEBUG]: $*"
+          }
+
+          function __msg_info() {
+              [[ "${INFO}" == "1" ]] && echo -e "[INFO]: $*"
+          }
+
+          __msg_error "File could not be found. Cannot proceed"
+
+          __msg_debug "Starting script execution with 276MB of available RAM"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: false

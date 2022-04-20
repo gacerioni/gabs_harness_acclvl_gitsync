@@ -1,0 +1,9 @@
+name: template-workload
+replicas: 1
+
+image: ${artifact.metadata.image}
+
+createNamespace: true
+namespace: ${infra.kubernetes.namespace}
+
+file_content: ${context.helper.file_content}

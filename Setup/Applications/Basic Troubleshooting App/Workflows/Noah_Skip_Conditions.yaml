@@ -1,0 +1,87 @@
+harnessApiVersion: '1.0'
+type: BUILD
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    stepSkipStrategies:
+    - assertionExpression: '"ci" !~ ${context.noah.NOAH}'
+      scope: SPECIFIC_STEPS
+      steps:
+      - Shell Script this must run but using the context variables
+    steps:
+    - type: SHELL_SCRIPT
+      name: Shell Script Output Variables
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        outputVars: NOAH
+        publishAsVar: true
+        scriptString: export NOAH='["ci", "dev"]'
+        scriptType: BASH
+        secretOutputVars: ''
+        sshKeyRefName: null
+        sweepingOutputName: noah
+        sweepingOutputScope: WORKFLOW
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
+    - type: SHELL_SCRIPT
+      name: Shell Script this must run
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          echo "hello"
+
+          echo "${context.noah.NOAH}"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
+    - type: SHELL_SCRIPT
+      name: Shell Script this must run but using the context variables
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: echo "Howdy"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: false

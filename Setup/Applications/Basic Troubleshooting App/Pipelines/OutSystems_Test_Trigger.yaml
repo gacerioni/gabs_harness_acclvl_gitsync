@@ -1,0 +1,11 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+description: https://harnesssupport.zendesk.com/agent/tickets/18933
+pipelineStages:
+- type: ENV_STATE
+  name: OutSystems_Test_Trigger
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 1
+  workflowName: OutSystems_Test_Trigger

@@ -1,0 +1,679 @@
+harnessApiVersion: '1.0'
+type: CANARY
+concurrencyStrategy: INFRA
+envName: ecs-prod-cse-gabs
+failureStrategies:
+- executionScope: WORKFLOW
+  failureTypes:
+  - APPLICATION_ERROR
+  repairActionCode: ROLLBACK_WORKFLOW
+  retryCount: 0
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 1 - Setup
+  phaseSteps:
+  - type: CONTAINER_SETUP
+    name: Set up Container
+    steps:
+    - type: ECS_SERVICE_SETUP
+      name: ECS Service Setup
+      properties:
+        awsAutoScalarConfigs: null
+        desiredInstanceCount: fixedInstances
+        ecsServiceName: ${app.name}__${service.name}__${env.name}
+        fixedInstances: '10'
+        resizeStrategy: RESIZE_NEW_FIRST
+        serviceSteadyStateTimeout: 10
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        title: ECS Service Setup
+    stepsInParallel: false
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 2 - Canary 10
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: SPECIFIC_STEPS
+      steps:
+      - Upgrade Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 10
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 3 - Canary 20
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: SPECIFIC_STEPS
+      steps:
+      - Upgrade Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 20
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 4 - Canary 30
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: SPECIFIC_STEPS
+      steps:
+      - Upgrade Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 30
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 5 - Canary 40
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: SPECIFIC_STEPS
+      steps:
+      - Upgrade Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 40
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 6 - Canary 50
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: SPECIFIC_STEPS
+      steps:
+      - Upgrade Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 50
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 7 - Canary 60
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: SPECIFIC_STEPS
+      steps:
+      - Upgrade Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 60
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 8 - Canary 70
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 70
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    - type: APPROVAL
+      name: Approval
+      properties:
+        approvalStateType: USER_GROUP
+        timeoutMillis: 86400000
+        userGroupNames:
+        - Account Administrator
+    - type: SHELL_SCRIPT
+      name: Failing on purpose
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          #!/bin/bash
+
+          exit 1
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 9 - Canary 80
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 80
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 10 - Canary 90
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 90
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Phase 11 - Canary 100
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    steps:
+    - type: ECS_SERVICE_DEPLOY
+      name: Upgrade Containers
+      properties:
+        downsizeInstanceUnitType: PERCENTAGE
+        instanceCount: 100
+        instanceUnitType: PERCENTAGE
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+rollbackPhases:
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 1 - Setup
+  phaseNameForRollback: Phase 1 - Setup
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 2 - Canary 10
+  phaseNameForRollback: Phase 2 - Canary 10
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 3 - Canary 20
+  phaseNameForRollback: Phase 3 - Canary 20
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 4 - Canary 30
+  phaseNameForRollback: Phase 4 - Canary 30
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 5 - Canary 40
+  phaseNameForRollback: Phase 5 - Canary 40
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 6 - Canary 50
+  phaseNameForRollback: Phase 6 - Canary 50
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 7 - Canary 60
+  phaseNameForRollback: Phase 7 - Canary 60
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 8 - Canary 70
+  phaseNameForRollback: Phase 8 - Canary 70
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 9 - Canary 80
+  phaseNameForRollback: Phase 9 - Canary 80
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 10 - Canary 90
+  phaseNameForRollback: Phase 10 - Canary 90
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+- type: ECS
+  computeProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  daemonSet: false
+  infraDefinitionName: Gabs_ECS_EC2Admin_AWS
+  name: Rollback Phase 11 - Canary 100
+  phaseNameForRollback: Phase 11 - Canary 100
+  phaseSteps:
+  - type: CONTAINER_DEPLOY
+    name: Deploy Containers
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    steps:
+    - type: ECS_SERVICE_ROLLBACK
+      name: Rollback Containers
+    stepsInParallel: false
+  - type: VERIFY_SERVICE
+    name: Verify Service
+    phaseStepNameForRollback: Deploy Containers
+    statusForRollback: SUCCESS
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: ECS_NGINX_SERVICE
+  statefulSet: false
+templatized: false

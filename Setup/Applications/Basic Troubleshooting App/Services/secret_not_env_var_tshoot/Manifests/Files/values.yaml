@@ -1,0 +1,16 @@
+name: harness-secret-as-volume
+replicas: 1
+
+image: ${artifact.metadata.image}
+dockercfg: ${artifact.source.dockerconfig}
+
+createNamespace: true
+namespace: ${infra.kubernetes.namespace}
+
+# A Service can map an incoming port to any targetPort.
+# targetPort is where application is listening on inside the container.
+servicePort: 80
+serviceTargetPort: 80
+
+# VOLUME SECRET BY GABS
+secretToVolume: ${serviceVariable.my_secret_from_secret_manager}

@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+helmChartConfig:
+  chartName: nginx
+  chartVersion: ${workflow.variables.chartVersion}
+  connectorName: Basic ArtifactHub Bitnami Repo
+skipVersioningForAllK8sObjects: false
+storeType: HelmChartRepo

@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: TRIGGER
+continueWithDefaultValues: false
+description: RDSPT-FAKE
+executionName: OutSystems_Test_Trigger
+executionType: Pipeline
+triggerCondition:
+- type: WEBHOOK

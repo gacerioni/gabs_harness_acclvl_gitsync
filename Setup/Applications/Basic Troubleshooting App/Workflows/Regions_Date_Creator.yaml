@@ -1,0 +1,153 @@
+harnessApiVersion: '1.0'
+type: ROLLING
+concurrencyStrategy: INFRA
+envName: prod
+failureStrategies:
+- executionScope: WORKFLOW
+  failureTypes:
+  - APPLICATION_ERROR
+  repairActionCode: ROLLBACK_WORKFLOW
+  retryCount: 0
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- type: KUBERNETES
+  computeProviderName: CS - Gabs - Kubernetes Cluster - GCP
+  daemonSet: false
+  infraDefinitionName: gabs_gcp_k8s
+  name: Rolling
+  phaseSteps:
+  - type: K8S_PHASE_STEP
+    name: Deploy
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: SPECIFIC_STEPS
+      steps:
+      - Rollout Deployment
+    steps:
+    - type: K8S_DEPLOYMENT_ROLLING
+      name: Rollout Deployment
+    - type: SHELL_SCRIPT
+      name: Shell Script
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        includeInfraSelectors: true
+        outputVars: NEXT_MONDAY,NEXT_FRIDAY
+        publishAsVar: true
+        scriptString: |-
+          #/bin/bash
+
+          echo "THIS IS A HELPER SCRIPT!"
+
+          # Getting todays date - and then the day of the week 1-7
+          todays_date=$(date +'%m/%d/%Y')
+          today_day_of_week=$(date +%u --date $todays_date)
+
+          # Creating some helper variables to handle the closest monday
+          datediff_to_closest_monday=$(expr 8 - $today_day_of_week)
+          echo "Days until next monday: $datediff_to_closest_monday"
+          start_date_add_expr="${datediff_to_closest_monday} days"
+
+          # Creating some helper variables to handle the closest friday
+          final_days_to_next_friday=$(expr  $datediff_to_closest_monday + 4)
+          final_date_add_expr="${final_days_to_next_friday} days"
+
+          # Doing the math
+          final_start_date=$(date +'%m/%d/%Y' -d "${start_date_add_expr}")
+          echo "Closest Monday - current start date: $final_start_date"
+          final_end_date=$(date +'%m/%d/%Y' -d "${final_date_add_expr}")
+          echo "From Closest Monday - next Friday: $final_end_date"
+
+          # Exporting our variables
+          export NEXT_MONDAY=$final_start_date
+          export NEXT_FRIDAY=$final_end_date
+        scriptType: BASH
+        secretOutputVars: ''
+        sshKeyRefName: null
+        sweepingOutputName: helper
+        sweepingOutputScope: PIPELINE
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Verify
+    steps:
+    - type: SHELL_SCRIPT
+      name: Workflow Variable Value Printer
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        includeInfraSelectors: true
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          echo "PRINTING THE WORKFLOW VARIABLE VALUE, NOT THE CONTEXT VARIABLE!"
+
+          echo "START DATE - WORKFLOW VARIABLE"
+          echo "${workflow.variables.Start_DateTime_Override}"
+          echo ""
+          echo "END DATE - WORKFLOW VARIABLE"
+          echo "${workflow.variables.End_DateTime_Override}"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: basic_nginx_gcp_k8s
+  statefulSet: false
+rollbackPhases:
+- type: KUBERNETES
+  computeProviderName: CS - Gabs - Kubernetes Cluster - GCP
+  daemonSet: false
+  infraDefinitionName: gabs_gcp_k8s
+  name: Rollback Rolling
+  phaseNameForRollback: Rolling
+  phaseSteps:
+  - type: K8S_PHASE_STEP
+    name: Deploy
+    phaseStepNameForRollback: Deploy
+    statusForRollback: SUCCESS
+    steps:
+    - type: K8S_DEPLOYMENT_ROLLING_ROLLBACK
+      name: Rollback Deployment
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Wrap Up
+    phaseStepNameForRollback: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: basic_nginx_gcp_k8s
+  statefulSet: false
+templatized: true
+userVariables:
+- type: TEXT
+  fixed: false
+  mandatory: true
+  name: Start_DateTime_Override
+  value: ${context.helper.NEXT_MONDAY}
+- type: TEXT
+  fixed: false
+  mandatory: true
+  name: End_DateTime_Override
+  value: ${context.helper.NEXT_FRIDAY}

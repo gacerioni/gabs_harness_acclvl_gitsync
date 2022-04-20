@@ -1,0 +1,12 @@
+harnessApiVersion: '1.0'
+type: CUSTOM
+delegateTags:
+- CS_ADMIN_EC2_DELEGATE
+templateUri: CS - Gabriel - Renamed/GHCR_TEMP_SOLUTION:latest
+templateVariables:
+- name: UNAME
+  value: gabrielcerioni
+- name: UPASS
+  value: ${secrets.getValue("NEW_PAT_GABS")}
+- name: REPO
+  value: gabrielcerioni/nginxprivate

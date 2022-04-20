@@ -1,0 +1,129 @@
+harnessApiVersion: '1.0'
+type: BUILD
+description: https://harnesssupport.zendesk.com/agent/tickets/18629
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    steps:
+    - type: SHELL_SCRIPT
+      name: Exposing the JSON representation of their Object
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - macbook_pro_gabs
+        executeOnDelegate: true
+        host: null
+        outputVars: JsonCtxAWS
+        publishAsVar: true
+        scriptString: |-
+          JsonCtxAWS=$(cat <<EOF
+          {
+            "AWN": {
+              "Pod": "us001",
+              "Region": "us",
+              "Scope": "local",
+              "Tier": "prod"
+            },
+            "Aliases": ["awn-exscan", "exscan", "us001-exscan-prod"],
+            "CanonicalName": "awn-exscan",
+            "Cluster": {
+              "Contains": true
+            },
+            "CommonName": "exscan",
+            "ID": "850827386003",
+            "Metrics": {
+              "DelegateSelectors": "850827386003",
+              "PushGatewayURL": "None"
+            },
+            "Name": "awn-exscan",
+            "Network": {
+              "Label": "us001-exscan-prod"
+            },
+            "Regions": {
+              "Primary": "us-west-2",
+              "Secondary": "us-east-2"
+            }
+          }
+          EOF
+          )
+
+          skip_condition_check=$(echo $JsonCtxAWS | jq '.Metrics.PushGatewayURL')
+          echo "$skip_condition_check"
+
+          if [ "$skip_condition_check" = null ]
+          then
+                echo "The validator variable is NULL!"
+                echo "Aborting the execution, to prevent false positives!"
+                exit 1
+          fi
+        scriptType: BASH
+        secretOutputVars: ''
+        sshKeyRefName: null
+        sweepingOutputName: deployment
+        sweepingOutputScope: WORKFLOW
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    stepSkipStrategies:
+    - assertionExpression: ${json.object(context.deployment.JsonCtxAWS).Metrics.PushGatewayURL} == 'None'
+      scope: SPECIFIC_STEPS
+      steps:
+      - Please skip me
+    steps:
+    - type: SHELL_SCRIPT
+      name: Please skip me
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: echo "${context.deployment.JsonCtxAWS}"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    - type: SHELL_SCRIPT
+      name: TEST RENAME GITSYNC
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        publishAsVar: false
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        timeoutMillis: 600000
+      templateUri: CS - Gabriel - Renamed/Renamed Folder/TEST RENAME GITSYNC:latest
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: false

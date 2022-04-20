@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: SERVICE
+artifactType: ZIP
+configVariables:
+- name: notificationGroup
+  value: Gabs_Notification_Slack_Group
+  valueType: TEXT
+deploymentType: SSH
+description: https://harnesssupport.zendesk.com/agent/tickets/15186

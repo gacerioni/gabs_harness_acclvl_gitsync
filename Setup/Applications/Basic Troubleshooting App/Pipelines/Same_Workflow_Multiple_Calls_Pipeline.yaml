@@ -1,0 +1,98 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+description: https://harnesssupport.zendesk.com/agent/tickets/15484
+pipelineStages:
+- type: ENV_STATE
+  name: Kelvin_Gabs_one_WFlow_to_rule_them_all
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Canary - First Hit
+  workflowName: Kelvin_Gabs_one_WFlow_to_rule_them_all
+  workflowVariables:
+  - entityType: SERVICE
+    name: Service
+    value: basic_nginx_gcp_k8s
+  - name: canary_load_perc
+    value: ${canary_load_perc_1}
+- type: APPROVAL
+  name: Approval 1
+  parallel: false
+  properties:
+    userGroups:
+    - Gabs Notifications Slack Group
+    workflowVariables: null
+    stageName: Approve!
+    timeoutMillis: 86400000
+    approvalStateType: USER_GROUP
+    sweepingOutputName: ''
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Approve!
+- type: ENV_STATE
+  name: Kelvin_Gabs_one_WFlow_to_rule_them_all-1
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Canary - Second Hit
+  workflowName: Kelvin_Gabs_one_WFlow_to_rule_them_all
+  workflowVariables:
+  - entityType: SERVICE
+    name: Service
+    value: basic_nginx_gcp_k8s
+  - name: canary_load_perc
+    value: ${canary_load_perc_2}
+- type: APPROVAL
+  name: Approval 3
+  parallel: false
+  properties:
+    userGroups:
+    - Gabs Notifications Slack Group
+    workflowVariables: null
+    stageName: Approve!
+    timeoutMillis: 86400000
+    approvalStateType: USER_GROUP
+    sweepingOutputName: ''
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Approve!
+- type: ENV_STATE
+  name: Kelvin_Gabs_one_WFlow_to_rule_them_all-2
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Canary - BREAK!
+  workflowName: Kelvin_Gabs_one_WFlow_to_rule_them_all-BAD
+  workflowVariables:
+  - entityType: SERVICE
+    name: Service
+    value: basic_nginx_gcp_k8s
+  - name: peso_test
+    value: ${canary_load_perc_3}
+- type: APPROVAL
+  name: Approval 5
+  parallel: false
+  properties:
+    userGroups:
+    - Account Administrator
+    variables: null
+    stageName: Approve!
+    timeoutMillis: 86400000
+    approvalStateType: USER_GROUP
+    sweepingOutputName: ''
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Approve!
+- type: ENV_STATE
+  name: Kelvin_Gabs_one_WFlow_to_rule_them_all-3
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Canary - Won't Reach
+  workflowName: Kelvin_Gabs_one_WFlow_to_rule_them_all
+  workflowVariables:
+  - entityType: SERVICE
+    name: Service
+    value: basic_nginx_gcp_k8s
+  - name: canary_load_perc
+    value: ${canary_load_perc_4}

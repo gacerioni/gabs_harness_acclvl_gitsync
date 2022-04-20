@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: SERVICE
+artifactType: DOCKER
+configVariables:
+- name: skip_env_list
+  value: test prod devas ci
+  valueType: TEXT
+deploymentType: KUBERNETES
+helmVersion: V2

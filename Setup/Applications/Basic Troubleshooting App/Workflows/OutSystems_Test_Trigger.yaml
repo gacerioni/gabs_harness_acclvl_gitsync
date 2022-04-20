@@ -1,0 +1,135 @@
+harnessApiVersion: '1.0'
+type: ROLLING
+concurrencyStrategy: INFRA
+description: https://harnesssupport.zendesk.com/agent/tickets/18933
+envName: prod
+failureStrategies:
+- executionScope: WORKFLOW
+  failureTypes:
+  - APPLICATION_ERROR
+  repairActionCode: ROLLBACK_WORKFLOW
+  retryCount: 0
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- type: KUBERNETES
+  computeProviderName: CS - Gabs - Kubernetes Cluster - GCP
+  daemonSet: false
+  infraDefinitionName: gabs_gcp_k8s
+  name: Rolling
+  phaseSteps:
+  - type: K8S_PHASE_STEP
+    name: Deploy
+    steps:
+    - type: SHELL_SCRIPT
+      name: Fake Ring Active Check
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - pcwin_gabs
+        executeOnDelegate: true
+        host: null
+        includeInfraSelectors: false
+        outputVars: ''
+        publishAsVar: false
+        scriptString: "#!/bin/bash\n#early exit due issue with API, go to the end\
+          \ to output variables in harness.\n#REMOVE THE LAST done IN THIS FILE AS\
+          \ WELL!!!!\n#exit in any error\nset -e\nDEBUG=2\n\necho set env\nAPI_KEY=\"\
+          U1NIeUpod2tTMXltOXdTTEd5dzJhdzo6M0tvbTE4eG0zUzRiekc5NDN0UE1DeTV0VElpUjdPVlNkeTJUOERPeGRNR3ZNMW0xTkQyZjViNU1JZkkzQnJ2R2ZQZDd0VGpoRmFoa3RsVHQ=\"\
+          \nHARNESS_ACCOUNT=\"SSHyJhwkS1ym9wSLGyw2aw\"\nPIPELINE_NAME=\"OutSystems_Test_Trigger\"\
+          \nLAUNCH_ENV=\"prod\"\n\nif [ \"$DEBUG\" -ge \"1\" ];\nthen\n\techo DEBUG\
+          \ ACTIVE, jq RESPONSE DISPLAYED\nfi\nif [ \"$DEBUG\" -ge \"2\" ];\nthen\n\
+          \techo DEBUG ACTIVE, CURL RESPONSE DISPLAYED\nfi\n\n\necho get app id\n\
+          APP_ID=$(curl -sS --location --request POST \"https://app.harness.io/gateway/api/graphql?accountId=$HARNESS_ACCOUNT\"\
+          \ \\\n--header \"x-api-key: $API_KEY\" \\\n--header 'Content-Type: application/json'\
+          \ \\\n--data-raw '{\"query\":\"query {\\r\\n  applicationByName (name: \\\
+          \"Basic Troubleshooting App\\\"){\\r\\n    id\\r\\n  } \\r\\n}\",\"variables\"\
+          :{}}') \nif [ $DEBUG -ge \"2\" ];\nthen\n\techo $APP_ID\nfi\nAPP_ID=$(echo\
+          \ $APP_ID | jq -r \".data.applicationByName.id\")\nif [ \"$DEBUG\" -ge \"\
+          1\" ];\nthen\n\techo $APP_ID\nfi\n\necho get pipeline ID\nPIPELINE_ID=$(curl\
+          \ -sS --location --request POST \"https://app.harness.io/gateway/api/graphql?accountId=$HARNESS_ACCOUNT\"\
+          \ \\\n--header \"x-api-key: $API_KEY\" \\\n--header 'Content-Type: application/json'\
+          \ \\\n--data-raw '{\"query\":\"query {\\r\\n  pipelineByName(applicationId:\
+          \ \\\"'\"$APP_ID\"'\\\" , pipelineName: \\\"'\"$PIPELINE_NAME\"'\\\") {\\\
+          r\\n    id\\r\\n  } \\r\\n}\",\"variables\":{}}')\nif [ \"$DEBUG\" -ge \"\
+          2\" ];\nthen\n\techo $PIPELINE_ID\nfi\nPIPELINE_ID=$(echo $PIPELINE_ID |\
+          \ jq -r \".data.pipelineByName.id\")\nif [ \"$DEBUG\" -ge \"1\" ];\nthen\n\
+          \techo $PIPELINE_ID\nfi\n\n\necho Get pipeline executions running\n#could\
+          \ not get both RUNNING and REJECTED in the same call so this part was copy&pasted\
+          \ except for the RUNNING\nPIPELINE_RUNS=$(curl -sS --location --request\
+          \ POST \"https://app.harness.io/gateway/api/graphql?accountId=$HARNESS_ACCOUNT\"\
+          \ \\\n--header \"x-api-key: $API_KEY\" \\\n--header 'Content-Type: application/json'\
+          \ \\\n--data-raw '{\"query\":\"{\\r\\n  executions(\\r\\n    filters: [{\
+          \ pipeline: { operator: EQUALS, values: [\\\"'\"$PIPELINE_ID\"'\\\"] }\\\
+          r\\n    \\t\\t\\t\\t\\t\\tstatus: { operator: EQUALS, values: [\\\"RUNNING\\\
+          \"] }\\r\\n    }]\\r\\n    limit: 100\\r\\n  ) {\\r\\n    pageInfo {\\r\\\
+          n      total\\r\\n    }\\r\\n    nodes {\\r\\n      id\\r\\n      status\
+          \     \\r\\n    }\\r\\n  }\\r\\n}\",\"variables\":{}}')\nif [ \"$DEBUG\"\
+          \ -ge \"2\" ];\nthen\n\techo $PIPELINE_RUNS\nfi\nPIPELINE_RUNS=$(echo $PIPELINE_RUNS\
+          \ | jq -r \".data.executions.nodes[].id\")\nif [ \"$DEBUG\" -ge \"1\" ];\n\
+          then\n\techo $PIPELINE_RUNS\nfi\n\narray=($PIPELINE_RUNS)\n\nfor PIPELINE_ID\
+          \ in \"${array[@]}\"\ndo\n\techo Get ID of running Launch task on pipeline\n\
+          \        echo Sleeping Chico\n        sleep 30\n\tLAUNCH_STAGE_ID=$(curl\
+          \ -sS --location --request POST \"https://app.harness.io/gateway/api/graphql?accountId=$HARNESS_ACCOUNT\"\
+          \ \\\n\t--header \"x-api-key: $API_KEY\" \\\n\t--header 'Content-Type: application/json'\
+          \ \\\n\t--data-raw '{\"query\":\"{\\r\\n  execution(executionId: \\\"'\"\
+          $PIPELINE_ID\"'\\\") {\\r\\n    ... on PipelineExecution{\\r\\n      pipelineStageExecutions\
+          \ {\\r\\n        pipelineStepName\\r\\n        ... on WorkflowStageExecution\
+          \ {\\r\\n          workflowExecutionId\\r\\n        }\\r\\n      }\\r\\\
+          n    }\\r\\n  }\\r\\n}\",\"variables\":{}}')\n\tif [ \"$DEBUG\" -ge \"2\"\
+          \ ];\n\tthen\n\t\techo $LAUNCH_STAGE_ID\n\tfi\n\tLAUNCH_STAGE_ID=$(echo\
+          \ $LAUNCH_STAGE_ID| jq -r '.data.execution.pipelineStageExecutions[]|select(.pipelineStepName==\"\
+          Launch Task\")|.workflowExecutionId')\n\tif [ \"$DEBUG\" -ge \"1\" ];\n\t\
+          then\n\t\techo $LAUNCH_STAGE_ID\n\tfi\n\ndone\n\nexport HARNESS_APPROVAL_STATUS=APPROVED"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 120000
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Verify
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: basic_nginx_gcp_k8s
+  statefulSet: false
+rollbackPhases:
+- type: KUBERNETES
+  computeProviderName: CS - Gabs - Kubernetes Cluster - GCP
+  daemonSet: false
+  infraDefinitionName: gabs_gcp_k8s
+  name: Rollback Rolling
+  phaseNameForRollback: Rolling
+  phaseSteps:
+  - type: K8S_PHASE_STEP
+    name: Deploy
+    phaseStepNameForRollback: Deploy
+    statusForRollback: SUCCESS
+    steps:
+    - type: K8S_DEPLOYMENT_ROLLING_ROLLBACK
+      name: Rollback Deployment
+    stepsInParallel: false
+  - type: K8S_PHASE_STEP
+    name: Wrap Up
+    phaseStepNameForRollback: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  serviceName: basic_nginx_gcp_k8s
+  statefulSet: false
+tags:
+  Ring: prod
+templatized: false

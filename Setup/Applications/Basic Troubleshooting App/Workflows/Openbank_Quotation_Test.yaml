@@ -1,0 +1,60 @@
+harnessApiVersion: '1.0'
+type: BUILD
+notificationRules:
+- conditions:
+  - FAILED
+  executionScope: WORKFLOW
+  notificationGroupAsExpression: false
+  userGroupAsExpression: false
+  userGroupNames:
+  - Account Administrator
+phases:
+- daemonSet: false
+  name: Phase 1
+  phaseSteps:
+  - type: PREPARE_STEPS
+    name: Prepare Steps
+    steps:
+    - type: SHELL_SCRIPT
+      name: OPENBANK
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - gabs-mbp
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          #!/bin/bash
+          set -x
+
+          # Creating the <home>/harness-scripts path IF it doesn't exist yet
+          mkdir -p ~/harness-scripts
+          cd ~/harness-scripts
+
+          echo sudo docker run --net=host -d -u 0:0 --rm --name harnessManager -e LOGGING_LEVEL=${serviceVariable.LOGGING_LEVEL} -e MEMORY=${serviceVariable.MEMORY} -e WATCHER_METADATA_URL=${serviceVariable.WATCHER_METADATA_URL} -e NEWRELIC_LICENSE_KEY=${serviceVariable.NEWRELIC_LICENSE_KEY} -e ALLOWED_ORIGINS=${serviceVariable.ALLOWED_ORIGINS} -e CAPSULE_JAR=${serviceVariable.CAPSULE_JAR} -e NEWRELIC_ENV=${serviceVariable.NEWRELIC_ENV} -e DELEGATE_METADATA_URL=${serviceVariable.DELEGATE_METADATA_URL} -e GRAPHITE_PREFIX=${serviceVariable.GRAPHITE_PREFIX} -e GRAPHITE_SERVER=${serviceVariable.GRAPHITE_SERVER} -e MANCENTER_URL=${serviceVariable.MANCENTER_URL} -e HZ_CLUSTER_NAME=${serviceVariable.HZ_CLUSTER_NAME} -e SERVER_PORT=${serviceVariable.SERVER_PORT} -e UI_SERVER_URL=${serviceVariable.UI_SERVER_URL} -e MONGO_URI='${serviceVariable.MONGO_URI}' -e DEPLOY_MODE=${serviceVariable.DEPLOY_MODE} -e TCP_HOSTS_DETAILS=${serviceVariable.TCP_HOSTS_DETAILS} -e CIDR=${host.hostName} -e API_URL=${serviceVariable.API_URL} -e HAZELCAST_PORT=${serviceVariable.HAZELCAST_PORT} -e jwtPasswordSecret=${serviceVariable.jwtPasswordSecret} -e jwtExternalServiceSecret=${serviceVariable.jwtExternalServiceSecret} -e jwtZendeskSecret=${serviceVariable.jwtZendeskSecret} -e jwtMultiAuthSecret=${serviceVariable.jwtMultiAuthSecret} -e jwtSsoRedirectSecret=${serviceVariable.jwtSsoRedirectSecret} -e FEATURES=${serviceVariable.FEATURES} -e  LOGDNA_KEY=${serviceVariable.LOGDNA_KEY} -e  SKIP_LOGS=${serviceVariable.SKIP_LOGS} -e COMPANYNAME=${serviceVariable.COMPANYNAME} -e DELEGATE_SERVICE_TARGET=$DELEGATE_SERVICE_TARGET -e DELEGATE_SERVICE_AUTHORITY=$DELEGATE_SERVICE_AUTHORITY -e ROLLING_FILE_LOGGING_ENABLED=${serviceVariable.ROLLING_FILE_LOGGING_ENABLED} -p  ${serviceVariable.SERVER_PORT}:${serviceVariable.SERVER_PORT} -p ${serviceVariable.HAZELCAST_PORT}:${serviceVariable.HAZELCAST_PORT} -e LICENSE_INFO=${workflow.variables.LICENSE_KEY} -v `pwd`/logs:/opt/harness/logs  harness/manager-signed:${workflow.variables.MANAGER_VERSION} > start_harness.sh
+
+          # Printing the file, for validation purposes
+          ls -ltr ~/harness-scripts/
+          cat ~/harness-scripts/start_harness.sh
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 60000
+    stepsInParallel: false
+  - type: COLLECT_ARTIFACT
+    name: Collect Artifact
+    stepsInParallel: false
+  - type: WRAP_UP
+    name: Wrap Up
+    stepsInParallel: false
+  provisionNodes: false
+  statefulSet: false
+templatized: false

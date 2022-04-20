@@ -1,0 +1,15 @@
+harnessApiVersion: '1.0'
+type: CUSTOM
+scripts:
+- customRepositoryMapping:
+    artifactAttributes:
+    - mappedAttribute: url
+      relativePath: assets[0].downloadUrl
+    - mappedAttribute: repository
+      relativePath: repository
+    artifactRoot: $.items
+    buildNoPath: name
+  scriptString: |
+    curl -X GET "http://15.228.7.175:8081/service/rest/v1/search?repository=ckd-web-gabs" \
+    -H "accept: application/json" > ${ARTIFACT_RESULT_PATH}
+  timeout: '60'

@@ -1,0 +1,4 @@
+harnessApiVersion: '1.0'
+type: DOCKER
+imageName: gabrielcerioni/nginxprivate
+serverName: GitHub Packages Container Registry Beta

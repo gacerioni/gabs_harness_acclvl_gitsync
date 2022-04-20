@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: CONFIG_FILE
+checksum: clF0Hg56Zr1jVNK/o/Eptg==
+checksumType: MD5
+encrypted: false
+fileName: rahul_gabs.something
+targetFilePath: rahul_gabs.something
+targetToAllEnv: true

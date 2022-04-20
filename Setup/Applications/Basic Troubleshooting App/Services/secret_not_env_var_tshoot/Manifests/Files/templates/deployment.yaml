@@ -1,0 +1,38 @@
+{{- if .Values.secretToVolume}}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{.Values.name}}
+  namespace: {{.Values.namespace}}
+stringData:
+  my_secret: {{.Values.secretToVolume}}
+---
+{{- end}}
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Values.name}}-deployment
+spec:
+  replicas: {{int .Values.replicas}}
+  selector:
+    matchLabels:
+      app: {{.Values.name}}
+  template:
+    metadata:
+      labels:
+        app: {{.Values.name}}
+    spec:
+      containers:
+      - name: {{.Values.name}}
+        image: {{.Values.image}}
+        {{- if .Values.secretToVolume}}
+        volumeMounts:
+        - name: harnesstest
+          mountPath: "/etc/gabstest"
+          readOnly: true
+      volumes:
+      - name: harnesstest
+        secret:
+          secretName: {{.Values.name}}
+        {{- end}}

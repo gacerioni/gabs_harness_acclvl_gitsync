@@ -1,0 +1,15 @@
+harnessApiVersion: '1.0'
+type: TRIGGER
+artifactSelections:
+- regex: false
+  serviceName: basic_ECR_lab
+  type: ARTIFACT_SOURCE
+continueWithDefaultValues: false
+executionName: basic_ECR_lab
+executionType: Workflow
+triggerCondition:
+- type: NEW_ARTIFACT
+  artifactFilter: .*
+  artifactStreamName: cerioni-ecr-registry
+  regex: true
+  serviceName: basic_ECR_lab

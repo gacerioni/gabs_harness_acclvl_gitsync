@@ -1,0 +1,21 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+description: https://harnesssupport.zendesk.com/agent/tickets/15186
+pipelineStages:
+- type: ENV_STATE
+  name: ckd-web-gabs-workflow
+  parallel: false
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: STAGE 1
+  workflowName: ckd-web-gabs-workflow
+  workflowVariables:
+  - entityType: ENVIRONMENT
+    name: Environment
+    value: prod
+  - entityType: SERVICE
+    name: Service
+    value: ckd-web-gabs
+  - entityType: INFRASTRUCTURE_DEFINITION
+    name: InfraDefinition_SSH
+    value: gabs_aws_ec2

@@ -1,0 +1,4 @@
+harnessApiVersion: '1.0'
+type: DOCKER
+imageName: gabrielcerioni/github_packages_docker_registry/nginx
+serverName: NEW GHCR TEST

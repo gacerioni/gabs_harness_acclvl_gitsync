@@ -1,0 +1,17 @@
+harnessApiVersion: '1.0'
+type: INFRA_DEFINITION
+cloudProviderType: AWS
+deploymentType: ECS
+infrastructure:
+- type: AWS_ECS
+  assignPublicIp: true
+  cloudProviderName: CS - Gabs - AWS - ECS - EC2 - CS Admin
+  clusterName: cse-standard-labs-cluster
+  launchType: EC2
+  region: sa-east-1
+  securityGroupIds:
+  - sg-079d5c832ae3d0f30
+  subnetIds:
+  - subnet-0e644164885a4dac5
+  - subnet-079faeef8b877cd32
+  vpcId: vpc-029c2a9ccf32c22b7
