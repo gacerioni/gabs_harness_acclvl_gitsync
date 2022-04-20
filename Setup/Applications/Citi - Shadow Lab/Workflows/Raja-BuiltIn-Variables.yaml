@@ -97,9 +97,6 @@ phases:
         templateExpressions: null
         timeoutMillis: 60000
       templateUri: CS - Gabriel - Renamed/dbdeploy:latest
-      templateVariables:
-      - name: myHost
-        value: ${instance.hostName}
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
