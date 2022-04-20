@@ -84,14 +84,14 @@ phases:
       properties:
         commandName: dbdeploy
         commandType: OTHER
-        connectionAttributeName: Ancestry Lab
-        connectionType: WINRM
+        connectionAttributeName: null
+        connectionType: SSH
         delegateSelectors: null
         executeOnDelegate: false
         host: ${instance.hostName}
         outputVars: ''
         publishAsVar: false
-        sshKeyRefName: null
+        sshKeyRefName: gabs_keypair_sa_east_1
         sweepingOutputName: null
         sweepingOutputScope: null
         templateExpressions: null
