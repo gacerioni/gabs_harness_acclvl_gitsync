@@ -1,5 +1,5 @@
 image:
-  tag: "10.51"
+  tag: ${artifact.metadata.tag}
 agent:
   registerjson:
     cloudUrl: https://na-east.jitterbit.com
