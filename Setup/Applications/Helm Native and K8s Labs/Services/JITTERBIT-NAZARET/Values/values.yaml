@@ -8,9 +8,7 @@ agent:
     agentGroupId: 6282
     agentNamePrefix: "%host%"
     deregisterAgentOnDrainstop: true
-env:
-  - name: ENV_VAR_NAME
-    value: "ENV_VAR_VALUE"
+env: {}
 hpa:
   enabled: false
 replicas: 1
