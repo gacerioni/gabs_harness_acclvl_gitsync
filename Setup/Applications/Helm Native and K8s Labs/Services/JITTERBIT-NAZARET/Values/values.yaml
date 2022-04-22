@@ -8,7 +8,7 @@ agent:
     agentGroupId: 6282
     agentNamePrefix: "%host%"
     deregisterAgentOnDrainstop: true
-env: {}
+env: [] # this must work
 hpa:
   enabled: false
 replicas: 1
