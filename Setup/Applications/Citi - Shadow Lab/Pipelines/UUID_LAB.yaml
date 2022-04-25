@@ -13,8 +13,8 @@ pipelineStages:
   parallel: false
   properties:
     userGroups:
-    - APPROVERS_EMPTY
-    workflowVariables: null
+    - Account Administrator
+    variables: null
     stageName: STAGE 2
     timeoutMillis: 86400000
     approvalStateType: USER_GROUP
