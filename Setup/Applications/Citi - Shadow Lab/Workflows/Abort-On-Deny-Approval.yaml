@@ -46,6 +46,16 @@ phases:
         timeoutMillis: 60000
     stepsInParallel: false
   - type: K8S_PHASE_STEP
+    failureStrategies:
+    - failureTypes:
+      - CONNECTIVITY
+      - AUTHENTICATION
+      - VERIFICATION_FAILURE
+      - APPLICATION_ERROR
+      repairActionCode: ABORT_WORKFLOW_EXECUTION
+      retryCount: 0
+      specificSteps:
+      - Approval
     name: Verify
     steps:
     - type: SHELL_SCRIPT
