@@ -76,7 +76,7 @@ phases:
         templateVariables: ''
         timeoutMillis: 60000
     - type: COMMAND
-      name: dbdeploy
+      name: dbdeploy-running-with-trick-to-force-repeater-not-the-customer-use-case-though
       properties:
         commandName: dbdeploy
         commandType: OTHER
