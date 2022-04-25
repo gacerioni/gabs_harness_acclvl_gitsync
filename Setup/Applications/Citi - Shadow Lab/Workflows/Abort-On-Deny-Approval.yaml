@@ -56,6 +56,15 @@ phases:
       retryCount: 0
       specificSteps:
       - Approval
+    - failureTypes:
+      - CONNECTIVITY
+      - AUTHENTICATION
+      - VERIFICATION_FAILURE
+      - APPLICATION_ERROR
+      repairActionCode: END_EXECUTION
+      retryCount: 0
+      specificSteps:
+      - Approval
     name: Verify
     steps:
     - type: SHELL_SCRIPT
