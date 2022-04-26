@@ -1,5 +1,5 @@
 harnessApiVersion: '1.0'
 type: HTTP_HELM_REPO
-password: gcpkms:gabrielcerioni_1_day_PAT
-url: https://gabslabs.github.io/private_nginx_helm_with_version_page
+password: gcpkms:gabrielcerioni_30_day_PAT
+url: https://raw.githubusercontent.com/GabsLabs/private_nginx_helm_with_version_page/gh-pages//
 username: gabrielcerioni
