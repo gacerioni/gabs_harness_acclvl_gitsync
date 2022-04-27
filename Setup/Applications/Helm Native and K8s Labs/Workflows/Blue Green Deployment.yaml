@@ -91,4 +91,9 @@ rollbackPhases:
   provisionNodes: false
   serviceName: Workload with Ingress
   statefulSet: false
-templatized: false
+templatized: true
+userVariables:
+- type: TEXT
+  fixed: false
+  mandatory: true
+  name: active_svc
