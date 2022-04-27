@@ -1,7 +1,7 @@
 name: harness-example
 replicas: 1
 
-activesvc: blabla
+activesvc: ${workflow.variables.active_svc}
 
 image: ${artifact.metadata.image}
 dockercfg: ${artifact.source.dockerconfig}
