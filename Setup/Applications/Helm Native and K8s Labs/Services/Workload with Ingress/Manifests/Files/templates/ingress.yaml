@@ -3,9 +3,10 @@ kind: Ingress
 metadata:
   name: minimal-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: instance
 spec:
-  ingressClassName: nginx-example
+  ingressClassName: alb
   rules:
   - http:
       paths:
