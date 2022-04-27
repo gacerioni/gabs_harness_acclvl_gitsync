@@ -29,21 +29,16 @@ phases:
         host: null
         outputVars: ''
         publishAsVar: false
-        scriptString: |
-          set -e
-
-          function containsStr {
-           echo 1
-          }
-          containsStr
-
-          echo 2
+        scriptString: "set -e\n\nfunction containsStr {\n echo 1 \n}\ncontainsStr\
+          \ \n\necho 2 \n"
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
         sweepingOutputScope: null
         templateExpressions: null
-        templateVariables: ''
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
         timeoutMillis: 60000
     stepsInParallel: false
   - type: WRAP_UP
