@@ -52,8 +52,7 @@ phases:
     - type: KUBERNETES_SWAP_SERVICE_SELECTORS
       name: Swap Primary with Stage
       properties:
-        delegateSelectors:
-        - eks-anaplan-nonroot
+        delegateSelectors: null
         service1: ${k8s.primaryServiceName}
         service2: ${k8s.stageServiceName}
         templateUuid: null
