@@ -17,6 +17,34 @@ phases:
     stepsInParallel: false
   - type: COLLECT_ARTIFACT
     name: Collect Artifact
+    steps:
+    - type: SHELL_SCRIPT
+      name: TEST
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - webex-docker-del
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |
+          set -e
+
+          function containsStr {
+           echo 1
+          }
+          containsStr
+
+          echo 2
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
     stepsInParallel: false
   - type: WRAP_UP
     name: Wrap Up
