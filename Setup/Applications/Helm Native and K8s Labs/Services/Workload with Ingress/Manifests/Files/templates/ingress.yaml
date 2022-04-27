@@ -1,24 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: keycloak-ingress
+  name: minimal-ingress
   annotations:
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: instance
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: alb
-  tls:
-  - hosts:
-    - alb.uhgid.aikyam.com
-    secretName: alb-tls-secret
+  ingressClassName: nginx-example
   rules:
-    - host: alb.uhgid.aikyam.com
-      http:
-       paths:
-       - path: /?(.*)
-         pathType: Prefix
-         backend:
-           service:
-            name: keycloak-svc-blue
-            port: 
+  - http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: test
+            port:
               number: 80
