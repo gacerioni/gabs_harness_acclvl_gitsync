@@ -18,9 +18,9 @@ notificationRules:
   - Account Administrator
 phases:
 - type: KUBERNETES
-  computeProviderName: Gabs - PC - K8s
+  computeProviderName: CS - Gabs - AWS - EKS - CS Admin
   daemonSet: false
-  infraDefinitionName: Gabs-PC-Labs
+  infraDefinitionName: EKS_K8s_SA_EAST_1
   name: Blue/Green
   phaseSteps:
   - type: K8S_PHASE_STEP
@@ -69,9 +69,9 @@ phases:
   statefulSet: false
 rollbackPhases:
 - type: KUBERNETES
-  computeProviderName: Gabs - PC - K8s
+  computeProviderName: CS - Gabs - AWS - EKS - CS Admin
   daemonSet: false
-  infraDefinitionName: Gabs-PC-Labs
+  infraDefinitionName: EKS_K8s_SA_EAST_1
   name: Rollback Blue/Green
   phaseNameForRollback: Blue/Green
   phaseSteps:
