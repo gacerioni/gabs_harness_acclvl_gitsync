@@ -54,12 +54,16 @@ phases:
           echo ${instance.hostName}
 
           # Defining a random working dir inside /tmp/
+          RANDOMSTR="$(echo $RANDOM | md5sum | head -c 20; echo;)"
+          WORK_DIR="/tmp/${RANDOMSTR}"
+          mkdir $WORK_DIR
+          cd $WORK_DIR
 
           # Cleaning older Artifacts
-          rm -f /tmp/${ARTIFACT_FILE_NAME}
+          #rm -f /tmp/${ARTIFACT_FILE_NAME}
 
           # Copying the ZIP File from JFROG, using the API
-          curl -sSf -u "${artifact.source.username}:${secrets.getValue("jfrog_artifactory_automationuser")}" -o /tmp/${ARTIFACT_FILE_NAME} "${artifact.url}"
+          curl -sSf -u "${artifact.source.username}:${secrets.getValue("jfrog_artifactory_automationuser")}" -o $WORK_DIR/${ARTIFACT_FILE_NAME} "${artifact.url}"
 
 
           #unzip ${ARTIFACT_FILE_NAME}
