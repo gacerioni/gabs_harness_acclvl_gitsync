@@ -54,10 +54,12 @@ phases:
           echo ${instance.hostName}
 
           # Cleaning older Artifacts
-          rm -f /tmp/${ARTIFACT_FILE_NAME}
+          #rm -f /tmp/${ARTIFACT_FILE_NAME}
 
           # Copying the ZIP File from JFROG, using the API
           #curl -sSf -u "automationuser:&ulsS94kIdDT" -o /tmp/${ARTIFACT_FILE_NAME} "${artifact.url}"
+
+          echo "${artifact.source.username}"
 
           #unzip ${ARTIFACT_FILE_NAME}
         scriptType: BASH
