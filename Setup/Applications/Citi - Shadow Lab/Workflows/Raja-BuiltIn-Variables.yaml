@@ -53,13 +53,14 @@ phases:
           echo ${artifact.artifactPath}
           echo ${instance.hostName}
 
+          # Defining a random working dir inside /tmp/
+
           # Cleaning older Artifacts
-          #rm -f /tmp/${ARTIFACT_FILE_NAME}
+          rm -f /tmp/${ARTIFACT_FILE_NAME}
 
           # Copying the ZIP File from JFROG, using the API
-          #curl -sSf -u "automationuser:&ulsS94kIdDT" -o /tmp/${ARTIFACT_FILE_NAME} "${artifact.url}"
+          curl -sSf -u "${artifact.source.username}:${secrets.getValue("aws-playground_AWS_secret_key")}" -o /tmp/${ARTIFACT_FILE_NAME} "${artifact.url}"
 
-          echo "${artifact.source.username}"
 
           #unzip ${ARTIFACT_FILE_NAME}
         scriptType: BASH
