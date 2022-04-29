@@ -59,7 +59,7 @@ phases:
           rm -f /tmp/${ARTIFACT_FILE_NAME}
 
           # Copying the ZIP File from JFROG, using the API
-          curl -sSf -u "${artifact.source.username}:${secrets.getValue("aws-playground_AWS_secret_key")}" -o /tmp/${ARTIFACT_FILE_NAME} "${artifact.url}"
+          curl -sSf -u "${artifact.source.username}:${secrets.getValue("jfrog_artifactory_automationuser")}" -o /tmp/${ARTIFACT_FILE_NAME} "${artifact.url}"
 
 
           #unzip ${ARTIFACT_FILE_NAME}
