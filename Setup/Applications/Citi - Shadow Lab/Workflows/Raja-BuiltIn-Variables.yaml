@@ -40,6 +40,8 @@ phases:
       properties:
         commandPath: null
         connectionAttributeName: null
+        delegateSelectors:
+        - ' ec2-final-delegate'
         executeOnDelegate: true
         host: null
         outputVars: ''
@@ -61,7 +63,9 @@ phases:
         sweepingOutputName: null
         sweepingOutputScope: null
         templateExpressions: null
-        templateVariables: ''
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
         timeoutMillis: 60000
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
