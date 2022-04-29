@@ -60,7 +60,7 @@ phases:
           #unzip ${ARTIFACT_FILE_NAME}
 
           echo “======================================================”
-          echo ${artifact}
+          echo "${artifact.url}"
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
