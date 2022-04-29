@@ -54,9 +54,8 @@ phases:
           echo ${instance.hostName}
 
           # Copying the ZIP File from JFROG, using the API
-          curl -sSf -u "automationuser:&ulsS94kIdDT" "${artifact.url}" -O /tmp/
+          curl -sSf -u "automationuser:&ulsS94kIdDT" -o /tmp/${ARTIFACT_FILE_NAME} "${artifact.url}"
 
-          echo ${ARTIFACT_FILE_NAME}
           #unzip ${ARTIFACT_FILE_NAME}
         scriptType: BASH
         sshKeyRefName: null
