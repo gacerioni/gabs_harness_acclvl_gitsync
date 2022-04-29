@@ -65,6 +65,8 @@ phases:
           # Unzipping the Artifact
           unzip $WORK_DIR/${ARTIFACT_FILE_NAME}
 
+          cp -p $WORK_DIR/${ARTIFACT_FILE_NAME} /opt/gabs/
+
           # cleaning the temp working dir, if you want it
           rm -rf ${WORK_DIR}
         scriptType: BASH
