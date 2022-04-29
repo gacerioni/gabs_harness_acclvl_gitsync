@@ -50,17 +50,14 @@ phases:
           #
           set -x
           #
-          echo “======================================================”
-          env
-          echo “======================================================”
           echo ${artifact.artifactPath}
           echo ${instance.hostName}
-          pwd
+
+          # Copying the ZIP File from JFROG, using the API
+          curl -sSf -u "automationuser:&ulsS94kIdDT" "${artifact.url}" -O /tmp/
+
           echo ${ARTIFACT_FILE_NAME}
           #unzip ${ARTIFACT_FILE_NAME}
-
-          echo “======================================================”
-          echo "${artifact.url}"
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
