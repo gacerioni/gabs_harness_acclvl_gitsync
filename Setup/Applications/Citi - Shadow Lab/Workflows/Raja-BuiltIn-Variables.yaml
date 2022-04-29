@@ -58,6 +58,9 @@ phases:
           pwd
           echo ${ARTIFACT_FILE_NAME}
           #unzip ${ARTIFACT_FILE_NAME}
+
+          echo “======================================================”
+          echo ${artifact}
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
