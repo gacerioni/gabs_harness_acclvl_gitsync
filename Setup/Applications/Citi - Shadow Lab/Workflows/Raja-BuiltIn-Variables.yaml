@@ -41,8 +41,7 @@ phases:
         commandName: oracledb_service_command
         commandType: OTHER
         connectionAttributeName: null
-        delegateSelectors:
-        - ' ec2-final-delegate'
+        delegateSelectors: null
         executeOnDelegate: true
         host: null
         outputVars: ''
