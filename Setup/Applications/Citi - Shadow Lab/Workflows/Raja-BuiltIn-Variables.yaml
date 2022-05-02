@@ -83,6 +83,11 @@ phases:
         templateVariables: null
         templateVersion: null
         timeoutMillis: 60000
+    - type: COMMAND
+      name: oracledb_service_command
+      properties:
+        commandType: OTHER
+      templateUri: CS - Gabriel - Renamed/oracledb_service_command:latest
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
