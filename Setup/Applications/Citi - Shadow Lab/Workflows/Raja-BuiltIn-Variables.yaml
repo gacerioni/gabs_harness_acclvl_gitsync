@@ -25,6 +25,11 @@ phases:
   phaseSteps:
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Deploy
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: SPECIFIC_STEPS
+      steps:
+      - Shell Script
     steps:
     - type: CUSTOM_DEPLOYMENT_FETCH_INSTANCES
       name: Fetch Instances
