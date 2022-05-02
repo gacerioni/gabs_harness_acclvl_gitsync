@@ -30,8 +30,7 @@ phases:
       name: Fetch Instances
       properties:
         stateTimeoutInMinutes: 1
-        tags:
-        - ' ec2-final-delegate'
+        tags: null
         templateUuid: null
         templateVariables: null
         templateVersion: null
