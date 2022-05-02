@@ -4,7 +4,7 @@ commandUnitType: OTHER
 commandUnits:
 - command: |-
     # Execute as root and pass environment variables
-    su -p -
+    whoami
 
     # The following variables are absolute paths defined as:
     # ${HOME}/${appName}/${serviceName}/${serviceTemplateName}/[runtime|backup|staging]
