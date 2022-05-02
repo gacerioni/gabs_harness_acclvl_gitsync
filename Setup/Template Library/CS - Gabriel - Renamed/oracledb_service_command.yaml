@@ -6,9 +6,6 @@ commandUnits:
     # Execute as root and pass environment variables
     whoami
 
-    # The following variables are absolute paths defined as:
-    # ${HOME}/${appName}/${serviceName}/${serviceTemplateName}/[runtime|backup|staging]
-
     mkdir -p "${app.defaults.RUNTIME_PATH}"
   commandUnitType: SETUP_ENV
   deploymentType: SSH
