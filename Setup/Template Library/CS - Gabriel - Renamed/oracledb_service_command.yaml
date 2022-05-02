@@ -2,14 +2,9 @@ harnessApiVersion: '1.0'
 type: SSH
 commandUnitType: OTHER
 commandUnits:
-- command: |-
+- command: |
     # Execute as root and pass environment variables
     whoami
-
-    echo ${artifact.artifactPath}
-    echo ${instance.hostName}
-
-    mkdir -p "${app.defaults.RUNTIME_PATH}"
   commandUnitType: SETUP_ENV
   deploymentType: SSH
   name: Setup Env
