@@ -2,15 +2,14 @@ harnessApiVersion: '1.0'
 type: SSH
 commandUnitType: OTHER
 commandUnits:
-- command: |2-
-
+- command: |-
     # Execute as root and pass environment variables
     su -p -
 
     # The following variables are absolute paths defined as:
     # ${HOME}/${appName}/${serviceName}/${serviceTemplateName}/[runtime|backup|staging]
 
-    mkdir -p "$WINGS_RUNTIME_PATH"
+    mkdir -p "${app.defaults.RUNTIME_PATH}"
   commandUnitType: SETUP_ENV
   deploymentType: SSH
   name: Setup Env
