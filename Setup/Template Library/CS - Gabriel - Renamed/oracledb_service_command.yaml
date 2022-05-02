@@ -9,6 +9,10 @@ commandUnits:
   deploymentType: SSH
   name: Setup Env
   scriptType: BASH
+- commandUnitType: EXEC
+  deploymentType: SSH
+  name: Exec-1
+  scriptType: BASH
 - artifactVariableName: artifact
   commandUnitType: DOWNLOAD_ARTIFACT
   deploymentType: SSH
