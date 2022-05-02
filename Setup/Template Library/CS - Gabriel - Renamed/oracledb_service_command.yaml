@@ -8,3 +8,16 @@ commandUnits:
   name: Download Artifact
   scriptType: BASH
   workingDirectory: ${app.defaults.RUNTIME_PATH}
+- command: |-
+    #!/bin/bash
+    set -e
+
+    # Unzipping the Artifact
+    unzip ${ARTIFACT_FILE_NAME}
+
+    ls -ltr
+  commandUnitType: EXEC
+  deploymentType: SSH
+  name: Exec - Do the job
+  scriptType: BASH
+  workingDirectory: ${app.defaults.RUNTIME_PATH}
