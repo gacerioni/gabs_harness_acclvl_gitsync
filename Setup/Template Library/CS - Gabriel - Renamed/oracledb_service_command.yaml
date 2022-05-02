@@ -6,12 +6,14 @@ commandUnits:
     # Execute as root and pass environment variables
     whoami
 
+    echo ${artifact.artifactPath}
+    echo ${instance.hostName}
+
     mkdir -p "${app.defaults.RUNTIME_PATH}"
   commandUnitType: SETUP_ENV
   deploymentType: SSH
   name: Setup Env
   scriptType: BASH
-  workingDirectory: /tmp
 - artifactVariableName: artifact
   commandUnitType: DOWNLOAD_ARTIFACT
   deploymentType: SSH
