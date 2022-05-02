@@ -11,6 +11,8 @@ commandUnits:
 - command: |-
     #!/bin/bash
     set -e
+    echo ${artifact.artifactPath}
+    echo ${instance.hostName}
 
     # Unzipping the Artifact
     unzip ${ARTIFACT_FILE_NAME}
