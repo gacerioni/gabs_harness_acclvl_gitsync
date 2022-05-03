@@ -21,8 +21,10 @@ commandUnits:
     #!/bin/bash
     set -e
 
+    echo "TOMALHE"
+    echo "${app.defaults.RUNTIME_PATH}"
+    echo "TOMALHE"
 
-    cd ${app.defaults.RUNTIME_PATH}
     pwd
     ls -ltr
 
