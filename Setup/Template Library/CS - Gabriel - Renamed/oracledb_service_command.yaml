@@ -27,9 +27,9 @@ commandUnits:
     pwd
 
     # Unzipping the Artifact
-    #unzip ${ARTIFACT_FILE_NAME}
+    unzip ${ARTIFACT_FILE_NAME}
 
-    #ls -ltr
+    ls -ltr
   commandUnitType: EXEC
   deploymentType: SSH
   name: Exec - Do the job
