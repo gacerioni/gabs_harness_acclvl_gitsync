@@ -21,10 +21,13 @@ commandUnits:
     #!/bin/bash
     set -e
 
-    # Unzipping the Artifact
-    unzip ${ARTIFACT_FILE_NAME}
-
+    pwd
     ls -ltr
+
+    # Unzipping the Artifact
+    #unzip ${ARTIFACT_FILE_NAME}
+
+    #ls -ltr
   commandUnitType: EXEC
   deploymentType: SSH
   name: Exec - Do the job
