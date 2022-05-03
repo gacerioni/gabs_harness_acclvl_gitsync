@@ -21,6 +21,8 @@ commandUnits:
     #!/bin/bash
     set -e
 
+
+    cd ${app.defaults.RUNTIME_PATH}
     pwd
     ls -ltr
 
