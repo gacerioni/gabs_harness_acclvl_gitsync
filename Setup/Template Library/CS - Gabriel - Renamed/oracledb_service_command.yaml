@@ -10,6 +10,12 @@ commandUnits:
   deploymentType: SSH
   name: Setup Env
   scriptType: BASH
+- artifactVariableName: artifact
+  commandUnitType: DOWNLOAD_ARTIFACT
+  deploymentType: SSH
+  name: Download Artifact
+  scriptType: BASH
+  workingDirectory: ${app.defaults.RUNTIME_PATH}
 - command: |-
     #!/bin/bash
     set -e
