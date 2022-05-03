@@ -18,13 +18,13 @@ commandUnits:
   scriptType: BASH
   workingDirectory: ${app.defaults.RUNTIME_PATH}
 - command: |-
-    #!/bin/bash
-    set -e
+    echo "current folder"
+    pwd
 
     cd "${app.defaults.RUNTIME_PATH}"
 
+    echo "entering the working dir"
     pwd
-    ls -ltr
 
     # Unzipping the Artifact
     #unzip ${ARTIFACT_FILE_NAME}
