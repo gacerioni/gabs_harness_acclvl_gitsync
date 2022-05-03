@@ -2,9 +2,7 @@ harnessApiVersion: '1.0'
 type: SSH
 commandUnitType: OTHER
 commandUnits:
-- command: |-
-    ${instance.hostname}
-    whoami
+- command: whoami
   commandUnitType: EXEC
   deploymentType: SSH
   name: Exec
