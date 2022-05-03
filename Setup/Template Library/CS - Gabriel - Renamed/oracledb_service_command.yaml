@@ -6,6 +6,7 @@ commandUnits:
     mkdir -p "$WINGS_RUNTIME_PATH"
     mkdir -p "$WINGS_BACKUP_PATH"
     mkdir -p "$WINGS_STAGING_PATH"
+    mkdir -p "${app.defaults.RUNTIME_PATH}"
   commandUnitType: SETUP_ENV
   deploymentType: SSH
   name: Setup Env
@@ -29,3 +30,5 @@ commandUnits:
   name: Exec - Do the job
   scriptType: BASH
   workingDirectory: ${app.defaults.RUNTIME_PATH}
+variables:
+- name: WINGS_STAGING_PATH"
