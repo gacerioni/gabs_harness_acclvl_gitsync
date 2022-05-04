@@ -55,7 +55,7 @@ phases:
       templateUri: CS - Gabriel - Renamed/oracledb_service_command:latest
       templateVariables:
       - name: helper_host_var
-        value: ''
+        value: ${instance.hostName}
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
