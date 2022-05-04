@@ -30,7 +30,8 @@ phases:
       name: Fetch Instances
       properties:
         stateTimeoutInMinutes: 1
-        tags: null
+        tags:
+        - eks-anaplan-nonroot
         templateUuid: null
         templateVariables: null
         templateVersion: null
