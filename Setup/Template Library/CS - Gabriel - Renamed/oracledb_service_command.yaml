@@ -36,7 +36,3 @@ commandUnits:
   workingDirectory: ${app.defaults.RUNTIME_PATH}
 variables:
 - name: WINGS_STAGING_PATH"
-- name: helper_var
-- name: helper_va
-- name: help
-- name: helper_host_var
