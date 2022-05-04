@@ -36,3 +36,4 @@ commandUnits:
   workingDirectory: ${app.defaults.RUNTIME_PATH}
 variables:
 - name: helper_host_var
+  value: ${instance.hostName}
