@@ -54,8 +54,6 @@ phases:
         timeoutMillis: 60000
       templateUri: CS - Gabriel - Renamed/oracledb_service_command:latest
       templateVariables:
-      - name: WINGS_STAGING_PATH"
-        value: ''
       - name: helper_host_var
         value: ''
     stepsInParallel: false
