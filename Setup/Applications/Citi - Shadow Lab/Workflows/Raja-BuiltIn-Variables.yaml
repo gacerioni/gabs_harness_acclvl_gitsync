@@ -31,7 +31,7 @@ phases:
       properties:
         stateTimeoutInMinutes: 1
         tags:
-        - eks-anaplan-nonroot
+        - eks-final-sa-east-1
         templateUuid: null
         templateVariables: null
         templateVersion: null
