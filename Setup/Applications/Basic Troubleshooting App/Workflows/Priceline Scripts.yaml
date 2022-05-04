@@ -19,7 +19,7 @@ phases:
     name: Collect Artifact
     steps:
     - type: SHELL_SCRIPT
-      name: TEST
+      name: Shell Script Step - No trailing spaces
       properties:
         commandPath: null
         connectionAttributeName: null
@@ -29,8 +29,16 @@ phases:
         host: null
         outputVars: ''
         publishAsVar: false
-        scriptString: "set -e\n\nfunction containsStr {\n echo 1 \n}\ncontainsStr\n\
-          \necho 2\n"
+        scriptString: |
+          #!/bin/bash
+          set -e
+
+          function containsStr {
+           echo 1
+          }
+          containsStr
+
+          echo 2
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
