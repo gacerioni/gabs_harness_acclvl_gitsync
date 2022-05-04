@@ -56,6 +56,14 @@ phases:
       templateVariables:
       - name: WINGS_STAGING_PATH"
         value: ''
+      - name: helper_var
+        value: ''
+      - name: helper_va
+        value: ''
+      - name: help
+        value: ''
+      - name: helper_host_var
+        value: ''
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
