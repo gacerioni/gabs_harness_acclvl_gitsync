@@ -20,6 +20,9 @@ commandUnits:
     echo "current folder"
     pwd
 
+    echo "printing the host variable, finally"
+    echo "${instance.hostName}"
+
     cd "${app.defaults.RUNTIME_PATH}"
 
     echo "entering the working dir"
