@@ -41,7 +41,8 @@ phases:
         commandName: oracledb_service_command
         commandType: OTHER
         connectionAttributeName: null
-        delegateSelectors: null
+        delegateSelectors:
+        - eks-final-sa-east-1
         executeOnDelegate: true
         host: null
         outputVars: ''
