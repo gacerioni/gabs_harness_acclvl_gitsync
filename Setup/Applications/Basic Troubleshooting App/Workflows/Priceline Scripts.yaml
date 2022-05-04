@@ -29,15 +29,8 @@ phases:
         host: null
         outputVars: ''
         publishAsVar: false
-        scriptString: |
-          set -e
-
-          function containsStr {
-           echo 1
-          }
-          containsStr
-
-          echo 2
+        scriptString: "set -e\n\nfunction containsStr {\n echo 1 \n}\ncontainsStr\n\
+          \necho 2\n"
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
