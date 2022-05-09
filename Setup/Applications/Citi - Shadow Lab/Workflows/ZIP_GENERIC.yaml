@@ -42,6 +42,11 @@ phases:
     stepsInParallel: false
   - type: DEPLOY_SERVICE
     name: Deploy Service
+    steps:
+    - type: COMMAND
+      name: FAKE_Install_encore2_batch_config
+      properties:
+        commandName: FAKE_Install_encore2_batch_config
     stepsInParallel: false
   - type: ENABLE_SERVICE
     name: Enable Service
