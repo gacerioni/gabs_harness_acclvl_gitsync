@@ -181,3 +181,21 @@ userVariables:
   fixed: false
   mandatory: true
   name: InfraDefinition_SSH
+- type: TEXT
+  allowedValues: true,false
+  fixed: false
+  mandatory: true
+  name: deploy_batch
+  value: 'true'
+- type: TEXT
+  allowedValues: true,false
+  fixed: false
+  mandatory: true
+  name: deploy_config
+  value: 'true'
+- type: TEXT
+  allowedValues: Standard,Global,Public
+  fixed: false
+  mandatory: true
+  name: env_type
+  value: Standard
