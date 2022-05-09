@@ -13,6 +13,6 @@ commandUnits:
   deploymentType: SSH
   name: Download Artifact
   scriptType: BASH
-  workingDirectory: ${app.defaults.RUNTIME_PATH}
+  workingDirectory: /tmp
 variables:
 - name: tr_filename
