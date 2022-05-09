@@ -16,7 +16,9 @@ commandUnits:
   destinationDirectoryPath: $WINGS_RUNTIME_PATH
   name: Copy Artifact
   source: ARTIFACTS
-- command: unzip "$ARTIFACT_FILE_NAME"
+- command: |-
+    echo "$ARTIFACT_FILE_NAME"
+    echo "${ARTIFACT_FILE_NAME}"
   commandUnitType: EXEC
   deploymentType: SSH
   name: Expand Artifact
