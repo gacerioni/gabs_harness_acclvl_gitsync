@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: ARTIFACTORY
+artifactPattern: cate-ara-167873/oracledb/*.zip
+metadataOnly: true
+repositoryName: citilab-helm-icg-prod
+repositoryType: any
+serverName: Harness Artifactory
+useDockerFormat: false
