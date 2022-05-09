@@ -8,5 +8,11 @@ commandUnits:
   name: Setup Env
   scriptType: BASH
   workingDirectory: Setup Runtime Paths
+- artifactVariableName: artifact
+  commandUnitType: DOWNLOAD_ARTIFACT
+  deploymentType: SSH
+  name: Download Artifact
+  scriptType: BASH
+  workingDirectory: ${app.defaults.RUNTIME_PATH}
 variables:
 - name: tr_filename
