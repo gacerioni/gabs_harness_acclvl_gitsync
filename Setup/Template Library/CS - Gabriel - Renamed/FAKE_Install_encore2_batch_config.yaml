@@ -14,5 +14,13 @@ commandUnits:
   name: Download Artifact
   scriptType: BASH
   workingDirectory: /tmp
+- command: |-
+    echo "PRINTING THE ARTIFACT FILE NAME:"
+    echo "$ARTIFACT_FILE_NAME"
+    echo "${ARTIFACT_FILE_NAME}"
+  commandUnitType: EXEC
+  deploymentType: SSH
+  name: Expand Artifact
+  scriptType: BASH
 variables:
 - name: tr_filename
