@@ -20,18 +20,21 @@ commandUnits:
     echo "current folder"
     pwd
 
-    echo "printing the host variable, finally"
-    echo "${instance.hostName}"
+    echo "PRINTING THE ARTIFACT FILENAME":
+    echo "${ARTIFACT_FILE_NAME}"
 
-    cd "${app.defaults.RUNTIME_PATH}"
+    #echo "printing the host variable, finally"
+    #echo "${instance.hostName}"
 
-    echo "entering the working dir"
-    pwd
+    #cd "${app.defaults.RUNTIME_PATH}"
+
+    #echo "entering the working dir"
+    #pwd
 
     # Unzipping the Artifact
-    unzip ${ARTIFACT_FILE_NAME}
+    #unzip ${ARTIFACT_FILE_NAME}
 
-    ls -ltr
+    #ls -ltr
   commandUnitType: EXEC
   deploymentType: SSH
   name: Exec - Do the job
