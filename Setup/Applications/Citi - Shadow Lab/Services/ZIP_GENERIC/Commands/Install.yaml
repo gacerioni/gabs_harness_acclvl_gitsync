@@ -32,8 +32,4 @@ commandUnits:
   name: Expand Artifact
   scriptType: BASH
   workingDirectory: $WINGS_RUNTIME_PATH
-- commandUnitType: COPY_CONFIGS
-  deploymentType: SSH
-  destinationParentPath: $WINGS_RUNTIME_PATH
-  name: Copy Configs
 targetToAllEnv: true
