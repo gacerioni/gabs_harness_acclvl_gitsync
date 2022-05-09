@@ -23,9 +23,6 @@ commandUnits:
     echo "PRINTING THE ARTIFACT FILENAME":
     echo "${ARTIFACT_FILE_NAME}"
 
-    #echo "printing the host variable, finally"
-    #echo "${instance.hostName}"
-
     #cd "${app.defaults.RUNTIME_PATH}"
 
     #echo "entering the working dir"
