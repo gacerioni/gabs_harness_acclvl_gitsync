@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: SERVICENOW
+baseUrl: https://ven03171.service-now.com
+delegateSelectors:
+- ec2-final-delegate
+password: gcpkms:jeremy_nelson_snow_pwd
+skipValidation: false
+username: jeremy.nelson
