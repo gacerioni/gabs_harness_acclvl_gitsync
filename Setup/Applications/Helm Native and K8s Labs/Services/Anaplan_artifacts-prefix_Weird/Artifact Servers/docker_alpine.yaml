@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: ARTIFACTORY
+dockerRepositoryServer: harness-docker.jfrog.io
+imageName: alpine
+metadataOnly: true
+repositoryName: docker
+repositoryType: docker
+serverName: Harness Artifactory
+useDockerFormat: false
