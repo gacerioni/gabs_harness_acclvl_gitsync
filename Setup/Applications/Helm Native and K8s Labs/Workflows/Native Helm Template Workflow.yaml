@@ -24,25 +24,6 @@ phases:
   phaseSteps:
   - type: HELM_DEPLOY
     name: Pre Deploy
-    steps:
-    - type: SHELL_SCRIPT
-      name: Shell Script
-      properties:
-        commandPath: null
-        connectionAttributeName: null
-        executeOnDelegate: true
-        host: null
-        includeInfraSelectors: true
-        outputVars: ''
-        publishAsVar: false
-        scriptString: echo 1
-        scriptType: BASH
-        sshKeyRefName: null
-        sweepingOutputName: null
-        sweepingOutputScope: null
-        templateExpressions: null
-        templateVariables: ''
-        timeoutMillis: 60000
     stepsInParallel: false
   - type: HELM_DEPLOY
     name: Deploy Containers
