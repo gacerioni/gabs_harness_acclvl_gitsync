@@ -143,7 +143,3 @@ userVariables:
   fixed: false
   mandatory: true
   name: InfraDefinition_HELM
-- type: TEXT
-  fixed: false
-  mandatory: true
-  name: version
