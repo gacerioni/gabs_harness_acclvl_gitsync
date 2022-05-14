@@ -1,0 +1,7 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+enableCollection: true
+helmChartConfig:
+  chartName: envvdelegatehelm
+  connectorName: icg-helm-prod
+storeType: HelmChartRepo
