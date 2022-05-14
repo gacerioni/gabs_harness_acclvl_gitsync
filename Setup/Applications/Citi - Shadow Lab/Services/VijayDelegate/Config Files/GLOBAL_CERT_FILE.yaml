@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: CONFIG_FILE
+checksumType: MD5
+description: This is just false file that will always be overwritten by the Environment (DEV, QA, PRD)
+encrypted: true
+fileName: gcpkms:TEST
+targetFilePath: GLOBAL_CERT_FILE
+targetToAllEnv: true
