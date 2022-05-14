@@ -1,0 +1,7 @@
+harnessApiVersion: '1.0'
+type: CONFIG_FILE_OVERRIDE
+checksum: b2Z5xs+vNBr0wBuJI3O73g==
+checksumType: MD5
+encrypted: false
+fileName: GLOBAL_CERT_FILE
+targetFilePath: GLOBAL_CERT_FILE
