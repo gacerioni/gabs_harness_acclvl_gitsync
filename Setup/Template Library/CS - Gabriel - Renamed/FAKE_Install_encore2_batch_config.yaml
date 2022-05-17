@@ -4,7 +4,7 @@ commandUnitType: OTHER
 commandUnits:
 - command: |-
     mkdir -p "${app.defaults.RUNTIME_PATH}"
-    ${helper_var}
+    echo "${helper_var}"
   commandUnitType: SETUP_ENV
   deploymentType: SSH
   name: Setup Env
