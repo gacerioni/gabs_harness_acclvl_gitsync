@@ -49,10 +49,7 @@ spec:
       imagePullSecrets:
       - name: {{.Values.name}}-dockercfg
       {{- end}}
-      tolerations:
-      - key: "example-key"
-        operator: "Exists"
-        effect: "NoSchedule"
+      tolerations: null
       containers:
       - name: {{.Values.name}}
         image: {{.Values.image}}
