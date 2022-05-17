@@ -7,4 +7,4 @@ templateVariables:
 - name: tr_filename
   value: ''
 - name: helper_var
-  value: ''
+  value: ${instance.hostName}
