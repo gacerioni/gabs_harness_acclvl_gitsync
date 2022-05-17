@@ -56,6 +56,7 @@ spec:
           limits: null
           requests:
             memory: 128Mi
+        tolerations: null
         {{- if or .Values.env.config .Values.env.secrets}}
         envFrom:
         {{- if .Values.env.config}}
