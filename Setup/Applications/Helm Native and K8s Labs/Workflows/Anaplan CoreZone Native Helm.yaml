@@ -72,4 +72,9 @@ rollbackPhases:
   provisionNodes: false
   serviceName: Anaplan CoreZone Native Helm
   statefulSet: false
-templatized: false
+templatized: true
+userVariables:
+- type: TEXT
+  fixed: false
+  mandatory: true
+  name: version
