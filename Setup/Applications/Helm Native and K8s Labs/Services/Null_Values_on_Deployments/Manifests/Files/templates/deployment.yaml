@@ -54,9 +54,8 @@ spec:
         image: {{.Values.image}}
         resources:
           requests:
-            memory: 128Mi
-          limits:
-            memory: 256mi
+            memory: "64Mi"
+            cpu: "250m"
         {{- if or .Values.env.config .Values.env.secrets}}
         envFrom:
         {{- if .Values.env.config}}
