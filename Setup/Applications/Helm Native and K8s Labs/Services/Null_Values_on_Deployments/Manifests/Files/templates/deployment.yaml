@@ -50,6 +50,7 @@ spec:
       - name: {{.Values.name}}-dockercfg
       {{- end}}
       tolerations: null
+      affinity: null
       containers:
       - name: {{.Values.name}}
         image: {{.Values.image}}
