@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: false
 delegateSelectors:
-- immutable-delegate-demo
+- citi-new-helm
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
