@@ -3,7 +3,7 @@ type: SERVICE
 artifactType: DOCKER
 configVariables:
 - name: repository
-  value: https://charts.helm.sh/stable
+  value: https://charts.bitnami.com/bitnami/
   valueType: TEXT
 deploymentType: HELM
 helmVersion: V3
