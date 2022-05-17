@@ -55,8 +55,7 @@ spec:
         resources:
           requests:
             memory: 128Mi
-          limits:
-            memory: 256Mi
+          limits: null
         {{- if or .Values.env.config .Values.env.secrets}}
         envFrom:
         {{- if .Values.env.config}}
