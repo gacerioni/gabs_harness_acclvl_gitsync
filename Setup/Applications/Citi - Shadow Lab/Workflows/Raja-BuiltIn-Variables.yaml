@@ -53,6 +53,9 @@ phases:
         templateExpressions: null
         timeoutMillis: 60000
       templateUri: CS - Gabriel - Renamed/oracledb_service_command:latest
+      templateVariables:
+      - name: helper_host_var
+        value: ''
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
