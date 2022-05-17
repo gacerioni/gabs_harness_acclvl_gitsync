@@ -47,6 +47,11 @@ phases:
       name: FAKE_Install_encore2_batch_config
       properties:
         commandName: FAKE_Install_encore2_batch_config
+        executeOnDelegate: true
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
+        timeoutMillis: 14400000
     stepsInParallel: false
   - type: ENABLE_SERVICE
     name: Enable Service
