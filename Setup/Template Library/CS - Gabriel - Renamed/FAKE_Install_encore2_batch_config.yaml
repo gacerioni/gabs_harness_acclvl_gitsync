@@ -2,7 +2,9 @@ harnessApiVersion: '1.0'
 type: SSH
 commandUnitType: OTHER
 commandUnits:
-- command: mkdir -p "${app.defaults.RUNTIME_PATH}"
+- command: |-
+    mkdir -p "${app.defaults.RUNTIME_PATH}"
+    ${helper_var}
   commandUnitType: SETUP_ENV
   deploymentType: SSH
   name: Setup Env
@@ -24,3 +26,4 @@ commandUnits:
   scriptType: BASH
 variables:
 - name: tr_filename
+- name: helper_var
