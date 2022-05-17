@@ -54,7 +54,7 @@ spec:
         image: {{.Values.image}}
         resources:
           requests:
-            memory: "64Mi"
+            memory: 64Mi
             cpu: 250m
         {{- if or .Values.env.config .Values.env.secrets}}
         envFrom:
