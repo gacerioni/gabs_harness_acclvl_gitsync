@@ -37,3 +37,5 @@ commandUnits:
   name: Exec - Do the job
   scriptType: BASH
   workingDirectory: ${app.defaults.RUNTIME_PATH}
+variables:
+- name: helper_host_var
