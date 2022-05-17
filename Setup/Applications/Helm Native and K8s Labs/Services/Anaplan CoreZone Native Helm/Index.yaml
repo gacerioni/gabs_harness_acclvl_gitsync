@@ -3,7 +3,7 @@ type: SERVICE
 artifactType: DOCKER
 configVariables:
 - name: repository
-  value: https://harness.jfrog.io/artifactory/citilab-helm-icg-prod/
+  value: https://charts.helm.sh/stable
   valueType: TEXT
 deploymentType: HELM
 helmVersion: V3
