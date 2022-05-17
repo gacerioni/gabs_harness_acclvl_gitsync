@@ -50,6 +50,9 @@ spec:
       - name: {{.Values.name}}-dockercfg
       {{- end}}
       containers:
+        resources:
+          requests:
+            memory: 128Mi
       - name: {{.Values.name}}
         image: {{.Values.image}}
         {{- if or .Values.env.config .Values.env.secrets}}
