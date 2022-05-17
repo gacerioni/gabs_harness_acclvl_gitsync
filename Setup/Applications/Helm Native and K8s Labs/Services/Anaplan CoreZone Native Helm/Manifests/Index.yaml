@@ -1,0 +1,8 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+enableCollection: false
+helmChartConfig:
+  chartName: nginx-with-version-page
+  chartUrl: ${serviceVariable.repository}
+  chartVersion: ${workflow.variables.version}
+storeType: HelmChartRepo
