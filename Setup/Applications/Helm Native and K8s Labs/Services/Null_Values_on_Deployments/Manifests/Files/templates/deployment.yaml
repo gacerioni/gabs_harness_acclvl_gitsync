@@ -53,8 +53,7 @@ spec:
       - name: {{.Values.name}}
         image: {{.Values.image}}
         resources:
-          limits: null        
-          affinity: null
+          limits: null
           requests:
             memory: 128Mi
         {{- if or .Values.env.config .Values.env.secrets}}
