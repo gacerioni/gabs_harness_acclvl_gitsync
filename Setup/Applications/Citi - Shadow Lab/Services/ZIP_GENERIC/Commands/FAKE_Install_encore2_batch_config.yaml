@@ -6,3 +6,5 @@ templateUri: CS - Gabriel - Renamed/FAKE_Install_encore2_batch_config:latest
 templateVariables:
 - name: tr_filename
   value: ''
+- name: helper_var
+  value: ''
