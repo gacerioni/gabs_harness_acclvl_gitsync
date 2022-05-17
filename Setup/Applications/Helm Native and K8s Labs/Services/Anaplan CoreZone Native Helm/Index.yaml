@@ -1,5 +1,9 @@
 harnessApiVersion: '1.0'
 type: SERVICE
 artifactType: DOCKER
+configVariables:
+- name: repository
+  value: https://harness.jfrog.io/artifactory/citilab-helm-icg-prod/
+  valueType: TEXT
 deploymentType: HELM
 helmVersion: V3
