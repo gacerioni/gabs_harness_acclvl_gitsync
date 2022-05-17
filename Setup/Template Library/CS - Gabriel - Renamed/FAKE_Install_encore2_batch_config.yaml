@@ -27,3 +27,4 @@ commandUnits:
 variables:
 - name: tr_filename
 - name: helper_var
+  value: ${instance.hostName}
