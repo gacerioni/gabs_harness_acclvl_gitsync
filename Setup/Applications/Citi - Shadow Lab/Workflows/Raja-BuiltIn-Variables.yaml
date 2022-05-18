@@ -35,27 +35,6 @@ phases:
         templateUuid: null
         templateVariables: null
         templateVersion: null
-    - type: COMMAND
-      name: oracledb_service_command
-      properties:
-        commandName: oracledb_service_command
-        commandType: OTHER
-        connectionAttributeName: null
-        delegateSelectors:
-        - eks-final-sa-east-1
-        executeOnDelegate: true
-        host: null
-        outputVars: ''
-        publishAsVar: false
-        sshKeyRefName: null
-        sweepingOutputName: null
-        sweepingOutputScope: null
-        templateExpressions: null
-        timeoutMillis: 60000
-      templateUri: CS - Gabriel - Renamed/oracledb_service_command:latest
-      templateVariables:
-      - name: helper_host_var
-        value: ${instance.hostName}
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
