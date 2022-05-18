@@ -4,4 +4,7 @@ enableCollection: true
 helmChartConfig:
   chartName: nginx-with-version-page
   connectorName: icg-helm-dev
+helmCommandFlag:
+  valueMap:
+    TEMPLATE: --include-crds
 storeType: HelmChartRepo
