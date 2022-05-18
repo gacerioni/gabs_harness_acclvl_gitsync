@@ -1,0 +1,15 @@
+harnessApiVersion: '1.0'
+type: SHELL_SCRIPT
+scriptString: |-
+  mkdir -p "${app.defaults.RUNTIME_PATH}"
+
+  echo "current folder"
+  pwd
+
+  echo "PRINTING THE ARTIFACT FILENAME":
+  echo "${ARTIFACT_FILE_NAME}"
+
+  echo "PRINTING THE INSTANCE HOSTNAME":
+  echo "${instance.hostName}"
+scriptType: BASH
+timeoutMillis: 600000
