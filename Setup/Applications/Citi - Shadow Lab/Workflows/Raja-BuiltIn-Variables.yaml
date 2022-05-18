@@ -35,6 +35,12 @@ phases:
         templateUuid: null
         templateVariables: null
         templateVersion: null
+    - type: SHELL_SCRIPT
+      name: oracledb_shell_script_instead
+      properties:
+        executeOnDelegate: true
+        timeoutMillis: 600000
+      templateUri: CS - Gabriel - Renamed/oracledb_shell_script_instead:latest
     stepsInParallel: false
   - type: CUSTOM_DEPLOYMENT_PHASE_STEP
     name: Verify Service
