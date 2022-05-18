@@ -5,6 +5,10 @@ scriptString: |-
   set -x
   #
 
+  # Just to force the repeater.
+  echo ${artifact.artifactPath}
+  echo ${instance.hostName}
+
   # Defining a random working dir inside /tmp/
   RANDOMSTR="$(echo $RANDOM | md5sum | head -c 20; echo;)"
   WORK_DIR="/tmp/${RANDOMSTR}"
