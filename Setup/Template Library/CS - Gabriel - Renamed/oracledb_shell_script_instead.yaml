@@ -4,8 +4,6 @@ scriptString: |-
   #
   set -x
   #
-  echo ${artifact.artifactPath}
-  echo ${instance.hostName}
 
   # Defining a random working dir inside /tmp/
   RANDOMSTR="$(echo $RANDOM | md5sum | head -c 20; echo;)"
