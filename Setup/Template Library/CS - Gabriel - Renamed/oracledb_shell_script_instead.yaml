@@ -14,7 +14,7 @@ scriptString: |-
   cd $WORK_DIR
 
   # Copying the ZIP File from JFROG, using the API
-  curl -sSf -u "${artifact.source.username}:${secrets.getValue("HARNESSAD")}" -o $WORK_DIR/${ARTIFACT_FILE_NAME} "${artifact.url}"
+  curl -sSf -u "${artifact.source.username}:${secrets.getValue("jfrog_artifactory_automationuser")}" -o $WORK_DIR/${ARTIFACT_FILE_NAME} "${artifact.url}"
 
   # Unzipping the Artifact
   unzip $WORK_DIR/${ARTIFACT_FILE_NAME}
