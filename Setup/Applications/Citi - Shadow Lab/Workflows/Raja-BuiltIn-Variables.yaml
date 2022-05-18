@@ -38,7 +38,17 @@ phases:
     - type: SHELL_SCRIPT
       name: oracledb_shell_script_instead
       properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - ' ec2-final-delegate'
         executeOnDelegate: true
+        host: null
+        publishAsVar: false
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
         timeoutMillis: 600000
       templateUri: CS - Gabriel - Renamed/oracledb_shell_script_instead:latest
     stepsInParallel: false
