@@ -1,15 +1,25 @@
 harnessApiVersion: '1.0'
 type: SHELL_SCRIPT
 scriptString: |-
-  mkdir -p "${app.defaults.RUNTIME_PATH}"
+  #
+  set -x
+  #
+  echo ${artifact.artifactPath}
+  echo ${instance.hostName}
 
-  echo "current folder"
-  pwd
+  # Defining a random working dir inside /tmp/
+  RANDOMSTR="$(echo $RANDOM | md5sum | head -c 20; echo;)"
+  WORK_DIR="/tmp/${RANDOMSTR}"
+  mkdir $WORK_DIR
+  cd $WORK_DIR
 
-  echo "PRINTING THE ARTIFACT FILENAME":
-  echo "${ARTIFACT_FILE_NAME}"
+  # Copying the ZIP File from JFROG, using the API
+  curl -sSf -u "${artifact.source.username}:${secrets.getValue("HARNESSAD")}" -o $WORK_DIR/${ARTIFACT_FILE_NAME} "${artifact.url}"
 
-  echo "PRINTING THE INSTANCE HOSTNAME":
-  echo "${instance.hostName}"
+  # Unzipping the Artifact
+  unzip $WORK_DIR/${ARTIFACT_FILE_NAME}
+
+  # cleaning the temp working dir, if you want it
+  rm -rf ${WORK_DIR}
 scriptType: BASH
 timeoutMillis: 600000
