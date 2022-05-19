@@ -8,3 +8,5 @@ templateVariables:
   value: ''
 - name: helper_var
   value: ${instance.hostName}
+- name: TECNOLOGIA
+  value: ''
