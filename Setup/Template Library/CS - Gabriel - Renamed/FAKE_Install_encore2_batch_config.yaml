@@ -4,13 +4,15 @@ commandUnitType: OTHER
 commandUnits:
 - command: |+
     #!/bin/bash
+    set -x
+
     mkdir -p "${app.defaults.RUNTIME_PATH}"
 
     echo ${TECNOLOGIA}
 
     case ${TECNOLOGIA} in
          "MACBOOK")
-            echo "MACBOOK"
+            echo "ENTREI NO MACBOOK CASE"
             ;;
         "frontsAngular")
             npm ci
