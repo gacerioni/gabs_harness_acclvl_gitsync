@@ -47,8 +47,9 @@ phases:
       name: FAKE_Install_encore2_batch_config
       properties:
         commandName: FAKE_Install_encore2_batch_config
-        delegateSelectors: null
-        executeOnDelegate: false
+        delegateSelectors:
+        - ' ec2-final-delegate'
+        executeOnDelegate: true
         templateUuid: null
         templateVariables: null
         templateVersion: null
