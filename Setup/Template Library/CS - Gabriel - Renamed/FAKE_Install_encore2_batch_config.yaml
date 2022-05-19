@@ -2,12 +2,26 @@ harnessApiVersion: '1.0'
 type: SSH
 commandUnitType: OTHER
 commandUnits:
-- command: |-
+- command: |+
+    #!/bin/bash
     mkdir -p "${app.defaults.RUNTIME_PATH}"
-    echo "${helper_var}"
-
 
     echo ${TECNOLOGIA}
+
+    case ${TECNOLOGIA} in
+         "MACBOOK")
+            echo "MACBOOK"
+            ;;
+        "frontsAngular")
+            npm ci
+            export NODE_OPTIONS=--max_old_space_size=5048
+            ng build --prod
+            gcloud app deploy --project ${GC_PROJECT} -q --verbosity=info
+            ;;
+    esac
+
+    echo DONE
+
   commandUnitType: SETUP_ENV
   deploymentType: SSH
   name: Setup Env
