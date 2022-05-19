@@ -5,6 +5,9 @@ commandUnits:
 - command: |-
     mkdir -p "${app.defaults.RUNTIME_PATH}"
     echo "${helper_var}"
+
+
+    echo ${TECNOLOGIA}
   commandUnitType: SETUP_ENV
   deploymentType: SSH
   name: Setup Env
@@ -28,3 +31,4 @@ variables:
 - name: tr_filename
 - name: helper_var
   value: ${instance.hostName}
+- name: TECNOLOGIA
