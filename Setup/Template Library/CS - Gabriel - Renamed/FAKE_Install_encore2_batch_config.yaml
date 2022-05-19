@@ -42,8 +42,5 @@ commandUnits:
   name: Expand Artifact
   scriptType: BASH
 variables:
-- name: tr_filename
-- name: helper_var
-  value: ${instance.hostName}
 - name: TECNOLOGIA
   value: MACBOOK
