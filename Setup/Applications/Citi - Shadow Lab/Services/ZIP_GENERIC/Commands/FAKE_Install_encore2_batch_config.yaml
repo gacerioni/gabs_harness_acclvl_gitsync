@@ -9,4 +9,4 @@ templateVariables:
 - name: helper_var
   value: ${instance.hostName}
 - name: TECNOLOGIA
-  value: ''
+  value: MACBOOK
