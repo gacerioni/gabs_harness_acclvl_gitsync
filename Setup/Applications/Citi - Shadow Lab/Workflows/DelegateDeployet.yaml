@@ -54,7 +54,7 @@ phases:
     name: Wrap Up
     stepsInParallel: false
   provisionNodes: false
-  serviceName: DelegateDeployet
+  serviceName: DelegateDeployer
   statefulSet: false
 rollbackPhases:
 - type: KUBERNETES
@@ -77,6 +77,6 @@ rollbackPhases:
     phaseStepNameForRollback: Wrap Up
     stepsInParallel: false
   provisionNodes: false
-  serviceName: DelegateDeployet
+  serviceName: DelegateDeployer
   statefulSet: false
 templatized: false
