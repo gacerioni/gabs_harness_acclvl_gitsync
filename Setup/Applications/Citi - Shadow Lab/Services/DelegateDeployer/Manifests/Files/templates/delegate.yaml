@@ -103,7 +103,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: INIT_SCRIPT
-          value: "echo 2"
+          value: "echo 10"
         - name: DELEGATE_PROFILE
           value: "jpqEbZEwRYSlre1Q1y9SBw"
         - name: DELEGATE_TOKEN
