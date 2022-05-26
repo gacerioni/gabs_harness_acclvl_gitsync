@@ -103,7 +103,7 @@ spec:
             fieldRef:
               fieldPath: metadata.namespace
         - name: INIT_SCRIPT
-          value: "echo 1"
+          value: "echo 2"
         - name: DELEGATE_PROFILE
           value: "jpqEbZEwRYSlre1Q1y9SBw"
         - name: DELEGATE_TOKEN
@@ -125,7 +125,7 @@ spec:
         - name: JRE_VERSION
           value: 1.8.0_242
         - name: HELM3_PATH
-          value: ""
+          value: "/opt/harness-delegate/client-tools/helm/v3.8.0/helm"
         - name: HELM_PATH
           value: ""
         - name: KUSTOMIZE_PATH
