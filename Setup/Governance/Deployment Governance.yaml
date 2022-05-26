@@ -17,5 +17,9 @@ timeRangeBasedFreezeConfigs:
     from: '1640958061200'
     timeZone: America/Sao_Paulo
     to: '1640961661200'
+  userGroupSelection:
+    filterType: CUSTOM
+    userGroupNames:
+    - Account Administrator
   userGroups:
   - Account Administrator
