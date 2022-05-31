@@ -1,0 +1,20 @@
+harnessApiVersion: '1.0'
+type: AWS
+assumeCrossAccountRole: true
+crossAccountAttributes:
+  crossAccountRoleArn: arn:aws:iam::014474954170:role/cross-account-role-labs
+tag: eks-final-sa-east-1
+usageRestrictions:
+  appEnvRestrictions:
+  - appFilter:
+      filterType: ALL
+    envFilter:
+      filterTypes:
+      - PROD
+  - appFilter:
+      filterType: ALL
+    envFilter:
+      filterTypes:
+      - NON_PROD
+useEc2IamCredentials: true
+useIRSA: false
