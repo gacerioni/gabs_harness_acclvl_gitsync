@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: KUBERNETES_CLUSTER
+authType: SERVICE_ACCOUNT
+continuousEfficiencyConfig:
+  continuousEfficiencyEnabled: false
+masterUrl: https://44390DA41D8C5387D9D672025A26EE57.gr7.sa-east-1.eks.amazonaws.com
+serviceAccountToken: gcpkms:EKS SA TOKEN
+skipValidation: false
+useKubernetesDelegate: false
