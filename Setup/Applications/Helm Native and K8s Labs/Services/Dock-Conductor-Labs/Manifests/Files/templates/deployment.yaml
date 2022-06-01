@@ -16,3 +16,4 @@ spec:
       containers:
       - name: harness-coks
         image: {{ .Values.image }}
+        imagePullPolicy: Always
