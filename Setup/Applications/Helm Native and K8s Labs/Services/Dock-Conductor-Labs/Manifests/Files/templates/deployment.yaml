@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: harness-example-deployment
+  name: harness-coks-deployment
 spec:
   replicas: 1
-  serviceName: harness-example-svc
+  serviceName: harness-coks-svc
   selector:
     matchLabels:
-      app: harness-example
+      app: harness-coks
   template:
     metadata:
       labels:
-        app: harness-example
+        app: harness-coks
     spec:
       containers:
-      - name: harness-example
+      - name: harness-coks
         image: {{ .Values.image }}
