@@ -15,4 +15,4 @@ spec:
     spec:
       containers:
       - name: harness-example
-        image: ${artifact.metadata.image}
+        image: {{ .Values.image }}
