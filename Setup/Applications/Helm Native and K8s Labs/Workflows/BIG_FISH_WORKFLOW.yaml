@@ -61,4 +61,10 @@ rollbackPhases:
   provisionNodes: false
   serviceName: Dock-Conductor-Labs
   statefulSet: false
-templatized: false
+templatized: true
+userVariables:
+- type: TEXT
+  fixed: false
+  mandatory: true
+  name: namespace
+  value: dev
