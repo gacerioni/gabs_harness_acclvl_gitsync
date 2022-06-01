@@ -4,7 +4,7 @@ metadata:
   name: harness-example-deployment
 spec:
   replicas: 1
-  serviceName: harness-example
+  serviceName: harness-example-svc
   selector:
     matchLabels:
       app: harness-example
