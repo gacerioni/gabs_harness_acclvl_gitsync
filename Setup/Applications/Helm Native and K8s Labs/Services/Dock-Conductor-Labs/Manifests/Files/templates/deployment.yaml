@@ -1,9 +1,10 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: harness-example-deployment
 spec:
   replicas: 1
+  serviceName: 
   selector:
     matchLabels:
       app: harness-example
