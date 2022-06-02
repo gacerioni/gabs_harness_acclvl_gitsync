@@ -5,5 +5,5 @@ deploymentType: HELM
 infrastructure:
 - type: DIRECT_KUBERNETES
   cloudProviderName: CS - Gabs - AWS - EKS - CS Admin
-  namespace: default
+  namespace: jason
   releaseName: ${infra.kubernetes.infraId}
