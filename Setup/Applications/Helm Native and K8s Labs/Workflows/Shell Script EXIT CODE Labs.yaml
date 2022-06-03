@@ -31,6 +31,7 @@ phases:
 
           for i in 1 2 3
           do
+            echo $i
             kubectl logs job/test-runner -n default
             if [ $? -eq 0 ]; then
                break;
@@ -38,7 +39,6 @@ phases:
             sleep 3
           done
           kubectl logs job/test-runner -n default
-          exit 0
         scriptType: BASH
         secretOutputVars: ''
         sshKeyRefName: null
