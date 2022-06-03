@@ -27,7 +27,7 @@ phases:
         outputVars: variablegabs
         publishAsVar: true
         scriptString: |-
-          export variablegabs="banana"
+          variablegabs="banana"
 
           for i in 1 2 3
           do
