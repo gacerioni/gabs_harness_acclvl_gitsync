@@ -27,7 +27,8 @@ phases:
         outputVars: ''
         publishAsVar: false
         scriptString: |-
-          while true; do
+          for i in 1 2 3 4 5
+          do
             kubectl logs job/test-runner -n default
             if [ $? -eq 0 ]; then
                break;
@@ -35,6 +36,7 @@ phases:
             sleep 3
           done
           kubectl logs job/test-runner -n default
+          exit 0
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
