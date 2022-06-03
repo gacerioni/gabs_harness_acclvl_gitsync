@@ -24,10 +24,12 @@ phases:
         - eks-final-sa-east-1
         executeOnDelegate: true
         host: null
-        outputVars: ''
-        publishAsVar: false
+        outputVars: variablegabs
+        publishAsVar: true
         scriptString: |-
-          for i in 1 2 3 4 5
+          variablegabs="banana"
+
+          for i in 1 2 3
           do
             kubectl logs job/test-runner -n default
             if [ $? -eq 0 ]; then
@@ -38,9 +40,10 @@ phases:
           kubectl logs job/test-runner -n default
           exit 0
         scriptType: BASH
+        secretOutputVars: ''
         sshKeyRefName: null
-        sweepingOutputName: null
-        sweepingOutputScope: null
+        sweepingOutputName: HELPER
+        sweepingOutputScope: PIPELINE
         templateExpressions: null
         templateUuid: null
         templateVariables: null
