@@ -52,6 +52,26 @@ phases:
     stepsInParallel: false
   - type: COLLECT_ARTIFACT
     name: Collect Artifact
+    steps:
+    - type: SHELL_SCRIPT
+      name: Print Context Variables
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - eks-final-sa-east-1
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: echo "${context.HELPER.variablegabs}"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
     stepsInParallel: false
   - type: WRAP_UP
     name: Wrap Up
