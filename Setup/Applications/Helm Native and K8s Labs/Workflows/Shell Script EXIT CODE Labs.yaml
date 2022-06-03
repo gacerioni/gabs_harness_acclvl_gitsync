@@ -14,6 +14,35 @@ phases:
   phaseSteps:
   - type: PREPARE_STEPS
     name: Prepare Steps
+    steps:
+    - type: SHELL_SCRIPT
+      name: Test exit codes
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - eks-final-sa-east-1
+        executeOnDelegate: true
+        host: null
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          set -e
+          while true; do
+            kubectl logs job/test-runner -n default
+            if [ $? -eq 0 ]; then
+               break;
+            fi
+            sleep 3
+          done
+          kubectl logs job/test-runner -n default
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
     stepsInParallel: false
   - type: COLLECT_ARTIFACT
     name: Collect Artifact
