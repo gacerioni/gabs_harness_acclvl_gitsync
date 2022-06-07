@@ -128,6 +128,22 @@ phases:
         templateExpressions: null
         templateVariables: ''
         timeoutMillis: 60000
+    - type: HTTP
+      name: HTTP
+      properties:
+        assertion: ${httpResponseCode}==200
+        body: ''
+        executeWithPreviousSteps: false
+        method: GET
+        publishAsVar: false
+        responseProcessingExpressions: ''
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        tags: null
+        templateVariables: ''
+        timeoutMillis: 10000
+        url: https://app.harness.io/nada
+        useProxy: false
     stepsInParallel: false
   - type: K8S_PHASE_STEP
     name: Wrap Up
