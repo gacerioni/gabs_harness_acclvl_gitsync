@@ -67,10 +67,6 @@ phases:
     - assertionExpression: 1 == 1
       scope: SPECIFIC_STEPS
       steps:
-      - HTTP
-    - assertionExpression: 1 == 1
-      scope: SPECIFIC_STEPS
-      steps:
       - Approval
     steps:
     - type: SHELL_SCRIPT
