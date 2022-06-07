@@ -102,7 +102,7 @@ phases:
     - type: HTTP
       name: HTTP
       properties:
-        assertion: ${httpResponseCode}==200 and json.select("ip", ${httpResponseBody}) == "15.229.2.156"
+        assertion: ${httpResponseCode}==200 and json.select("ip", ${httpResponseBody}) == "1.1.1.1"
         body: ''
         executeWithPreviousSteps: false
         method: GET
