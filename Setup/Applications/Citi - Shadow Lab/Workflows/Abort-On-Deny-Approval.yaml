@@ -63,6 +63,15 @@ phases:
         scriptString: |-
           PATH_FOR_KUBECONFIG="${HARNESS_KUBE_CONFIG_PATH}"
 
+          echo "#########################"
+          echo "This is the file kubeconfig for this runtime:"
+          echo "${PATH_FOR_KUBECONFIG}"
+          ls -ltr ${PATH_FOR_KUBECONFIG}
+          echo ""
+
+          echo "#########################"
+          echo "printing that file content:"
+          echo ""
           cat "${PATH_FOR_KUBECONFIG}"
         scriptType: BASH
         sshKeyRefName: null
