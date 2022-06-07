@@ -103,13 +103,6 @@ phases:
         templateExpressions: null
         templateVariables: ''
         timeoutMillis: 60000
-    - type: APPROVAL
-      name: Approval
-      properties:
-        approvalStateType: USER_GROUP
-        timeoutMillis: 86400000
-        userGroupNames:
-        - Account Administrator
     - type: HTTP
       name: HTTP
       properties:
@@ -126,6 +119,13 @@ phases:
         timeoutMillis: 10000
         url: https://app.harness.io/nada
         useProxy: false
+    - type: APPROVAL
+      name: Approval
+      properties:
+        approvalStateType: USER_GROUP
+        timeoutMillis: 86400000
+        userGroupNames:
+        - Account Administrator
     - type: SHELL_SCRIPT
       name: Shell Script 5
       properties:
