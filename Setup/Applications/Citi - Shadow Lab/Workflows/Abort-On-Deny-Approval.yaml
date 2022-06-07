@@ -119,8 +119,11 @@ phases:
         responseProcessingExpressions: ''
         sweepingOutputName: null
         sweepingOutputScope: null
-        tags: null
-        templateVariables: ''
+        tags:
+        - ' ec2-final-delegate'
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
         timeoutMillis: 10000
         url: https://app.harness.io/nada
         useProxy: false
