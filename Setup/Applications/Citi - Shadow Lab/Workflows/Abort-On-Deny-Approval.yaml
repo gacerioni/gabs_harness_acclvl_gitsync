@@ -102,10 +102,10 @@ phases:
     - type: HTTP
       name: HTTP
       properties:
-        assertion: ''
+        assertion: ${httpResponseCode}==200 and json.select("ip", ${httpResponseBody}) == "15.229.2.156"
         body: ''
         executeWithPreviousSteps: false
-        method: POST
+        method: GET
         publishAsVar: false
         responseProcessingExpressions: ''
         sweepingOutputName: null
@@ -116,7 +116,7 @@ phases:
         templateVariables: null
         templateVersion: null
         timeoutMillis: 5000
-        url: https://dgdagadgdaggdsa/nada
+        url: http://ip.jsontest.com/
         useProxy: false
     - type: APPROVAL
       name: Approval
