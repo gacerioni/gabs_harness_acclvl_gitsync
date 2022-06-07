@@ -4,4 +4,9 @@ enableCollection: true
 helmChartConfig:
   chartName: nginx-with-version-page
   connectorName: icg-helm-prod
+helmCommandFlag:
+  valueMap:
+    HISTORY: -n ebv274helmcharts
+    UPGRADE: --install
+    LIST: -n ebv274helmcharts
 storeType: HelmChartRepo
