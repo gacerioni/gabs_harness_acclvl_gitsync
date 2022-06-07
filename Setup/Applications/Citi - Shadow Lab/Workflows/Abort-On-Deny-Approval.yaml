@@ -111,7 +111,7 @@ phases:
     - type: HTTP
       name: HTTP
       properties:
-        assertion: ${httpResponseCode}==200
+        assertion: ''
         body: ''
         executeWithPreviousSteps: false
         method: GET
