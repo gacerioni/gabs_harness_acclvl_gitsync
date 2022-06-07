@@ -3,7 +3,7 @@ type: APPLICATION_MANIFEST
 enableCollection: true
 helmChartConfig:
   chartName: nginx-with-version-page
-  connectorName: icg-helm-dev
+  connectorName: icg-helm-prod
 helmCommandFlag:
   valueMap:
     TEMPLATE: --include-crds
