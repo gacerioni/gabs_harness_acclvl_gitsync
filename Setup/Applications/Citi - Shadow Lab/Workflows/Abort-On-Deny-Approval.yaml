@@ -52,19 +52,10 @@ phases:
       - AUTHENTICATION
       - VERIFICATION_FAILURE
       - APPLICATION_ERROR
-      repairActionCode: ABORT_WORKFLOW_EXECUTION
-      retryCount: 0
-      specificSteps:
-      - Approval
-    - failureTypes:
-      - CONNECTIVITY
-      - AUTHENTICATION
-      - VERIFICATION_FAILURE
-      - APPLICATION_ERROR
       repairActionCode: END_EXECUTION
       retryCount: 0
       specificSteps:
-      - Approval
+      - HTTP
     name: Verify
     stepSkipStrategies:
     - assertionExpression: 1 == 1
