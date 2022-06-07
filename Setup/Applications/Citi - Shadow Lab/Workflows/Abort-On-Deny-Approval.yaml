@@ -66,6 +66,11 @@ phases:
       specificSteps:
       - Approval
     name: Verify
+    stepSkipStrategies:
+    - assertionExpression: 1 == 1
+      scope: SPECIFIC_STEPS
+      steps:
+      - Approval
     steps:
     - type: SHELL_SCRIPT
       name: Shell Script 2
