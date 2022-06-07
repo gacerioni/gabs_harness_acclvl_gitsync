@@ -125,7 +125,7 @@ phases:
         templateVariables: null
         templateVersion: null
         timeoutMillis: 10000
-        url: https://app.harness.io/nada
+        url: https://app.harness.io/
         useProxy: false
     - type: APPROVAL
       name: Approval
