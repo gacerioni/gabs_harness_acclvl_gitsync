@@ -60,7 +60,10 @@ phases:
         includeInfraSelectors: true
         outputVars: ''
         publishAsVar: false
-        scriptString: echo "${HARNESS_KUBE_CONFIG_PATH}"
+        scriptString: |-
+          PATH_FOR_KUBECONFIG="${HARNESS_KUBE_CONFIG_PATH}"
+
+          cat "${PATH_FOR_KUBECONFIG}"
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
