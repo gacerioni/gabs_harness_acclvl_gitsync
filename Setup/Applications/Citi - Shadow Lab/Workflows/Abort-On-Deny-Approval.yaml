@@ -50,6 +50,24 @@ phases:
         delegateSelectors:
         - eks-final-sa-east-1
         stateTimeoutInMinutes: 10
+    - type: SHELL_SCRIPT
+      name: Shell Script_2
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        executeOnDelegate: true
+        host: null
+        includeInfraSelectors: true
+        outputVars: ''
+        publishAsVar: false
+        scriptString: echo "${HARNESS_KUBE_CONFIG_PATH}"
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
     stepsInParallel: false
   - type: K8S_PHASE_STEP
     failureStrategies:
