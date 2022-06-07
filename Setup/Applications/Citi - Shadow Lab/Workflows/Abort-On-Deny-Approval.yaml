@@ -58,7 +58,7 @@ phases:
       - AUTHENTICATION
       - VERIFICATION_FAILURE
       - APPLICATION_ERROR
-      repairActionCode: END_EXECUTION
+      repairActionCode: ABORT_WORKFLOW_EXECUTION
       retryCount: 0
       specificSteps:
       - HTTP
