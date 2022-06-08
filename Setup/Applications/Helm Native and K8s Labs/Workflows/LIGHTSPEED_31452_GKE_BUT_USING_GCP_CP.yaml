@@ -30,7 +30,7 @@ phases:
       name: Rollout Deployment
       properties:
         delegateSelectors:
-        - eric-citi
+        - eks-final-sa-east-1
         stateTimeoutInMinutes: 10
         templateUuid: null
         templateVariables: null
