@@ -53,9 +53,9 @@ phases:
         publishAsVar: false
         scriptString: |-
           export KUBECONFIG=${HARNESS_KUBE_CONFIG_PATH}
-          #cat "${KUBECONFIG}"
+          cat "${KUBECONFIG}"
 
-          /opt/harness-delegate/client-tools/kubectl/v1.13.2/kubectl get ns
+          #/opt/harness-delegate/client-tools/kubectl/v1.13.2/kubectl get ns
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
