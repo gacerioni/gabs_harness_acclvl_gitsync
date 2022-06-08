@@ -18,9 +18,9 @@ notificationRules:
   - Account Administrator
 phases:
 - type: KUBERNETES
-  computeProviderName: CS - Gabs - AWS - EKS - CS Admin
+  computeProviderName: CS - Gabs - Google Cloud Platform
   daemonSet: false
-  infraDefinitionName: EKS_K8s_SA_EAST_1
+  infraDefinitionName: LIGHTSPEED_31452_GKE_BUT_USING_GCP_CP
   name: Rolling
   phaseSteps:
   - type: K8S_PHASE_STEP
@@ -74,9 +74,9 @@ phases:
   statefulSet: false
 rollbackPhases:
 - type: KUBERNETES
-  computeProviderName: CS - Gabs - AWS - EKS - CS Admin
+  computeProviderName: CS - Gabs - Google Cloud Platform
   daemonSet: false
-  infraDefinitionName: EKS_K8s_SA_EAST_1
+  infraDefinitionName: LIGHTSPEED_31452_GKE_BUT_USING_GCP_CP
   name: Rollback Rolling
   phaseNameForRollback: Rolling
   phaseSteps:
