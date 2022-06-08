@@ -53,15 +53,17 @@ phases:
         publishAsVar: false
         scriptString: |-
           export KUBECONFIG=${HARNESS_KUBE_CONFIG_PATH}
+          echo "${KUBECONFIG}"
 
           kubectl get ns
-          kubectl cluster-info
         scriptType: BASH
         sshKeyRefName: null
         sweepingOutputName: null
         sweepingOutputScope: null
         templateExpressions: null
-        templateVariables: ''
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
         timeoutMillis: 60000
     stepsInParallel: false
   - type: K8S_PHASE_STEP
