@@ -38,6 +38,31 @@ phases:
     stepsInParallel: false
   - type: K8S_PHASE_STEP
     name: Verify
+    steps:
+    - type: SHELL_SCRIPT
+      name: Shell Script
+      properties:
+        commandPath: null
+        connectionAttributeName: null
+        delegateSelectors:
+        - eks-final-sa-east-1
+        executeOnDelegate: true
+        host: null
+        includeInfraSelectors: false
+        outputVars: ''
+        publishAsVar: false
+        scriptString: |-
+          export KUBECONFIG=${HARNESS_KUBE_CONFIG_PATH}
+
+          kubectl get ns
+          kubectl cluster-info
+        scriptType: BASH
+        sshKeyRefName: null
+        sweepingOutputName: null
+        sweepingOutputScope: null
+        templateExpressions: null
+        templateVariables: ''
+        timeoutMillis: 60000
     stepsInParallel: false
   - type: K8S_PHASE_STEP
     name: Wrap Up
