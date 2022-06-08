@@ -45,7 +45,7 @@ phases:
         commandPath: null
         connectionAttributeName: null
         delegateSelectors:
-        - eks-final-sa-east-1
+        - ' ec2-final-delegate'
         executeOnDelegate: true
         host: null
         includeInfraSelectors: false
