@@ -53,7 +53,7 @@ phases:
         publishAsVar: false
         scriptString: |-
           export KUBECONFIG=${HARNESS_KUBE_CONFIG_PATH}
-          echo "${KUBECONFIG}"
+          cat "${KUBECONFIG}"
 
           kubectl get ns
         scriptType: BASH
