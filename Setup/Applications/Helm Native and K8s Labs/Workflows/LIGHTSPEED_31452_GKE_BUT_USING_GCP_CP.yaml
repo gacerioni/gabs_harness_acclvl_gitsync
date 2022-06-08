@@ -45,7 +45,7 @@ phases:
         commandPath: null
         connectionAttributeName: null
         delegateSelectors:
-        - eric-citi
+        - eks-final-sa-east-1
         executeOnDelegate: true
         host: null
         includeInfraSelectors: false
