@@ -69,7 +69,6 @@ phases:
 - type: KUBERNETES
   computeProviderName: Gabs - PC - K8s
   daemonSet: false
-  infraDefinitionName: Gabs-PC-Labs
   name: Primary
   phaseSteps:
   - type: K8S_PHASE_STEP
@@ -87,6 +86,13 @@ phases:
   provisionNodes: false
   serviceName: Private ECR Lab
   statefulSet: false
+  templateExpressions:
+  - expression: ${InfraDefinition_KUBERNETES}
+    fieldName: infraDefinitionId
+    metadata:
+    - name: relatedField
+    - name: entityType
+      value: INFRASTRUCTURE_DEFINITION
 preDeploymentSteps:
 - type: SHELL_SCRIPT
   name: Gather Deployed Artifact Info
@@ -129,7 +135,6 @@ rollbackPhases:
 - type: KUBERNETES
   computeProviderName: Gabs - PC - K8s
   daemonSet: false
-  infraDefinitionName: Gabs-PC-Labs
   name: Rollback Primary
   phaseNameForRollback: Primary
   phaseSteps:
@@ -148,10 +153,17 @@ rollbackPhases:
   provisionNodes: false
   serviceName: Private ECR Lab
   statefulSet: false
+  templateExpressions:
+  - expression: ${InfraDefinition_KUBERNETES}
+    fieldName: infraDefinitionId
+    metadata:
+    - name: relatedField
+    - name: entityType
+      value: INFRASTRUCTURE_DEFINITION
 templatized: true
 userVariables:
 - type: ENTITY
-  description: Variable for Infrastructure Definition entity in Rollback Canary Deployment
+  description: Variable for Infrastructure Definition entity in Rollback Primary
   fixed: false
   mandatory: true
   name: InfraDefinition_KUBERNETES
