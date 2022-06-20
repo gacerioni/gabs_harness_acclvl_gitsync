@@ -59,6 +59,13 @@ phases:
   provisionNodes: false
   serviceName: Private ECR Lab
   statefulSet: false
+  templateExpressions:
+  - expression: ${InfraDefinition_KUBERNETES}
+    fieldName: infraDefinitionId
+    metadata:
+    - name: relatedField
+    - name: entityType
+      value: INFRASTRUCTURE_DEFINITION
 - type: KUBERNETES
   computeProviderName: Gabs - PC - K8s
   daemonSet: false
@@ -112,6 +119,13 @@ rollbackPhases:
   provisionNodes: false
   serviceName: Private ECR Lab
   statefulSet: false
+  templateExpressions:
+  - expression: ${InfraDefinition_KUBERNETES}
+    fieldName: infraDefinitionId
+    metadata:
+    - name: relatedField
+    - name: entityType
+      value: INFRASTRUCTURE_DEFINITION
 - type: KUBERNETES
   computeProviderName: Gabs - PC - K8s
   daemonSet: false
@@ -134,4 +148,10 @@ rollbackPhases:
   provisionNodes: false
   serviceName: Private ECR Lab
   statefulSet: false
-templatized: false
+templatized: true
+userVariables:
+- type: ENTITY
+  description: Variable for Infrastructure Definition entity in Rollback Canary Deployment
+  fixed: false
+  mandatory: true
+  name: InfraDefinition_KUBERNETES
