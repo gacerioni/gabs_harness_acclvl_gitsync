@@ -10,5 +10,5 @@ metadata:
     product-line: productinfrastructure
 data:
   BACKEND_PORT: "4000"
-  CLIENT_NAME_VERIFICATION_ALLOWED_CLIENTS: {{.Values.sidecarclients}}
-  CLIENT_NAME_VERIFICATION_ENABLED: {{.Values.sidecarClientnameverf}}
+  CLIENT_NAME_VERIFICATION_ALLOWED_CLIENTS: {{.Values.sidecarclients | toString}}
+  CLIENT_NAME_VERIFICATION_ENABLED: {{.Values.sidecarClientnameverf | toString}}
