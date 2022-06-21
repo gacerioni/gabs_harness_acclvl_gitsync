@@ -11,4 +11,4 @@ metadata:
 data:
   BACKEND_PORT: "4000"
   CLIENT_NAME_VERIFICATION_ALLOWED_CLIENTS: "{{.Values.sidecarclients}}"
-  CLIENT_NAME_VERIFICATION_ENABLED: "{{.Values.sidecarClientnameverf | toString}}"
+  CLIENT_NAME_VERIFICATION_ENABLED: "{{.Values.sidecarClientnameverf}}"
