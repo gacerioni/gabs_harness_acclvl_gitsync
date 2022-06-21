@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: value-testing-ui-sidecar-config-map
-  namespace: vt-vtplatform
+  namespace: {{.Values.namespace}}
   annotations:
   labels:
     app: value-testing-ui
