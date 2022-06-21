@@ -9,6 +9,6 @@ metadata:
     product: valuetesting
     product-line: productinfrastructure
 data:
-  BACKEND_PORT: 4000
+  BACKEND_PORT: "4000"
   CLIENT_NAME_VERIFICATION_ALLOWED_CLIENTS: "{{.Values.sidecarclients}}"
   CLIENT_NAME_VERIFICATION_ENABLED: "{{.Values.sidecarClientnameverf}}"
