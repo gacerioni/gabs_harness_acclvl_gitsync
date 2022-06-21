@@ -1,0 +1,13 @@
+kind: ConfigMap
+metadata:
+  name: value-testing-ui-sidecar-config-map
+  namespace: vt-vtplatform
+  annotations:
+  labels:
+    app: value-testing-ui
+    product: valuetesting
+    product-line: productinfrastructure
+data:
+  BACKEND_PORT: 4000
+  CLIENT_NAME_VERIFICATION_ALLOWED_CLIENTS: {{.Values.sidecarclients}}
+  CLIENT_NAME_VERIFICATION_ENABLED: {{.Values.sidecarClientnameverf}}
