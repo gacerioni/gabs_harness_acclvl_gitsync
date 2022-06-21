@@ -1,0 +1,9 @@
+harnessApiVersion: '1.0'
+type: INFRA_DEFINITION
+cloudProviderType: KUBERNETES_CLUSTER
+deploymentType: HELM
+infrastructure:
+- type: DIRECT_KUBERNETES
+  cloudProviderName: Gabs - PC - K8s
+  namespace: native-helm
+  releaseName: ${infra.kubernetes.infraId}
