@@ -2,6 +2,9 @@ harnessApiVersion: '1.0'
 type: SERVICE
 artifactType: DOCKER
 configVariables:
+- name: sidecarSslCiphers
+  value: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
+  valueType: TEXT
 - name: sidecarKeystoreType
   value: JKS
   valueType: TEXT
