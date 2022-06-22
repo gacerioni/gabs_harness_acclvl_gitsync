@@ -3,5 +3,6 @@ type: DOCKER
 delegateSelectors:
 - GCP_K8s_Customer_Success
 password: gcpkms:DockerHubGabsPrivatePWD
+skipValidation: false
 url: https://registry.hub.docker.com/v2/
 username: gacerioni
