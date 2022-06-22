@@ -1,0 +1,48 @@
+harnessApiVersion: '1.0'
+type: PIPELINE
+description: https://harnesssupport.zendesk.com/agent/tickets/29543
+pipelineStages:
+- type: APPROVAL
+  name: Approval 0
+  parallel: false
+  properties:
+    workflowVariables: null
+    approvalStateParams:
+      shellScriptApprovalParams:
+        scriptString: |-
+          cd /root/harness-service-now/
+
+          CHANGE_NUMBER=${context.HELPER.CHG_NUMBER}
+          CMDB_CI_NAME=${context.HELPER.SVC_NAME}
+          SNOW_USER=svc_harness_CD
+          SNOW_PASS=${secrets.getValue("harness_user")}
+          URL_SNOW="https://c6bank.service-now.com"
+
+          echo "########"
+          echo "${CHANGE_NUMBER}"
+          echo "${CMDB_CI_NAME}"
+          echo "${SNOW_USER}"
+          echo "${SNOW_PASS}"
+          echo "${URL_SNOW}"
+          echo "########"
+
+          CHG_RESULT="curl -s "$URL_SNOW" --request GET --header "Accept:application/json" --user "$SNOW_USER":"$SNOW_PASS""
+          echo "########DANGER########"
+          echo "PRINTING PWD DIRECTLY"
+          echo ${secrets.getValue("harness_user")}
+          echo "PRINTING RAW PWD:"
+          echo $SNOW_PASS
+          echo "PRINTING THE CURL COMMAND:"
+          echo $CHG_RESULT
+          echo "#######################"
+
+          echo ${secrets.getValue("administartor_local_winrm_labs")}
+
+          export HARNESS_APPROVAL_STATUS="APPROVED"
+        retryInterval: 30000
+    stageName: Custom Approval
+    timeoutMillis: 86400000
+    approvalStateType: SHELL_SCRIPT
+  skipCondition:
+    type: DO_NOT_SKIP
+  stageName: Custom Approval
