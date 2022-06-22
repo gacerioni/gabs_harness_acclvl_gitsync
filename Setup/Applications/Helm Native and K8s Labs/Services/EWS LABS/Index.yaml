@@ -2,6 +2,9 @@ harnessApiVersion: '1.0'
 type: SERVICE
 artifactType: DOCKER
 configVariables:
+- name: stressTestEnabled
+  value: 'false'
+  valueType: TEXT
 - name: sample_secret
   value: hashicorpvault://TEST_REGIONS/harness/BARTOLO#value
   valueType: ENCRYPTED_TEXT
