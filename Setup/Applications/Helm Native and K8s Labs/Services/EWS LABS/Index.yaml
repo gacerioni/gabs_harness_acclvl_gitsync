@@ -2,6 +2,9 @@ harnessApiVersion: '1.0'
 type: SERVICE
 artifactType: DOCKER
 configVariables:
+- name: fixedRateInMilliseconds
+  value: '30000'
+  valueType: TEXT
 - name: enableAppD
   value: 'false'
   valueType: TEXT
