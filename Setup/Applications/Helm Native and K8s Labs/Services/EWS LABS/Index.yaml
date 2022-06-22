@@ -3,7 +3,7 @@ type: SERVICE
 artifactType: DOCKER
 configVariables:
 - name: sidecarClientnameverf
-  value: version 1
+  value: v1
   valueType: TEXT
 - name: sidecarclients
   value: sidecar-client
