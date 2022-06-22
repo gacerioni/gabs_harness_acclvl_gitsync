@@ -2,9 +2,6 @@ harnessApiVersion: '1.0'
 type: SERVICE
 artifactType: DOCKER
 configVariables:
-- name: sidecarClientnameverf
-  value: '1234567'
-  valueType: TEXT
 - name: sidecarclients
   value: blablabla-123
   valueType: TEXT
