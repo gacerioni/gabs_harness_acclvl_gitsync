@@ -7,6 +7,10 @@ dockercfg: ${artifact.source.dockerconfig}
 createNamespace: true
 namespace: ${infra.kubernetes.namespace}
 
+# EWS BLOCK
+product: testing
+productLine: testingews
+
 ## Sidecar
 sidecar:
   enabled: ${serviceVariable.enableSidecar}
