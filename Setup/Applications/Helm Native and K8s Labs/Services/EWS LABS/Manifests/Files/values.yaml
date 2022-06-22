@@ -1,31 +1,25 @@
 name: harness-example
 replicas: 1
 
-sidecarclients: "${serviceVariable.sidecarclients}"
-sidecarClientnameverf: "${serviceVariable.sidecarClientnameverf}"
-
 image: ${artifact.metadata.image}
 dockercfg: ${artifact.source.dockerconfig}
 
 createNamespace: true
 namespace: ${infra.kubernetes.namespace}
 
-# Service Type allow you to specify what kind of service you want.
-# Possible values for ServiceVariableType are:
-# ClusterIP | NodePort | LoadBalancer | ExternalName
-serviceType: LoadBalancer
-
-# A Service can map an incoming port to any targetPort.
-# targetPort is where application is listening on inside the container.
-servicePort: 80
-serviceTargetPort: 80
-
-# Specify all environment variables to be added to the container.
-# The following two maps, config and secrets, are put into a ConfigMap
-# and a Secret, respectively.
-# Both are added to the container environment in podSpec as envFrom source.
-env:
-  config:
-    key1: value1
-  secrets:
-    key2: value2
+## Sidecar
+sidecar:
+  enabled: ${serviceVariable.enableSidecar}
+  image: ${serviceVariable.sidecarImageWithTag}
+  port: 9080
+  env:
+    config:
+      secretDataDir: /home/jboss/secrets
+      keyStoreType: ${serviceVariable.sidecarKeystoreType}
+      sslCiphers: ${serviceVariable.sidecarSslCiphers}
+      serverKeystoreData: ${configFile.getAsBase64("sidecarServerKeystoreData")}
+      allowedclients: ${serviceVariable.sidecarclients}
+      clientverf: ${serviceVariable.sidecarClientnameverf}
+      applicationPort: 4000
+    secrets:
+      serverSslKeystoreCredential: ${serviceVariable.sidecarServerSslKeystoreCredential}
