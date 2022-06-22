@@ -2,6 +2,9 @@ harnessApiVersion: '1.0'
 type: SERVICE
 artifactType: DOCKER
 configVariables:
+- name: sidecarKeystoreType
+  value: JKS
+  valueType: TEXT
 - name: sidecarImageWithTag
   value: dev.registry.ews.int/ews/platform/ews-cm/master/tls-sidecar:1.0.0.6258
   valueType: TEXT
