@@ -12,8 +12,8 @@ metadata:
 data:
   BACKEND_PORT: "{{.Values.sidecar.env.config.applicationPort}}"
   SERVER_SSL_KEYSTORE_TYPE: {{.Values.sidecar.env.config.keyStoreType}}
-  SSL_CIPHERS: "{{.Values.sidecar.env.config.sslCiphers}}"
-  SERVER_SSL_KEY_STORE_LOCATION: "{{.Values.sidecar.env.config.secretDataDir}}"
-  CLIENT_NAME_VERIFICATION_ALLOWED_CLIENTS: "{{.Values.sidecar.env.config.allowedclients}}"
-  CLIENT_NAME_VERIFICATION_ENABLED: "{{.Values.sidecar.env.config.clientverf}}"
+  SSL_CIPHERS: {{.Values.sidecar.env.config.sslCiphers}}
+  SERVER_SSL_KEY_STORE_LOCATION: {{.Values.sidecar.env.config.secretDataDir}}
+  CLIENT_NAME_VERIFICATION_ALLOWED_CLIENTS: {{.Values.sidecar.env.config.allowedclients}}
+  CLIENT_NAME_VERIFICATION_ENABLED: {{.Values.sidecar.env.config.clientverf}}
 {{- end}}
