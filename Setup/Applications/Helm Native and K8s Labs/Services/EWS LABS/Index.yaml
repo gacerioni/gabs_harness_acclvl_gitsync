@@ -2,6 +2,9 @@ harnessApiVersion: '1.0'
 type: SERVICE
 artifactType: DOCKER
 configVariables:
+- name: sidecarclients
+  value: sidecar-client
+  valueType: TEXT
 - name: sidecarServerSslKeystoreCredential
   value: gcpkms:administartor_local_winrm_labs
   valueType: ENCRYPTED_TEXT
