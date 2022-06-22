@@ -1,14 +1,19 @@
+{{- if .Values.sidecar.enabled }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: value-testing-ui-sidecar-config-map
+  name: {{.Values.name}}-sidecar-config-map
   namespace: {{.Values.namespace}}
   annotations:
   labels:
-    app: value-testing-ui
-    product: valuetesting
-    product-line: productinfrastructure
+    app: {{.Values.name}}
+    product: {{.Values.product}}
+    product-line: {{.Values.productLine}}
 data:
-  BACKEND_PORT: "4000"
-  CLIENT_NAME_VERIFICATION_ALLOWED_CLIENTS: "{{.Values.sidecarclients | toString}}"
-  CLIENT_NAME_VERIFICATION_ENABLED: "{{.Values.sidecarClientnameverf | toString}}"
+  BACKEND_PORT: {{.Values.sidecar.env.config.applicationPort}}
+  SERVER_SSL_KEYSTORE_TYPE: {{.Values.sidecar.env.config.keyStoreType}}
+  SSL_CIPHERS: {{.Values.sidecar.env.config.sslCiphers}}
+  SERVER_SSL_KEY_STORE_LOCATION: {{.Values.sidecar.env.config.secretDataDir}}
+  CLIENT_NAME_VERIFICATION_ALLOWED_CLIENTS: {{.Values.sidecar.env.config.allowedclients}}
+  CLIENT_NAME_VERIFICATION_ENABLED: {{.Values.sidecar.env.config.clientverf}}  
+{{- end}}
