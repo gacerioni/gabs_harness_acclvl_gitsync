@@ -2,6 +2,9 @@ harnessApiVersion: '1.0'
 type: SERVICE
 artifactType: DOCKER
 configVariables:
+- name: sample_config_variable
+  value: dev-sample-config
+  valueType: TEXT
 - name: fixedRateInMilliseconds
   value: '30000'
   valueType: TEXT
