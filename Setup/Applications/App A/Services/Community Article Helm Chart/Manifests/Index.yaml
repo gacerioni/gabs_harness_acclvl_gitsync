@@ -1,6 +1,0 @@
-harnessApiVersion: '1.0'
-type: APPLICATION_MANIFEST
-helmChartConfig:
-  chartName: community-nginx-gabs
-  connectorName: Community Article Helm Chart
-storeType: HelmChartRepo
