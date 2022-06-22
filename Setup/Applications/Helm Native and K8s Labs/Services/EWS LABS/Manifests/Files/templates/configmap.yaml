@@ -10,7 +10,7 @@ metadata:
     product: {{.Values.product}}
     product-line: {{.Values.productLine}}
 data:
-  BACKEND_PORT: {{.Values.sidecar.env.config.applicationPort}}
+  BACKEND_PORT: {{.Values.sidecar.env.config.applicationPort | toString}}
   SERVER_SSL_KEYSTORE_TYPE: "{{.Values.sidecar.env.config.keyStoreType}}"
   SSL_CIPHERS: "{{.Values.sidecar.env.config.sslCiphers}}"
   SERVER_SSL_KEY_STORE_LOCATION: "{{.Values.sidecar.env.config.secretDataDir}}"
