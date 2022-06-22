@@ -3,7 +3,7 @@ type: KUBERNETES_CLUSTER
 continuousEfficiencyConfig:
   continuousEfficiencyEnabled: true
 delegateSelectors:
-- gke-immutable-delegate
+- eric-citi
 skipValidation: false
 usageRestrictions:
   appEnvRestrictions:
