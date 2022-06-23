@@ -1,7 +1,7 @@
 harnessApiVersion: '1.0'
 type: APPLICATION
 branchName: main
-description: criacao de cloud function para leitura da base de dead-letter
+description: criacao de cloud function para leitura da base
 gitConnector: Account Lvl Git Sync Personal
 isGitSyncEnabled: true
 repoName: gabs_harness_acclvl_gitsync
