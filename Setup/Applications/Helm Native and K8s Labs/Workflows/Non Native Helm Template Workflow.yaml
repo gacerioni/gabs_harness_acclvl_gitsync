@@ -63,7 +63,7 @@ phases:
         templateVersion: null
         timeoutMillis: 60000
     - type: SHELL_SCRIPT
-      name: PRINT ${HARNESS_KUBE_CONFIG_PATH} ON ANOTHER DEL
+      name: PRINT ON ANOTHER DEL
       properties:
         commandPath: null
         connectionAttributeName: null
@@ -80,7 +80,9 @@ phases:
         sweepingOutputName: null
         sweepingOutputScope: null
         templateExpressions: null
-        templateVariables: ''
+        templateUuid: null
+        templateVariables: null
+        templateVersion: null
         timeoutMillis: 60000
     stepsInParallel: false
   - type: K8S_PHASE_STEP
