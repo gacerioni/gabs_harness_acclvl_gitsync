@@ -4,6 +4,15 @@ pipelineStages:
 - type: ENV_STATE
   name: Non Native Helm Template Workflow
   parallel: false
+  runtimeInputs:
+    runtimeInputVariables:
+    - Environment
+    - Service
+    - InfraDefinition_KUBERNETES
+    timeout: 86400000
+    timeoutAction: END_EXECUTION
+    userGroupNames:
+    - Account Administrator
   skipCondition:
     type: DO_NOT_SKIP
   stageName: STAGE 1
@@ -11,12 +20,12 @@ pipelineStages:
   workflowVariables:
   - entityType: ENVIRONMENT
     name: Environment
-    value: prod
+    value: ${env}
   - entityType: SERVICE
     name: Service
-    value: CITI_icg-helm
+    value: ${svc}
   - entityType: INFRASTRUCTURE_DEFINITION
     name: InfraDefinition_KUBERNETES
-    value: EKS_K8s_SA_EAST_1
+    value: ${infra}
   - name: SiteURL
     value: ruchi
