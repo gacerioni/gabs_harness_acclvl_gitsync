@@ -1,6 +1,7 @@
 harnessApiVersion: '1.0'
 type: SHELL_SCRIPT
-scriptString: |
-  secret=$(echo "&ulsS94kIdDT")
+scriptString: |-
+  helperVar="$(cat /opt/harness-delegate/harness-delegate/JFROG_PWD_2)"
+  secret="${helperVar}"
 scriptType: BASH
 timeoutMillis: 600000
