@@ -1,3 +1,10 @@
 harnessApiVersion: '1.0'
 type: APPLICATION_MANIFEST
-storeType: Local
+gitFileConfig:
+  branch: current-gen
+  connectorName: Account Lvl Git Sync Personal
+  filePath: /
+  repoName: simplest-k8s-workload-for-harness-ng
+  useBranch: true
+  useInlineServiceDefinition: false
+storeType: Remote
