@@ -3,7 +3,6 @@ type: APPLICATION_MANIFEST
 gitFileConfig:
   branch: current-gen
   connectorName: Account Lvl Git Sync Personal
-  filePath: /
   repoName: simplest-k8s-workload-for-harness-ng
   useBranch: true
   useInlineServiceDefinition: false
