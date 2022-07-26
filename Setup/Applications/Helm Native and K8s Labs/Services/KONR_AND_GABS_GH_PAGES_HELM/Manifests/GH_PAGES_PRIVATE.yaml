@@ -1,0 +1,7 @@
+harnessApiVersion: '1.0'
+type: APPLICATION_MANIFEST
+enableCollection: true
+helmChartConfig:
+  chartName: community-nginx-gabs
+  connectorName: KONR_AND_GABS_GH_PAGES_HELM
+storeType: HelmChartRepo
